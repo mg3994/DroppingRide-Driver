@@ -8,6 +8,8 @@ class CustomCard extends StatelessWidget {
   final Color boxShadowColor;
   final double blurRadius;
   final Offset boxShadowOffset;
+  final Color? color;
+  final Border? border;
 
   const CustomCard({
     super.key,
@@ -18,6 +20,8 @@ class CustomCard extends StatelessWidget {
     this.boxShadowColor = const Color(0x1A000000), // Colors.black.withOpacity(0.1)
     this.blurRadius = 5.0,
     this.boxShadowOffset = const Offset(0, 2),
+    this.color ,
+    this.border,
   });
 
   @override
@@ -26,7 +30,8 @@ class CustomCard extends StatelessWidget {
       margin:margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        border: (border != null)? border:null ,
+        color: color ?? Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(

@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:restart_tagxi/app/localization.dart';
 import '../../../../common/app_constants.dart';
@@ -78,20 +79,22 @@ class ChooseLanguagePage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(AppImages.bg),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Padding(
+                    : 
+                    // Container(
+                    //     decoration: BoxDecoration(
+                    //       image: DecorationImage(
+                    //         image: AssetImage(AppImages.bg),
+                    //         fit: BoxFit.cover,
+                    //       ),
+                    //     ),
+                    //     child:
+                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  height: size.width * 0.05 +
+                                  height: size.width * 0.02 +
                                       MediaQuery.of(context).padding.top),
                               Row(
                                 children: [
@@ -129,17 +132,27 @@ class ChooseLanguagePage extends StatelessWidget {
                                           .textTheme
                                           .titleLarge!
                                           .copyWith(
-                                              color: AppColors.blackText,
-                                              fontSize: 18)),
+                                              // color: AppColors.blackText,
+                                              fontSize: 14,fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               SizedBox(height: size.width * 0.02),
-                              LanguageListWidget(
-                                  languageList: AppConstants.languageList,
-                                  cont: context),
-                              SizedBox(height: size.width * 0.05),
+                                DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
+                              Expanded(
+                                child: LanguageListWidget(
+                                    languageList: AppConstants.languageList,
+                                    cont: context),
+                              ),
+                              // SizedBox(height: size.width * 0.05),
                               Center(
                                 child: CustomButton(
+                                  borderRadius: 4,
                                   buttonName:
                                       AppLocalizations.of(context)!.select,
                                   height: size.width * 0.15,
@@ -161,7 +174,7 @@ class ChooseLanguagePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      // ),
               ),
             );
           },

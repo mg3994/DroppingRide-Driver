@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restart_tagxi/common/app_constants.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import '../../../../common/common.dart';
 import '../../../../core/utils/custom_background.dart';
 import '../../../../core/utils/custom_button.dart';
@@ -58,8 +59,9 @@ class RegisterPage extends StatelessWidget {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Scaffold(
-                body: CustomBackground(
-                  child: SafeArea(
+                body:
+                  //  CustomBackground(child: 
+                 SafeArea(
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(20),
@@ -90,9 +92,10 @@ class RegisterPage extends StatelessWidget {
                                             .register,
                                         textStyle: Theme.of(context)
                                             .textTheme
-                                            .displayLarge!
+                                            .displayMedium!
                                             .copyWith(
-                                                color: AppColors.blackText),
+                                                // color: AppColors.blackText
+                                                ),
                                       ),
                                     ),
                                   ],
@@ -101,66 +104,86 @@ class RegisterPage extends StatelessWidget {
                               SizedBox(height: size.width * 0.1),
                               buildProfilePick(size, context),
                               SizedBox(height: size.width * 0.1),
-                              MyText(
-                                text: AppLocalizations.of(context)!.name,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: AppColors.black,
-                                        fontSize: AppConstants().subHeaderSize),
+                              /////////////
+                              CustomCard(
+                                borderRadius: 6,
+                                                            color: Theme.of(context).dialogBackgroundColor,
+                                border: Border.all(width: 1.2,color:Theme.of(context).disabledColor.withAlpha(100)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children:
+                                [MyText(
+                                  text: AppLocalizations.of(context)!.name,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          // color: AppColors.black,
+                                          fontSize: AppConstants().subHeaderSize,
+                                          fontWeight: FontWeight.bold,
+                                          ),
+                                ),
+                                SizedBox(height: size.width * 0.02),
+                                buildUserNameField(context),
+                                SizedBox(height: size.width * 0.02),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.mobile,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          // color: AppColors.black,
+                                          fontSize: AppConstants().subHeaderSize,
+                                          fontWeight: FontWeight.bold,
+                                          ),
+                                ),
+                                SizedBox(height: size.width * 0.02),
+                                buildMobileField(context, size),
+                                SizedBox(height: size.width * 0.02),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.email,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          // color: AppColors.black,
+                                          fontSize: AppConstants().subHeaderSize,
+                                          fontWeight: FontWeight.bold,
+                                          ),
+                                ),
+                                SizedBox(height: size.width * 0.02),
+                                buildEmailField(context),
+                                SizedBox(height: size.width * 0.02),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.gender,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          // color: AppColors.black,
+                                          fontSize: AppConstants().subHeaderSize,
+                                          fontWeight: FontWeight.bold,
+                                          ),
+                                ),
+                                SizedBox(height: size.width * 0.02),
+                                buildDropDownGenderField(context),
+                                SizedBox(height: size.width * 0.02),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.password,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          // color: AppColors.black,
+                                          fontSize: AppConstants().subHeaderSize,
+                                          fontWeight: FontWeight.bold,
+                                          ),
+                                ),
+                                SizedBox(height: size.width * 0.02),
+                                buildPasswordField(context, size),
+                                SizedBox(height: size.width * 0.02),] ),
                               ),
-                              SizedBox(height: size.width * 0.02),
-                              buildUserNameField(context),
-                              SizedBox(height: size.width * 0.02),
-                              MyText(
-                                text: AppLocalizations.of(context)!.mobile,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: AppColors.black,
-                                    ),
-                              ),
-                              SizedBox(height: size.width * 0.02),
-                              buildMobileField(context, size),
-                              SizedBox(height: size.width * 0.02),
-                              MyText(
-                                text: AppLocalizations.of(context)!.email,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: AppColors.black,
-                                        fontSize: AppConstants().subHeaderSize),
-                              ),
-                              SizedBox(height: size.width * 0.02),
-                              buildEmailField(context),
-                              SizedBox(height: size.width * 0.02),
-                              MyText(
-                                text: AppLocalizations.of(context)!.gender,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: AppColors.black,
-                                        fontSize: AppConstants().subHeaderSize),
-                              ),
-                              SizedBox(height: size.width * 0.02),
-                              buildDropDownGenderField(context),
-                              SizedBox(height: size.width * 0.02),
-                              MyText(
-                                text: AppLocalizations.of(context)!.password,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: AppColors.black,
-                                        fontSize: AppConstants().subHeaderSize),
-                              ),
-                              SizedBox(height: size.width * 0.02),
-                              buildPasswordField(context, size),
-                              SizedBox(height: size.width * 0.02),
+                              ///////
                               SizedBox(height: size.width * 0.1),
                               buildButton(context),
                               SizedBox(height: size.width * 0.3),
@@ -170,7 +193,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                // ),
               ),
             );
           },
@@ -183,7 +206,7 @@ class RegisterPage extends StatelessWidget {
     return Center(
       child: CircleAvatar(
         radius: size.width * 0.15,
-        backgroundColor: Theme.of(context).dividerColor,
+        // backgroundColor: Theme.of(context).dividerColor,
         backgroundImage: context.read<AuthBloc>().profileImage.isNotEmpty
             ? FileImage(File(context.read<AuthBloc>().profileImage))
             : const AssetImage(AppImages.defaultProfile),
@@ -202,9 +225,9 @@ class RegisterPage extends StatelessWidget {
                     width: size.width * 0.1,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      color: Theme.of(context).disabledColor.withAlpha(150),
                     ),
-                    child: const Center(child: Icon(Icons.edit)),
+                    child:  Center(child: Icon(Icons.edit,color: Theme.of(context).primaryColorDark)),
                   ),
                 )
               ],
@@ -219,8 +242,8 @@ class RegisterPage extends StatelessWidget {
     return Center(
       child: CustomButton(
         buttonName: AppLocalizations.of(context)!.register,
-        borderRadius: 10,
-        height: MediaQuery.of(context).size.height * 0.06,
+        borderRadius: 4,
+        height: MediaQuery.of(context).size.height * 0.07,
         isLoader: context.read<AuthBloc>().isLoading,
         onTap: () {
           if (context.read<AuthBloc>().formKey.currentState!.validate() &&
@@ -243,6 +266,8 @@ class RegisterPage extends StatelessWidget {
   Widget buildPasswordField(BuildContext context, Size size) {
     return CustomTextField(
       controller: context.read<AuthBloc>().rPasswordController,
+      borderRadius: 2,
+      fillColor: Theme.of(context).cardColor,
       filled: true,
       obscureText: !context.read<AuthBloc>().showPassword,
       hintText: AppLocalizations.of(context)!.enterYourPassword,
@@ -282,12 +307,13 @@ class RegisterPage extends StatelessWidget {
 
   Widget buildEmailField(BuildContext context) {
     return CustomTextField(
+      borderRadius: 2,
       controller: context.read<AuthBloc>().rEmailController,
       enabled: !context.read<AuthBloc>().isLoginByEmail,
       filled: true,
       fillColor: context.read<AuthBloc>().isLoginByEmail
-          ? Theme.of(context).disabledColor.withOpacity(0.1)
-          : null,
+                    ? Theme.of(context).disabledColor.withOpacity(0.1)
+          : Theme.of(context).cardColor,
       hintText: AppLocalizations.of(context)!.enterEmail,
       validator: (value) {
         if (value!.isNotEmpty && !AppValidation.emailValidate(value)) {
@@ -307,7 +333,9 @@ class RegisterPage extends StatelessWidget {
       filled: true,
       fillColor: !context.read<AuthBloc>().isLoginByEmail
           ? Theme.of(context).disabledColor.withOpacity(0.1)
-          : null,
+          : Theme.of(context).cardColor,
+               borderRadius: 2,
+       
       enabled: context.read<AuthBloc>().isLoginByEmail,
       hintText: AppLocalizations.of(context)!.mobile,
       keyboardType: TextInputType.number,
@@ -342,7 +370,7 @@ class RegisterPage extends StatelessWidget {
                       : null,
                 ),
               ),
-              MyText(text: context.read<AuthBloc>().dialCode),
+              MyText(text: context.read<AuthBloc>().dialCode,textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),),
             ],
           ),
         ),
@@ -361,6 +389,8 @@ class RegisterPage extends StatelessWidget {
 
   Widget buildUserNameField(BuildContext context) {
     return CustomTextField(
+           borderRadius: 2,
+      fillColor: Theme.of(context).cardColor,
       controller: context.read<AuthBloc>().rUserNameController,
       filled: true,
       hintText: AppLocalizations.of(context)!.enterName,
@@ -377,6 +407,7 @@ class RegisterPage extends StatelessWidget {
   Widget buildDropDownGenderField(BuildContext context) {
     return DropdownButtonFormField(
       isExpanded: true,
+      
       hint: Text(AppLocalizations.of(context)!.selectGender),
       style: Theme.of(context).textTheme.bodyMedium!,
       dropdownColor: Theme.of(context).dialogBackgroundColor,
@@ -403,7 +434,7 @@ class RegisterPage extends StatelessWidget {
             fontWeight: FontWeight.w400,
             color: Theme.of(context).hintColor),
         filled: true,
-        fillColor: Theme.of(context).scaffoldBackgroundColor,
+        fillColor: Theme.of(context).cardColor,
         errorStyle: TextStyle(
           color: AppColors.red.withOpacity(0.8),
           fontWeight: FontWeight.bold,
@@ -413,25 +444,25 @@ class RegisterPage extends StatelessWidget {
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: AppColors.errorLight.withOpacity(0.8), width: 1),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(2),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.errorLight.withOpacity(0.5),
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(2),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).hintColor, width: 1),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(2),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).hintColor,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(2),
         ),
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -57,6 +57,9 @@ class SelectCountryWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CustomTextField(
+                    filled: true,
+                    hintText:AppLocalizations.of(context)?.searchResult,
+                    fillColor: Theme.of(context).cardColor,
                     controller: context.read<AuthBloc>().searchController,
                     borderRadius: 10,
                     onChange: (p0) => context.read<AuthBloc>().add(AuthUpdateEvent()),
@@ -83,6 +86,7 @@ class SelectCountryWidget extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: countries.length,
                     shrinkWrap: true,
+                    
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (con, index) {
                       var countryData = countries.elementAt(index);
@@ -100,7 +104,7 @@ class SelectCountryWidget extends StatelessWidget {
                               .toString())) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 3),
+                              horizontal: 4, vertical: 3),
                           child: InkWell(
                             onTap: () {
                                 context.read<AuthBloc>().dialCode =

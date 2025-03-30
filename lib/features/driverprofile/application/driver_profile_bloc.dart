@@ -365,7 +365,7 @@ class DriverProfileBloc extends Bloc<DriverProfileEvent, DriverProfileState> {
             ? 'drivers/driver_${userData!.id}'
             : 'owners/owner_${userData!.id}')
         .get();
-    if (driverState.child('approve').value == 1) {
+    if (driverState.child('approve').value == 1) { // BUG:
       approved = true;
       if (!isClosed) {
         add(DriverUpdateEvent());

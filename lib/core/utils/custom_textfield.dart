@@ -120,7 +120,7 @@ class CustomTextField extends StatelessWidget {
         errorStyle: TextStyle(
           color: AppColors.red.withOpacity(0.8),
           fontWeight: FontWeight.bold,
-          fontSize: 13,
+          fontSize: 10,
         ),
         labelText: labelText,
         labelStyle: labelStyle ??

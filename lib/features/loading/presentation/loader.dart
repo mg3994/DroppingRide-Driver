@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -76,10 +77,11 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
               canPop: false,
               child: Scaffold(
                 backgroundColor:
-                    (context.read<LoaderBloc>().locationApproved == null ||
-                            context.read<LoaderBloc>().locationApproved == true)
-                        ? Theme.of(context).primaryColor
-                        : Theme.of(context).scaffoldBackgroundColor,
+                    // (context.read<LoaderBloc>().locationApproved == null || // Commented By MG:
+                    //         context.read<LoaderBloc>().locationApproved == true)
+                    //     ? Theme.of(context).primaryColor
+                    //     :
+                         Theme.of(context).scaffoldBackgroundColor,
                 resizeToAvoidBottomInset: false,
                 body: Center(
                   child: (context.read<LoaderBloc>().locationApproved == null ||
@@ -89,8 +91,8 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                           children: [
                             Image.asset(
                               AppImages.loader,
-                              width: size.width * 0.51,
-                              height: size.height * 0.51,
+                              width: size.width * 0.51, //0.8,
+                              height: size.height * 0.51, //0.6
                             )
                           ],
                         )
@@ -107,19 +109,34 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                                 SizedBox(height: size.width * 0.05),
                                 SizedBox(
                                   width: size.width * 0.9,
-                                  child: MyText(
-                                    // text: AppLocalizations.of(context)!
-                                    //     .welcomeToName
-                                    //     .toString()
-                                    //     .replaceAll('1111', AppConstants.title),
-                                    text:AppLocalizations.of(context)!.whyBackgroundLocation,
-                                    textStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
-                                    textAlign: TextAlign.center,
+                                  child: Column(
+                                    spacing: 2,
+                                    children: [
+                                      MyText(
+                                        // text: AppLocalizations.of(context)!
+                                        //     .welcomeToName
+                                        //     .toString()
+                                        //     .replaceAll('1111', AppConstants.title),
+                                        text:AppLocalizations.of(context)!.whyBackgroundLocation,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                fontSize: AppConstants().subHeaderSize,
+                                                fontWeight: FontWeight.w600),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      
+                                       DottedLine(
+                                        // ADDED: BY MG: Dotted line
+                                        dashLength: 2,
+                                        dashGapLength: 2,
+                                        dashRadius: 1,
+                                        lineThickness: 1,
+                                        dashColor:
+                                            Theme.of(context).dividerColor,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(height: size.width * 0.05),
@@ -130,10 +147,10 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                                         .locationPermDesc.replaceAll('111', AppConstants.title),
                                     textStyle: Theme.of(context)
                                         .textTheme
-                                        .bodyMedium!
+                                        .labelSmall!
                                         .copyWith(
-                                            color: const Color(0xff847979),
-                                            fontSize: 16,
+                                            // color: const Color(0xff847979),
+                                            // fontSize: AppConstants().labelTextSize,
                                             fontWeight: FontWeight.w400),
                                     textAlign: TextAlign.center,
                                     maxLines: 10,
@@ -157,10 +174,10 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                                               .allowLocation,
                                           textStyle: Theme.of(context)
                                               .textTheme
-                                              .bodyMedium!
+                                              .bodySmall!
                                               .copyWith(
-                                                  color: AppColors.black,
-                                                  fontSize: 16,
+                                                  // color: AppColors.black,
+                                                  // fontSize: 16,
                                                   fontWeight: FontWeight.w600),
                                           textAlign: TextAlign.center,
                                         ),
@@ -168,6 +185,7 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                                     )),
                                 SizedBox(height: size.width * 0.1),
                                 CustomButton(
+                                   borderRadius: 6,
                                     buttonName:
                                         AppLocalizations.of(context)!.allow,
                                     onTap: () async {

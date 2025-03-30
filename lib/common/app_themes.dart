@@ -132,9 +132,9 @@ class AppThemes {
         ),
         labelSmall: const TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: 10,
+          fontSize: 8,
           fontFamily: fontFamily,
-          color: AppColors.black,
+          color: AppColors.labelSmall,
         ),
       )),
       inputDecorationTheme: InputDecorationTheme(
@@ -308,7 +308,7 @@ class AppThemes {
         ),
         labelSmall: const TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: 10,
+          fontSize: 8,
           fontFamily: fontFamily,
           color: AppColors.white,
         ),

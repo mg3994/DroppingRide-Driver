@@ -76,4 +76,5 @@ class AppColors {
   static const Color blackText = Color(0xFF000000);
   static const Color commonColor = Color(0xFFDBDBDB);
   static const Color scaffoldBackgroundColor =Color(0xFFEBEBEB);// Added By MG: #EBEBEB 
+  static const Color labelSmall =  Color(0xff847979);
 }

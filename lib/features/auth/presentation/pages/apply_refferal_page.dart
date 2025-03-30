@@ -1,6 +1,8 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/features/driverprofile/presentation/pages/driver_profile_pages.dart';
 
 import '../../../../core/utils/custom_background.dart';
@@ -47,61 +49,80 @@ class ApplyRefferalPage extends StatelessWidget {
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             return Scaffold(
-              body: CustomBackground(
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: size.width * 0.1),
-                        MyText(
-                            text: AppLocalizations.of(context)!.applyReferal,
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .displayLarge!
-                                .copyWith(color: AppColors.blackText)),
-                        SizedBox(height: size.width * 0.1),
-                        CustomTextField(
-                          controller:
-                              context.read<AuthBloc>().rReferralCodeController,
-                          filled: true,
-                          hintText:
-                              AppLocalizations.of(context)!.enterReferralCode,
-                        ),
-                        SizedBox(height: size.width * 0.1),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomButton(
-                              buttonName: AppLocalizations.of(context)!.skip,
-                              width: size.width * 0.4,
-                              onTap: () {
-                                context
+              body:
+                  //  CustomBackground(child:
+                  SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: size.width * 0.1),
+                      CustomCard(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MyText(
+                                  text: AppLocalizations.of(context)!
+                                      .applyReferal,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall!
+                                      .copyWith(fontWeight: FontWeight.bold)),
+                              SizedBox(height: size.width * 0.01),
+                              DottedLine(
+                                // ADDED: BY MG: Dotted line
+                                dashLength: 2,
+                                dashGapLength: 2,
+                                dashRadius: 1,
+                                lineThickness: 1,
+                                dashColor: Theme.of(context).dividerColor,
+                              ),
+                              SizedBox(height: size.width * 0.07),
+                              CustomTextField(
+                                controller: context
                                     .read<AuthBloc>()
-                                    .add(ReferralEvent(referralCode: 'Skip'));
-                              },
-                            ),
-                            CustomButton(
-                              buttonName: AppLocalizations.of(context)!.apply,
-                              isLoader: context.read<AuthBloc>().isLoading,
-                              width: size.width * 0.4,
-                              onTap: () {
-                                context.read<AuthBloc>().add(ReferralEvent(
-                                    referralCode: context
-                                        .read<AuthBloc>()
-                                        .rReferralCodeController
-                                        .text));
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: size.width * 0.05),
-                      ],
-                    ),
+                                    .rReferralCodeController,
+                                filled: true,
+                                hintText: AppLocalizations.of(context)!
+                                    .enterReferralCode,
+                              ),
+                              SizedBox(height: size.width * 0.07),
+                            ]),
+                      ),
+                      SizedBox(height: size.width * 0.1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomButton(
+                            buttonName: AppLocalizations.of(context)!.skip,
+                            width: size.width * 0.4,
+                            onTap: () {
+                              context
+                                  .read<AuthBloc>()
+                                  .add(ReferralEvent(referralCode: 'Skip'));
+                            },
+                          ),
+                          CustomButton(
+                            buttonName: AppLocalizations.of(context)!.apply,
+                            isLoader: context.read<AuthBloc>().isLoading,
+                            width: size.width * 0.4,
+                            onTap: () {
+                              context.read<AuthBloc>().add(ReferralEvent(
+                                  referralCode: context
+                                      .read<AuthBloc>()
+                                      .rReferralCodeController
+                                      .text));
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: size.width * 0.05),
+                    ],
                   ),
                 ),
               ),
+              // ),
             );
           },
         ),

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/app_arguments.dart';
+import 'package:restart_tagxi/common/app_colors.dart';
+// import 'package:restart_tagxi/common/app_text_styles.dart';
 
 import '../../../../core/utils/custom_loader.dart';
 import '../../../auth/presentation/pages/auth_page.dart';
@@ -72,10 +74,10 @@ class _LandingPageState extends State<LandingPage> {
                                   width: size.width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Theme.of(context).primaryColor,
+                                    color: Theme.of(context).disabledColor.withAlpha(150),
                                   ),
                                 ),
-                                SizedBox(height: size.height * 0.15),
+                                SizedBox(height: size.height * 0.19),
                                 LandingContentWidget(cont: context),
                                 SizedBox(height: size.height * 0.02),
                                 LandingSkipButtonWidget(cont:context),

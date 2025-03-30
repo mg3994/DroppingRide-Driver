@@ -3236,7 +3236,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             activeTimer = Timer.periodic(const Duration(minutes: 1), (timer) {
               userData!.totalMinutesOnline =
                   (int.parse(userData!.totalMinutesOnline!) + 1).toString();
-              add(UpdateOnlineTimeEvent(
+              add(UpdateOnlineTimeEvent( // Bug:
                   minutes: int.parse(userData!.totalMinutesOnline!)));
             });
           }
