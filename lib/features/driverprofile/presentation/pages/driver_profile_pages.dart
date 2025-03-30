@@ -37,7 +37,7 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
   return BlocProvider(
     create: (context) => DriverProfileBloc()
       ..add(GetInitialDataEvent(from: args!.from, fleetId: args.fleetId))
-      ..add(ModifyDocEvent())
+      // ..add(ModifyDocEvent()) // commented By MG:
       ..add(GetServiceLocationEvent(
           type: userData!.enableModulesForApplications != 'both'
               ? userData!.enableModulesForApplications
