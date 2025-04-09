@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/l10n/app_localizations.dart';
 import '../../../../../../app/localization.dart';
 import '../../../../../../common/common.dart';
@@ -45,7 +46,7 @@ class ProfileWidget extends StatelessWidget {
           height: size.height,
           decoration: BoxDecoration(
             // color: AppColors.commonColor,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).disabledColor,
             border: Border(
               bottom: BorderSide(color: Theme.of(context).primaryColorLight),
             ),
@@ -201,24 +202,26 @@ class ProfileWidget extends StatelessWidget {
                 : size.height * 0.23,
             left: size.width * 0.05,
             right: size.width * 0.05,
-            child: Container(
-              height: size.width * 0.23,
-              width: size.width * 0.8,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Theme.of(context).shadowColor,
-                        spreadRadius: 2.0,
-                        blurRadius: 2.0)
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                        width: size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+                    width: 3.0, // Choose the thickness of the bottom bar
+                  ),
+                ),
+                    ),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                      
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MyText(
@@ -242,60 +245,74 @@ class ProfileWidget extends StatelessWidget {
                                     color: Theme.of(context).primaryColorDark)),
                       ],
                     ),
-                    !showWallet && userData!.role == 'owner'
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: VerticalDivider(
-                                color: Theme.of(context).dividerColor),
-                          )
-                        : SizedBox(),
-                    if (showWallet && userData!.role == 'owner') ...[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: VerticalDivider(
-                            color: Theme.of(context).dividerColor),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyText(
-                              text: AppLocalizations.of(context)!.wallet,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      fontSize: 14,
-                                      color: Theme.of(context)
-                                          .disabledColor
-                                          .withOpacity(0.8))),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              MyText(
-                                  text: wallet,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                          color: Theme.of(context)
-                                              .primaryColorDark)),
-                            ],
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: VerticalDivider(
-                            color: Theme.of(context).dividerColor),
-                      ),
-                    ],
-                    if (userData!.role == 'driver') ...[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: VerticalDivider(
-                            color: Theme.of(context).dividerColor),
-                      ),
-                      Column(
+                  ),
+                  !showWallet && userData!.role == 'owner'
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: VerticalDivider(
+                              color: Theme.of(context).dividerColor),
+                        )
+                      : SizedBox(),
+                  if (showWallet && userData!.role == 'owner') ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: VerticalDivider(
+                          color: Theme.of(context).dividerColor),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyText(
+                            text: AppLocalizations.of(context)!.wallet,
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    fontSize: 14,
+                                    color: Theme.of(context)
+                                        .disabledColor
+                                        .withOpacity(0.8))),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyText(
+                                text: wallet,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .primaryColorDark)),
+                          ],
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: VerticalDivider(
+                          color: Theme.of(context).dividerColor),
+                    ),
+                  ],
+                  if (userData!.role == 'driver') ...[
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 8),
+                    //   child: VerticalDivider(
+                    //       color: Theme.of(context).dividerColor),
+                    // ),
+                      Container(
+                        width: size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+                    width: 3.0, // Choose the thickness of the bottom bar
+                  ),
+                ),
+                    ),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MyText(
@@ -309,7 +326,7 @@ class ProfileWidget extends StatelessWidget {
                                           .disabledColor
                                           .withOpacity(0.8))),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               MyText(
                                   text: ratings,
@@ -328,13 +345,27 @@ class ProfileWidget extends StatelessWidget {
                           )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: VerticalDivider(
-                            color: Theme.of(context).dividerColor),
-                      ),
-                    ],
-                    Column(
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 8),
+                    //   child: VerticalDivider(
+                    //       color: Theme.of(context).dividerColor),
+                    // ),
+                  ],
+                  Container(
+                     width: size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+                    width: 3.0, // Choose the thickness of the bottom bar
+                  ),
+                ),
+                    ),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MyText(
@@ -356,8 +387,8 @@ class ProfileWidget extends StatelessWidget {
                                     color: Theme.of(context).primaryColorDark)),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

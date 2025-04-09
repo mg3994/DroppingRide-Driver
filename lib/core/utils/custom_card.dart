@@ -10,6 +10,14 @@ class CustomCard extends StatelessWidget {
   final Offset boxShadowOffset;
   final Color? color;
   final Border? border;
+  final double? width;
+  final double? height;
+  // final double? maxWidth;
+  // final double? maxHeight;
+  // final double? minWidth;
+  // final double? minHeight;
+  final BoxConstraints? constraints;
+  final AlignmentGeometry? alignment;
 
   const CustomCard({
     super.key,
@@ -21,12 +29,19 @@ class CustomCard extends StatelessWidget {
     this.blurRadius = 5.0,
     this.boxShadowOffset = const Offset(0, 2),
     this.color ,
-    this.border,
+    this.border, this.width, this.height, 
+    // this.maxWidth, this.maxHeight, this.minWidth, this.minHeight, 
+    this.constraints, this.alignment,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width,
+      height: height,
+     
+      constraints: constraints,
+      alignment: alignment,
       margin:margin,
       padding: padding,
       decoration: BoxDecoration(

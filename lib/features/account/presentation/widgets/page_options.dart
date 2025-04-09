@@ -1,5 +1,7 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:restart_tagxi/common/app_constants.dart';
+import 'package:restart_tagxi/core/utils/custom_navigation_icon.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 
 class PageOptions extends StatelessWidget {
@@ -18,22 +20,26 @@ class PageOptions extends StatelessWidget {
         InkWell(
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 20, top: 20),
+            padding: const EdgeInsets.only(bottom: 4, top: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   flex: 1,
                   child: Row(
+                    spacing: 12,
+              mainAxisAlignment: MainAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.center,  
                     children: [
-                      Icon(
-                        icon,
-                        size: 20,
-                        color: Theme.of(context).disabledColor,
+                      NavigationIconWidget(icon: Icon(
+                          icon,
+                          size: 18,
+                          color: Theme.of(context).disabledColor,
+                        ),
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
+                      // SizedBox(
+                      //   width: 8,
+                      // ),
                       MyText(
                         text: list,
                         textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -53,10 +59,13 @@ class PageOptions extends StatelessWidget {
           ),
         ),
         // const SizedBox(height: 20),
-        Divider(
-          height: 1,
-          color: Theme.of(context).dividerColor.withOpacity(0.2),
-        ),
+                          DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
       ],
     );
   }

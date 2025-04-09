@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/local_data.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/extensions.dart';
 import 'package:restart_tagxi/features/account/presentation/pages/profile/page/update_details.dart';
 import 'package:restart_tagxi/features/account/presentation/widgets/edit_options.dart';
@@ -83,69 +84,72 @@ class ProfileInfoPage extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 10),
-                                MyText(
-                                  text: AppLocalizations.of(context)!
-                                      .personalInformation,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                          fontWeight: FontWeight.bold,fontSize: 18),
-                                ),
-                                const SizedBox(height: 10),
-                                EditOptions(
-                                  text: userData!.name,
-                                  header: AppLocalizations.of(context)!.name,
-                                  onTap: () {
-                                    context
-                                        .read<AccBloc>()
-                                        .add(UserDetailEditEvent(
-                                          header: AppLocalizations.of(context)!
-                                              .name,
-                                          text: userData!.name,
-                                        ));
-                                  },
-                                ),
-                                EditOptions(
-                                  text: userData!.mobile,
-                                  header: AppLocalizations.of(context)!.mobile,
-                                  onTap: () {},
-                                ),
-                                EditOptions(
-                                  text: userData!.email,
-                                  header: AppLocalizations.of(context)!.email,
-                                  onTap: () {
-                                    context.read<AccBloc>().add(
-                                        UserDetailEditEvent(
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .email,
-                                            text: userData!.email));
-                                  },
-                                ),
-                                EditOptions(
-                                  text: userData!.gender != ''
-                                      ? userData!.gender
-                                      : "${AppLocalizations.of(context)!.update} ${AppLocalizations.of(context)!.gender}",
-                                  header: AppLocalizations.of(context)!.gender,
-                                  onTap: () {
-                                    context.read<AccBloc>().add(
+                            child: CustomCard(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // const SizedBox(height: 10),
+                                  // MyText(
+                                  //   text: AppLocalizations.of(context)!
+                                  //       .personalInformation,
+                                  //   textStyle: Theme.of(context)
+                                  //       .textTheme
+                                  //       .titleMedium!
+                                  //       .copyWith(
+                                  //           color: Theme.of(context)
+                                  //               .primaryColorDark,
+                                  //           fontWeight: FontWeight.bold,fontSize: 18),
+                                  // ),
+                                  const SizedBox(height: 10),
+                                  /////
+                                  EditOptions(
+                                    text: userData!.name,
+                                    header: AppLocalizations.of(context)!.name,
+                                    onTap: () {
+                                      context
+                                          .read<AccBloc>()
+                                          .add(UserDetailEditEvent(
+                                            header: AppLocalizations.of(context)!
+                                                .name,
+                                            text: userData!.name,
+                                          ));
+                                    },
+                                  ),
+                                  EditOptions(
+                                    text: userData!.mobile,
+                                    header: AppLocalizations.of(context)!.mobile,
+                                    onTap: () {},
+                                  ),
+                                  EditOptions(
+                                    text: userData!.email,
+                                    header: AppLocalizations.of(context)!.email,
+                                    onTap: () {
+                                      context.read<AccBloc>().add(
                                           UserDetailEditEvent(
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .gender,
-                                            text: userData!.gender,
-                                          ),
-                                        );
-                                  },
-                                ),
-                              ],
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .email,
+                                              text: userData!.email));
+                                    },
+                                  ),
+                                  EditOptions(
+                                    text: userData!.gender != ''
+                                        ? userData!.gender
+                                        : "${AppLocalizations.of(context)!.update} ${AppLocalizations.of(context)!.gender}",
+                                    header: AppLocalizations.of(context)!.gender,
+                                    onTap: () {
+                                      context.read<AccBloc>().add(
+                                            UserDetailEditEvent(
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .gender,
+                                              text: userData!.gender,
+                                            ),
+                                          );
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

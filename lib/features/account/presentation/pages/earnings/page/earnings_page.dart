@@ -48,10 +48,11 @@ class _EarningsPageState extends State<EarningsPage> {
           }
         }, child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
-              backgroundColor: AppColors.primary,
+              backgroundColor:   Theme.of(context).disabledColor,
               body: Stack(
                 children: [
                   Container(
+                   
                     height: size.height,
                     width: size.width,
                     padding: EdgeInsets.fromLTRB(

@@ -31,12 +31,12 @@ class ReviewPage extends StatelessWidget {
             padding: EdgeInsets.all(size.width * 0.05),
             child: Column(
               children: [
-                SizedBox(
-                  width: size.width * 0.9,
-                  child: const Row(
-                    children: [],
-                  ),
-                ),
+                // SizedBox(
+                //   width: size.width * 0.9,
+                //   child: const Row(
+                //     children: [],
+                //   ),
+                // ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -102,6 +102,8 @@ class ReviewPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: CustomTextField(
+                            borderRadius:4,
+                            fillColor:Theme.of(context).cardColor,
                             controller:
                                 context.read<HomeBloc>().reviewController,
                             filled: true,
@@ -120,6 +122,7 @@ class ReviewPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 80),
                   child: CustomButton(
+                   borderRadius:4,
                       buttonName: AppLocalizations.of(context)!.submit,
                       width: 250,
                       onTap: () {

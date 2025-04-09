@@ -83,11 +83,15 @@ class MapAppBarWidget extends StatelessWidget {
                                 width: size.width * 0.7,
                                 height: size.width * 0.1,
                                 child: CustomTextField(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: size.width * 0.02,
+                                      horizontal: size.width * 0.03),
+                                  borderRadius: 4,
                                   controller: context
                                       .read<HomeBloc>()
                                       .dropAddressController,
                                   fillColor:
-                                      Theme.of(context).scaffoldBackgroundColor,
+                                      Theme.of(context).cardColor,
                                   filled: true,
                                   hintText:
                                       AppLocalizations.of(context)!.searchPlace,
