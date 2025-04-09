@@ -8,7 +8,7 @@ class InvoiceTopPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = AppColors.primary;
+    paint.color = AppColors.greyHintColor;
     final path = Path();
     if (textDirection == 'ltr') {
       path.lineTo(0, size.height * 0.4);

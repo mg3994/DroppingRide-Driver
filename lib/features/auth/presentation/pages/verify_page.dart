@@ -54,7 +54,7 @@ class _VerifyPageState extends State<VerifyPage>
     }
   }
 
-   @override
+  @override
   void dispose() {
     if (timer != null) {
       timer?.cancel();
@@ -141,118 +141,124 @@ class _VerifyPageState extends State<VerifyPage>
               child: Scaffold(
                 resizeToAvoidBottomInset: true,
                 body:
-                //  CustomBackground(child: 
-                 SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.1),
-                          context.read<AuthBloc>().isOtpVerify
-                              ? MyText(
-                                  text: widget.arg.isLoginByEmail ? AppLocalizations.of(context)!.otpSentEmail
-                                      : AppLocalizations.of(context)!
-                                      .otpSentMobile,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall
-                                      // .copyWith(
-                                      //   color: AppColors.blackText,
-                                      // )
-                                      ,
-                                )
-                              : MyText(
-                                  text: AppLocalizations.of(context)!
-                                      .enterYourPassword,
-                                  textAlign: TextAlign.center,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                       .labelSmall
-                                      // .copyWith(
-                                      //   color: AppColors.blackText,
-                                      // )
-                                      ,
-                                ),
-                          const SizedBox(height: 20),
-                          CustomCard(
-                            color: Theme.of(context).dialogBackgroundColor,
-                            border: Border.all(width: 1.2,color:Theme.of(context).disabledColor.withAlpha(100)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Wrap(
-                                  alignment: WrapAlignment.center,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    if (!widget.arg.isLoginByEmail)
-                                      SizedBox(
-                                        height: 20,
-                                        width: 30,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(1.0),
-                                          child: Image.network(
-                                            widget.arg.countryFlag,
-                                            fit: BoxFit.fill,
-                                          ),
+                    //  CustomBackground(child:
+                    SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.1),
+                        context.read<AuthBloc>().isOtpVerify
+                            ? MyText(
+                                text: widget.arg.isLoginByEmail
+                                    ? AppLocalizations.of(context)!.otpSentEmail
+                                    : AppLocalizations.of(context)!
+                                        .otpSentMobile,
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
+                                textStyle:
+                                    Theme.of(context).textTheme.labelSmall
+                                // .copyWith(
+                                //   color: AppColors.blackText,
+                                // )
+                                ,
+                              )
+                            : MyText(
+                                text: AppLocalizations.of(context)!
+                                    .enterYourPassword,
+                                textAlign: TextAlign.center,
+                                textStyle:
+                                    Theme.of(context).textTheme.labelSmall
+                                // .copyWith(
+                                //   color: AppColors.blackText,
+                                // )
+                                ,
+                              ),
+                        const SizedBox(height: 20),
+                        CustomCard(
+                          color: Theme.of(context).dialogBackgroundColor,
+                          border: Border.all(
+                              width: 1.2,
+                              color: Theme.of(context)
+                                  .disabledColor
+                                  .withAlpha(100)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                children: [
+                                  if (!widget.arg.isLoginByEmail)
+                                    SizedBox(
+                                      height: 20,
+                                      width: 30,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(1.0),
+                                        child: Image.network(
+                                          widget.arg.countryFlag,
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
-                                    const SizedBox(width: 10),
-                                    MyText(
-                                      text: widget.arg.mobileOrEmail,
+                                    ),
+                                  const SizedBox(width: 10),
+                                  MyText(
+                                    text: widget.arg.mobileOrEmail,
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          // color: AppColors.blackText,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: MyText(
+                                      text:
+                                          AppLocalizations.of(context)!.change,
                                       textStyle: Theme.of(context)
                                           .textTheme
-                                          .bodyMedium!
+                                          .bodySmall!
                                           .copyWith(
-                                            // color: AppColors.blackText,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                              color: Theme.of(context)
+                                                  .disabledColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14),
                                     ),
-                                    const SizedBox(width: 10),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: MyText(
-                                        text: AppLocalizations.of(context)!.change,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .copyWith(
-                                                color: Theme.of(context).disabledColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                 const SizedBox(height: 10),
-                                    DottedLine( // ADDED: BY MG: Dotted line
-                         dashLength: 2,
-                          dashGapLength: 2,
-                          dashRadius: 1,
-                          lineThickness: 1,
-                          dashColor: Theme.of(context).dividerColor,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              DottedLine(
+                                // ADDED: BY MG: Dotted line
+                                dashLength: 2,
+                                dashGapLength: 2,
+                                dashRadius: 1,
+                                lineThickness: 1,
+                                dashColor: Theme.of(context).dividerColor,
+                              ),
+                              const SizedBox(height: 20),
+                              if (widget.arg.userExist &&
+                                  !context.read<AuthBloc>().isOtpVerify)
+                                passwordField(context),
+                              if (!widget.arg.userExist ||
+                                  context.read<AuthBloc>().isOtpVerify)
+                                buildPinField(context),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 20),
-                          if (widget.arg.userExist &&
-                              !context.read<AuthBloc>().isOtpVerify)
-                            passwordField(context),
-                          if (!widget.arg.userExist ||
-                              context.read<AuthBloc>().isOtpVerify)
-                            buildPinField(context),
-                              ],
-                            ),
-                          ),
-                          
-                          const SizedBox(height: 20),
-                          buildLoginButton(context),
-                        ],
-                      ),
+                        buildLoginButton(context),
+                      ],
                     ),
                   ),
+                ),
                 // ),
               ),
             );
@@ -274,7 +280,7 @@ class _VerifyPageState extends State<VerifyPage>
               textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                   // color: AppColors.blackText,
                   // fontSize: AppConstants().subHeaderSize,
-                   fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold),
             ),
             InkWell(
               onTap: () {
@@ -292,10 +298,9 @@ class _VerifyPageState extends State<VerifyPage>
               child: MyText(
                 text: AppLocalizations.of(context)!.signUsingOtp,
                 textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w600, 
+                    fontWeight: FontWeight.w600,
                     // color: AppColors.blackText
-                    fontSize: 12
-                    ),
+                    fontSize: 12),
               ),
             ),
           ],
@@ -356,9 +361,9 @@ class _VerifyPageState extends State<VerifyPage>
             MyText(
               text: AppLocalizations.of(context)!.enterOtp,
               textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                fontWeight: FontWeight.bold,
-                  // color: AppColors.blackText,
-                  // fontSize: AppConstants().subHeaderSize
+                    fontWeight: FontWeight.bold,
+                    // color: AppColors.blackText,
+                    // fontSize: AppConstants().subHeaderSize
                   ),
             ),
             if (widget.arg.userExist &&
@@ -444,11 +449,11 @@ class _VerifyPageState extends State<VerifyPage>
             textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: context.read<AuthBloc>().timerDuration != 0
                       ? Theme.of(context).disabledColor
-                      :Theme.of(context).primaryColorDark,
+                      : Theme.of(context).primaryColorDark,
                 ),
           ),
         ),
-         const SizedBox(height: 6), // Added: By MG:
+        const SizedBox(height: 6), // Added: By MG:
       ],
     );
   }

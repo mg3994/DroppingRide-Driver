@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,6 +31,14 @@ class ImagePickerDialog extends StatelessWidget {
                     color: Theme.of(context).primaryColorDark,
                   ),
             ),
+              DottedLine(
+                                // ADDED: BY MG: Dotted line
+                                dashLength: 2,
+                                dashGapLength: 2,
+                                dashRadius: 1,
+                                lineThickness: 1,
+                                dashColor: Theme.of(context).dividerColor,
+                              ),
             SizedBox(height: size * 0.05),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,11 +53,12 @@ class ImagePickerDialog extends StatelessWidget {
                     height: size * 0.3,
                     width: size * 0.3,
                     decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
                       border: Border.all(
                           color: Theme.of(context)
                               .primaryColorDark
                               .withOpacity(0.5)),
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(3),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -83,11 +93,13 @@ class ImagePickerDialog extends StatelessWidget {
                     height: size * 0.3,
                     width: size * 0.3,
                     decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+
                       border: Border.all(
                           color: Theme.of(context)
                               .primaryColorDark
                               .withOpacity(0.5)),
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(3),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

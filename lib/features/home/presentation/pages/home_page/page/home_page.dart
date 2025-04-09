@@ -400,6 +400,7 @@ class _HomePageState extends State<HomePage>
                             ? TextDirection.ltr
                             : TextDirection.rtl,
                     child: Scaffold(
+                     
                       resizeToAvoidBottomInset: false,
                       body: ((userData == null ||
                               userData!.onTripRequest == null ||

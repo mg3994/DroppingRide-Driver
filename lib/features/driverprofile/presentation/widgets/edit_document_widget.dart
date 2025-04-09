@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restart_tagxi/common/app_colors.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/core/utils/custom_textfield.dart';
 import 'package:restart_tagxi/core/utils/extensions.dart';
@@ -28,6 +30,7 @@ class EditDocumentWidget extends StatelessWidget {
               padding: EdgeInsets.all(size.width * 0.05),
               height: size.height,
               width: size.width,
+              
               child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top),
@@ -79,7 +82,7 @@ class EditDocumentWidget extends StatelessWidget {
                           textStyle:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     fontSize: 18,
-                                    color: AppColors.blackText,
+                                    // color: AppColors.blackText,
                                   ),
                         ))
                       ],
@@ -87,129 +90,157 @@ class EditDocumentWidget extends StatelessWidget {
                   ),
                   Expanded(
                       child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: size.width * 0.1),
-                        InkWell(
-                          onTap: () {
-                            (context
-                                            .read<DriverProfileBloc>()
-                                            .neededDocuments
-                                            .firstWhere((e) =>
-                                                e.id ==
-                                                context
-                                                    .read<DriverProfileBloc>()
-                                                    .choosenDocument)
-                                            .isEditable ==
-                                        true ||
-                                    context
+                    child: CustomCard(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 2,
+                          horizontal: size.width * 0.05),
+                      child: Column(
+                        spacing: 4,
+                        children: [
+                          SizedBox(height: size.width * 0.01),
+                          InkWell(
+                            onTap: () {
+                              (context
+                                              .read<DriverProfileBloc>()
+                                              .neededDocuments
+                                              .firstWhere((e) =>
+                                                  e.id ==
+                                                  context
+                                                      .read<DriverProfileBloc>()
+                                                      .choosenDocument)
+                                              .isEditable ==
+                                          true ||
+                                      context
+                                          .read<DriverProfileBloc>()
+                                          .isEditable)
+                                  ? showModalBottomSheet(
+                                      isScrollControlled: false,
+                                      context: context,
+                                      useSafeArea: true,
+                                      builder: (_) {
+                                        return SafeArea(
+                                          child: ImagePickerDialog(
+                                            size: size.width,
+                                            onImageSelected:
+                                                (ImageSource source) {
+                                              context
+                                                  .read<DriverProfileBloc>()
+                                                  .add(
+                                                    PickImageEvent(
+                                                        source: source,
+                                                        isFront: true),
+                                                  );
+                                            },
+                                          ),
+                                        );
+                                      })
+                                  : null;
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                MyText(
+                                  text:
+                                      '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} Front',
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontSize: 18,
+                                        color: AppColors.blackText,
+                                      ),
+                                ),
+                                  DottedLine(
+                                  // ADDED: BY MG: Dotted line
+                                  dashLength: 2,
+                                  dashGapLength: 2,
+                                  dashRadius: 1,
+                                  lineThickness: 1,
+                                  dashColor: Theme.of(context).dividerColor,
+                                ),
+                                SizedBox(height: size.width * 0.04),
+                                Container(
+                                  color: AppColors.darkGrey
+                                            .withOpacity(0.1),
+                                  height: size.width * 0.5,
+                                  width: size.width * 0.8,
+                                  child: DottedBorder(
+                                    color: AppColors.darkGrey,
+                                    strokeWidth: 2,
+                                    dashPattern: const [6, 3],
+                                    borderType: BorderType.RRect,
+                                    radius: const Radius.circular(5),
+                                    child: (context
+                                                .read<DriverProfileBloc>()
+                                                .docImage ==
+                                            null)
+                                        ? Center(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.camera_alt,
+                                                  color: AppColors.black
+                                                      .withOpacity(0.5),
+                                                  size: size.width * 0.07,
+                                                ),
+                                                SizedBox(
+                                                    height: size.width * 0.025),
+                                                MyText(
+                                                  text: AppLocalizations.of(
+                                                          context)!
+                                                      .tapToUploadImage,
+                                                  textStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                        fontSize: 15,
+                                                        color: AppColors.black
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Container(
+                                            height: size.width * 0.5,
+                                            width: size.width * 0.8,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: FileImage(
+                                                  File(context
+                                                      .read<DriverProfileBloc>()
+                                                      .docImage!),
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                              borderRadius: BorderRadius.circular(
+                                                  5), // Matching borderRadius
+                                            ),
+                                          ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: context
                                         .read<DriverProfileBloc>()
-                                        .isEditable)
-                                ? showModalBottomSheet(
-                                    isScrollControlled: false,
-                                    context: context,
-                                    useSafeArea: true,
-                                    builder: (_) {
-                                      return SafeArea(
-                                        child: ImagePickerDialog(
-                                          size: size.width,
-                                          onImageSelected:
-                                              (ImageSource source) {
+                                        .neededDocuments
+                                        .firstWhere((e) =>
+                                            e.id ==
                                             context
                                                 .read<DriverProfileBloc>()
-                                                .add(
-                                                  PickImageEvent(
-                                                      source: source,
-                                                      isFront: true),
-                                                );
-                                          },
-                                        ),
-                                      );
-                                    })
-                                : null;
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MyText(
-                                text:
-                                    '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} Front',
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontSize: 18,
-                                      color: AppColors.blackText,
-                                    ),
-                              ),
-                              SizedBox(height: size.width * 0.01),
-                              SizedBox(
-                                height: size.width * 0.5,
-                                width: size.width * 0.8,
-                                child: DottedBorder(
-                                  color: AppColors.darkGrey,
-                                  strokeWidth: 2,
-                                  dashPattern: const [6, 3],
-                                  borderType: BorderType.RRect,
-                                  radius: const Radius.circular(5),
-                                  child: (context
-                                              .read<DriverProfileBloc>()
-                                              .docImage ==
-                                          null)
-                                      ? Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.camera_alt,
-                                                color: AppColors.black
-                                                    .withOpacity(0.5),
-                                                size: size.width * 0.07,
-                                              ),
-                                              SizedBox(
-                                                  height: size.width * 0.025),
-                                              MyText(
-                                                text: AppLocalizations.of(
-                                                        context)!
-                                                    .tapToUploadImage,
-                                                textStyle: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyMedium!
-                                                    .copyWith(
-                                                      fontSize: 15,
-                                                      color: AppColors.black
-                                                          .withOpacity(0.5),
-                                                    ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      : Container(
-                                          height: size.width * 0.5,
-                                          width: size.width * 0.8,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: FileImage(
-                                                File(context
-                                                    .read<DriverProfileBloc>()
-                                                    .docImage!),
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                                5), // Matching borderRadius
-                                          ),
-                                        ),
-                                ),
-                              )
-                            ],
+                                                .choosenDocument)
+                                        .isFrontAndBack ==
+                                    true
+                                ? size.width * 0.05
+                                : size.width * 0,
                           ),
-                        ),
-                        SizedBox(
-                          height: context
+                          context
                                       .read<DriverProfileBloc>()
                                       .neededDocuments
                                       .firstWhere((e) =>
@@ -219,250 +250,178 @@ class EditDocumentWidget extends StatelessWidget {
                                               .choosenDocument)
                                       .isFrontAndBack ==
                                   true
-                              ? size.width * 0.05
-                              : size.width * 0,
-                        ),
-                        context
-                                    .read<DriverProfileBloc>()
-                                    .neededDocuments
-                                    .firstWhere((e) =>
-                                        e.id ==
-                                        context
-                                            .read<DriverProfileBloc>()
-                                            .choosenDocument)
-                                    .isFrontAndBack ==
-                                true
-                            ? InkWell(
-                                onTap: () {
-                                  context
-                                              .read<DriverProfileBloc>()
-                                              .neededDocuments
-                                              .firstWhere((e) =>
-                                                  e.id ==
+                              ? InkWell(
+                                  onTap: () {
+                                    context
+                                                .read<DriverProfileBloc>()
+                                                .neededDocuments
+                                                .firstWhere((e) =>
+                                                    e.id ==
+                                                    context
+                                                        .read<DriverProfileBloc>()
+                                                        .choosenDocument)
+                                                .isEditable ==
+                                            true
+                                        ? showModalBottomSheet(
+                                            isScrollControlled: false,
+                                            context: context,
+                                            useSafeArea: true,
+                                            builder: (builder) {
+                                              return ImagePickerDialog(
+                                                size: size.width,
+                                                onImageSelected:
+                                                    (ImageSource source) {
                                                   context
                                                       .read<DriverProfileBloc>()
-                                                      .choosenDocument)
-                                              .isEditable ==
-                                          true
-                                      ? showModalBottomSheet(
-                                          isScrollControlled: false,
-                                          context: context,
-                                          useSafeArea: true,
-                                          builder: (builder) {
-                                            return ImagePickerDialog(
-                                              size: size.width,
-                                              onImageSelected:
-                                                  (ImageSource source) {
-                                                context
-                                                    .read<DriverProfileBloc>()
-                                                    .add(
-                                                      PickImageEvent(
-                                                          source: source,
-                                                          isFront: false),
-                                                    );
-                                              },
-                                            );
-                                          })
-                                      : null;
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MyText(
-                                      text:
-                                          '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} Back',
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(
-                                            fontSize: 18,
-                                            color: AppColors.blackText,
-                                          ),
-                                    ),
-                                    SizedBox(height: size.width * 0.01),
-                                    SizedBox(
-                                      height: size.width * 0.5,
-                                      width: size.width * 0.8,
-                                      child: DottedBorder(
-                                        color: AppColors.darkGrey,
-                                        strokeWidth: 2,
-                                        dashPattern: const [6, 3],
-                                        borderType: BorderType.RRect,
-                                        radius: const Radius.circular(5),
-                                        child: (context
-                                                    .read<DriverProfileBloc>()
-                                                    .docImageBack ==
-                                                null)
-                                            ? Center(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.camera_alt,
-                                                      color: AppColors.black
-                                                          .withOpacity(0.5),
-                                                      size: size.width * 0.07,
-                                                    ),
-                                                    SizedBox(
-                                                        height:
-                                                            size.width * 0.025),
-                                                    MyText(
-                                                      text: AppLocalizations.of(
-                                                              context)!
-                                                          .tapToUploadImage,
-                                                      textStyle:
-                                                          Theme.of(context)
-                                                              .textTheme
-                                                              .bodyMedium!
-                                                              .copyWith(
-                                                                fontSize: 15,
-                                                                color: AppColors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                              ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            : Container(
-                                                height: size.width * 0.5,
-                                                width: size.width * 0.8,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: FileImage(
-                                                      File(context
-                                                          .read<
-                                                              DriverProfileBloc>()
-                                                          .docImageBack!),
-                                                    ),
-                                                    fit: BoxFit.cover,
+                                                      .add(
+                                                        PickImageEvent(
+                                                            source: source,
+                                                            isFront: false),
+                                                      );
+                                                },
+                                              );
+                                            })
+                                        : null;
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      MyText(
+                                        text:
+                                            '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} Back',
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .copyWith(
+                                              fontSize: 18,
+                                              color: AppColors.blackText,
+                                            ),
+                                      ),
+                                        DottedLine(
+                                  // ADDED: BY MG: Dotted line
+                                  dashLength: 2,
+                                  dashGapLength: 2,
+                                  dashRadius: 1,
+                                  lineThickness: 1,
+                                  dashColor: Theme.of(context).dividerColor,
+                                ),
+                                     SizedBox(height: size.width * 0.04),
+                                      Container(
+                                        height: size.width * 0.5,
+                                        width: size.width * 0.8,
+                                        color: AppColors.darkGrey
+                                            .withOpacity(0.1),
+                                        child: DottedBorder(
+                                          color: AppColors.darkGrey,
+                                          strokeWidth: 2,
+                                          dashPattern: const [6, 3],
+                                          borderType: BorderType.RRect,
+                                          radius: const Radius.circular(5),
+                                          child: (context
+                                                      .read<DriverProfileBloc>()
+                                                      .docImageBack ==
+                                                  null)
+                                              ? Center(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.camera_alt,
+                                                        color: AppColors.black
+                                                            .withOpacity(0.5),
+                                                        size: size.width * 0.07,
+                                                      ),
+                                                      SizedBox(
+                                                          height:
+                                                              size.width * 0.025),
+                                                      MyText(
+                                                        text: AppLocalizations.of(
+                                                                context)!
+                                                            .tapToUploadImage,
+                                                        textStyle:
+                                                            Theme.of(context)
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                  fontSize: 15,
+                                                                  color: AppColors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
+                                                )
+                                              : Container(
+                                                  height: size.width * 0.5,
+                                                  width: size.width * 0.8,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: FileImage(
+                                                        File(context
+                                                            .read<
+                                                                DriverProfileBloc>()
+                                                            .docImageBack!),
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(5),
+                                                  ),
                                                 ),
-                                              ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : const SizedBox(),
-                        if (context
-                            .read<DriverProfileBloc>()
-                            .neededDocuments
-                            .firstWhere((e) =>
-                                e.id ==
-                                context
-                                    .read<DriverProfileBloc>()
-                                    .choosenDocument)
-                            .hasIdNumer)
-                          Column(
-                            children: [
-                              SizedBox(height: size.width * 0.07),
-                              SizedBox(
-                                width: size.width * 0.9,
-                                child: MyText(
-                                  text: context
-                                      .read<DriverProfileBloc>()
-                                      .neededDocuments
-                                      .firstWhere((e) =>
-                                          e.id ==
-                                          context
-                                              .read<DriverProfileBloc>()
-                                              .choosenDocument)
-                                      .idKey,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        color: AppColors.blackText,
-                                      ),
-                                ),
-                              ),
-                              SizedBox(height: size.width * 0.05),
-                              Container(
-                                color: AppColors.darkGrey.withOpacity(0.1),
-                                child: CustomTextField(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        color: AppColors.blackText,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
+                                    ],
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.black.withOpacity(0.5),
-                                        width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  controller: context
-                                      .read<DriverProfileBloc>()
-                                      .documentId,
-                                  hintText: context
-                                      .read<DriverProfileBloc>()
-                                      .neededDocuments
-                                      .firstWhere((e) =>
-                                          e.id ==
-                                          context
-                                              .read<DriverProfileBloc>()
-                                              .choosenDocument)
-                                      .idKey,
-                                ),
-                              )
-                            ],
-                          ),
-                        if (context
-                            .read<DriverProfileBloc>()
-                            .neededDocuments
-                            .firstWhere((e) =>
-                                e.id ==
-                                context
-                                    .read<DriverProfileBloc>()
-                                    .choosenDocument)
-                            .hasExpiryDate)
-                          Column(
-                            children: [
-                              SizedBox(height: size.width * 0.07),
-                              SizedBox(
-                                width: size.width * 0.9,
-                                child: MyText(
-                                  text: AppLocalizations.of(context)!
-                                      .chooseExpiryDate,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        color: AppColors.blackText,
-                                      ),
-                                ),
-                              ),
-                              SizedBox(height: size.width * 0.05),
-                              InkWell(
-                                onTap: () {
+                                )
+                              : const SizedBox(),
+                          if (context
+                              .read<DriverProfileBloc>()
+                              .neededDocuments
+                              .firstWhere((e) =>
+                                  e.id ==
                                   context
                                       .read<DriverProfileBloc>()
-                                      .add(ChooseDateEvent(context: context));
-                                },
-                                child: Container(
+                                      .choosenDocument)
+                              .hasIdNumer)
+                            Column(
+                              children: [
+                                SizedBox(height: size.width * 0.07),
+                                SizedBox(
+                                  width: size.width * 0.9,
+                                  child: MyText(
+                                    text: context
+                                        .read<DriverProfileBloc>()
+                                        .neededDocuments
+                                        .firstWhere((e) =>
+                                            e.id ==
+                                            context
+                                                .read<DriverProfileBloc>()
+                                                .choosenDocument)
+                                        .idKey,
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          fontSize: 16,
+                                          color: AppColors.blackText,
+                                        ),
+                                  ),
+                                ),
+                                SizedBox(height: size.width * 0.05),
+                                Container(
                                   color: AppColors.darkGrey.withOpacity(0.1),
                                   child: CustomTextField(
+                                    borderRadius: 2,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: size.width * 0.035,
+                                        horizontal: size.width * 0.05),
+                                    filled: true,
+                                    fillColor: Theme.of(context).cardColor,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall!
@@ -470,7 +429,6 @@ class EditDocumentWidget extends StatelessWidget {
                                           fontSize: 16,
                                           color: AppColors.blackText,
                                         ),
-                                    enabled: false,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: AppColors.darkGrey, width: 1),
@@ -482,25 +440,109 @@ class EditDocumentWidget extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     disabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: AppColors.darkGrey, width: 1),
+                                      borderSide: BorderSide(
+                                          color: AppColors.black.withOpacity(0.5),
+                                          width: 1),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     controller: context
                                         .read<DriverProfileBloc>()
-                                        .documentExpiry,
-                                    hintText:
-                                        '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} ${AppLocalizations.of(context)!.expiryDate}',
+                                        .documentId,
+                                    hintText: context
+                                        .read<DriverProfileBloc>()
+                                        .neededDocuments
+                                        .firstWhere((e) =>
+                                            e.id ==
+                                            context
+                                                .read<DriverProfileBloc>()
+                                                .choosenDocument)
+                                        .idKey,
+                                  ),
+                                )
+                              ],
+                            ),
+                          if (context
+                              .read<DriverProfileBloc>()
+                              .neededDocuments
+                              .firstWhere((e) =>
+                                  e.id ==
+                                  context
+                                      .read<DriverProfileBloc>()
+                                      .choosenDocument)
+                              .hasExpiryDate)
+                            Column(
+                              children: [
+                                SizedBox(height: size.width * 0.07),
+                                SizedBox(
+                                  width: size.width * 0.9,
+                                  child: MyText(
+                                    text: AppLocalizations.of(context)!
+                                        .chooseExpiryDate,
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          fontSize: 16,
+                                          color: AppColors.blackText,
+                                        ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        SizedBox(height: size.width * 0.05),
-                      ],
+                                SizedBox(height: size.width * 0.05),
+                                InkWell(
+                                  onTap: () {
+                                    context
+                                        .read<DriverProfileBloc>()
+                                        .add(ChooseDateEvent(context: context));
+                                  },
+                                  child: Container(
+                                    color: AppColors.darkGrey.withOpacity(0.1),
+                                    child: CustomTextField(
+                                      borderRadius: 2,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: size.width * 0.035,
+                                          horizontal: size.width * 0.05),
+                                      filled: true,
+                                      fillColor: Theme.of(context).cardColor,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                            fontSize: 16,
+                                            color: AppColors.blackText,
+                                          ),
+                                      enabled: false,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: AppColors.darkGrey, width: 1),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: AppColors.darkGrey, width: 1),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      disabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: AppColors.darkGrey, width: 1),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      controller: context
+                                          .read<DriverProfileBloc>()
+                                          .documentExpiry,
+                                      hintText:
+                                          '${context.read<DriverProfileBloc>().neededDocuments.firstWhere((e) => e.id == context.read<DriverProfileBloc>().choosenDocument).name} ${AppLocalizations.of(context)!.expiryDate}',
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          SizedBox(height: size.width * 0.05),
+                        ],
+                      ),
                     ),
                   )),
                   CustomButton(
+                    borderRadius: 2,
                       buttonName: AppLocalizations.of(context)!.submit,
                       onTap: () {
                         if (context.read<DriverProfileBloc>().docImage !=

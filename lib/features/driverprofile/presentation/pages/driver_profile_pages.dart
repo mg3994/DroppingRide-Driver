@@ -19,6 +19,7 @@ import 'package:restart_tagxi/l10n/app_localizations.dart';
 
 import '../widgets/document_declined_widget.dart';
 import '../widgets/needed_documents_shimmer.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 class DriverProfilePage extends StatelessWidget {
   static const String routeName = '/driverProfilePage';
@@ -71,8 +72,8 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
         child: Scaffold(
           body: Stack(
             children: [
-              CustomBackground(
-                child: (context.read<DriverProfileBloc>().choosenDocument !=
+              // CustomBackground(child: 
+              (context.read<DriverProfileBloc>().choosenDocument !=
                             null &&
                         context.read<DriverProfileBloc>().isEditable)
                     ? EditDocumentWidget(cont: context)
@@ -190,380 +191,438 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                                 cont : context,arg:  args)
                                       ],
                                     )))
-                                : Container(
-                                    padding: EdgeInsets.fromLTRB(
-                                        size.width * 0.05,
-                                        size.width * 0.05,
-                                        size.width * 0.05,
-                                        0),
-                                    height: size.height,
-                                    width: size.width,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                .padding
-                                                .top),
-                                        SizedBox(
-                                          width: size.width * 0.9,
-                                          child: MyText(
-                                            text: AppLocalizations.of(context)!
-                                                .requiredInfo,
-                                            textStyle: Theme.of(context)
-                                                .textTheme
-                                                .headlineMedium!
-                                                .copyWith(
-                                                    fontSize: 18,
-                                                    color: AppColors.blackText),
-                                          ),
-                                        ),
-                                        SizedBox(height: size.width * 0.12),
-                                        SizedBox(
-                                          width: size.width * 0.9,
-                                          child: Row(
-                                            children: [
-                                              MyText(
-                                                text:
-                                                    '${AppLocalizations.of(context)!.welcome}  ',
-                                                textStyle: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                        fontSize: 16,
-                                                        color:
-                                                            AppColors.darkGrey),
-                                              ),
-                                              Expanded(
+                                : Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 4),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                      .padding
+                                                      .top),
+                                              SizedBox(
+                                                width: size.width * 0.9,
                                                 child: MyText(
-                                                  text: userData!.name,
+                                                  text: AppLocalizations.of(context)!
+                                                      .requiredInfo,
                                                   textStyle: Theme.of(context)
                                                       .textTheme
-                                                      .bodyLarge!
+                                                      .headlineMedium!
                                                       .copyWith(
                                                           fontSize: 18,
-                                                          color: AppColors
-                                                              .blackText),
+                                                          color: AppColors.blackText),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: size.width * 0.025),
-                                        SizedBox(
-                                          width: size.width * 0.9,
-                                          child: MyText(
-                                            text: (userData!.role == 'driver')
-                                                ? AppLocalizations.of(context)!
-                                                    .followSteps
-                                                : AppLocalizations.of(context)!
-                                                    .followStepsOwner,
-                                            textStyle: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium!
-                                                .copyWith(
-                                                    fontSize: 12,
-                                                    color: AppColors.black
-                                                        .withOpacity(0.5)),
-                                          ),
-                                        ),
-                                        SizedBox(height: size.width * 0.07),
-                                        SizedBox(
-                                          width: size.width * 0.725,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                height: size.width * 0.077,
-                                                width: size.width * 0.077,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                        width: 2,
-                                                        color: AppColors.black),
-                                                    color: AppColors.black
-                                                        .withOpacity(0.16)),
-                                                alignment: Alignment.center,
-                                                child: MyText(
-                                                  text: '1',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                          fontSize: 12,
-                                                          color: AppColors.black),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Row(
-                                                  children: [
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Expanded(
-                                                      child: Text(
-                                                        '---------------------',
-                                                        style: TextStyle(
-                                                            color:
-                                                                AppColors.black),
-                                                        maxLines: 1,
+                                              SizedBox(height: size.width * 0.02),
+                                      
+                                              DottedLine(
+                                      // ADDED: BY MG: Dotted line
+                                      dashLength: 2,
+                                      dashGapLength: 2,
+                                      dashRadius: 1,
+                                      lineThickness: 1,
+                                      dashColor: Theme.of(context).dividerColor,
+                                                                    ),
+                                              // SizedBox(height: size.width * 0.10),
+                                             
+                                      Expanded(
+                                        child: Container(
+                                            padding: EdgeInsets.fromLTRB(
+                                                size.width * 0.05,
+                                                size.width * 0.05,
+                                                size.width * 0.05,
+                                                0),
+                                                margin: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(color: Theme.of(context).cardColor,border: Border.all(width: 0.5,color: Theme.of(context).disabledColor.withAlpha(50))),
+                                            height: size.height,
+                                            width: size.width,
+                                            child: Column(
+                                              children: [
+                                                 ///////// Start
+                                                // Column(
+                                                  
+                                                //   crossAxisAlignment: CrossAxisAlignment.start,
+                                                //   children:[
+                                        
+                                                SizedBox(
+                                                  width: size.width * 0.9,
+                                                  child: Row(
+                                                    children: [
+                                                      MyText(
+                                                        text:
+                                                            '${AppLocalizations.of(context)!.welcome}  ',
+                                                        textStyle: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge!
+                                                            .copyWith(
+                                                                fontSize: 16,
+                                                                color:
+                                                                    AppColors.darkGrey),
                                                       ),
-                                                    ),
-                                                    Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      size: size.width * 0.04,
-                                                      color: AppColors.black,
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                height: size.width * 0.077,
-                                                width: size.width * 0.077,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                        width: 2,
-                                                        color: AppColors.black),
-                                                    color: (userData!
-                                                                .serviceLocationId !=
-                                                            '')
-                                                        ? AppColors.black
-                                                            .withOpacity(0.16)
-                                                        : Colors.transparent),
-                                                alignment: Alignment.center,
-                                                child: MyText(
-                                                  text: '2',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                          fontSize: 12,
-                                                          color: AppColors.black),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: (userData!
-                                                            .serviceLocationId !=
-                                                        '')
-                                                    ? Row(
-                                                        children: [
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Expanded(
-                                                            child: Text(
-                                                              '---------------------',
-                                                              style: TextStyle(
+                                                      Expanded(
+                                                        child: MyText(
+                                                          text: userData!.name,
+                                                          textStyle: Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .copyWith(
+                                                                  fontSize: 18,
                                                                   color: AppColors
-                                                                      .black),
-                                                              maxLines: 1,
-                                                            ),
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .arrow_forward_ios,
-                                                            size:
-                                                                size.width * 0.04,
-                                                            color:
-                                                                AppColors.black,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Container(),
-                                              ),
-                                              Container(
-                                                height: size.width * 0.077,
-                                                width: size.width * 0.077,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                        width: 2,
-                                                        color: AppColors.black),
-                                                    color: (context
-                                                            .read<
-                                                                DriverProfileBloc>()
-                                                            .showSubmitButton)
-                                                        ? AppColors.black
-                                                            .withOpacity(0.16)
-                                                        : Colors.transparent),
-                                                alignment: Alignment.center,
-                                                child: MyText(
-                                                  text: '3',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                          fontSize: 12,
-                                                          color: AppColors.black),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: size.width * 0.015),
-                                        SizedBox(
-                                          width: size.width * 0.9,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: size.width * 0.25,
-                                                height: 20,
-                                                child: MyText(
-                                                    text: AppLocalizations.of(
-                                                            context)!
-                                                        .profile,
-                                                    textStyle: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            color: AppColors
-                                                                .blackText),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.center),
-                                              ),
-                                              Expanded(
-                                                child: MyText(
-                                                    text: (userData!.role ==
-                                                            'driver')
-                                                        ? AppLocalizations.of(
-                                                                context)!
-                                                            .vehicleInfo
-                                                        : AppLocalizations.of(
-                                                                context)!
-                                                            .companyInfo,
-                                                    textStyle: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                            fontSize: 12,
-                                                            color: AppColors
-                                                                .blackText),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.center),
-                                              ),
-                                              SizedBox(
-                                                  width: size.width * 0.25,
-                                                  height: 20,
-                                                  child: MyText(
-                                                    text: AppLocalizations.of(
-                                                            context)!
-                                                        .documents,
-                                                    textStyle: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall!
-                                                        .copyWith(
-                                                          fontSize: 12,
-                                                          color:
-                                                              AppColors.blackText,
+                                                                      .blackText),
                                                         ),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.center,
-                                                  ))
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: size.width * 0.05),
-                                        Expanded(
-                                          child: SingleChildScrollView(
-                                            child: (userData!.serviceLocationId ==
-                                                    '')
-                                                ? VehicleInformationWidget(
-                                                    cont: context,args: args)
-                                                : (context.read<DriverProfileBloc>().isRejected && !context.read<DriverProfileBloc>().reUploadDocument && !userData!.available)
-                                                         ? DocumentDeclinedWidget(cont: context)
-                                                         :(((userData!.uploadedDocument == true && !context.read<DriverProfileBloc>().modifyDocument)
-                                                        ? SizedBox(
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Image.asset(
-                                                                  AppImages
-                                                                      .waitingApprovel,
-                                                                  height:
-                                                                      size.width *
-                                                                          0.6,
-                                                                ),
-                                                                MyText(
-                                                                  text: AppLocalizations.of(
-                                                                          context)!
-                                                                      .waitingForApprovelText
-                                                                      .toString()
-                                                                      .replaceAll(
-                                                                          '\\n',
-                                                                          '\n'),
-                                                                  textStyle: const TextStyle(
-                                                                      color:
-                                                                          AppColors
-                                                                              .red,
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                  maxLines: 3,
-                                                                ),
-                                                              ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                 DottedLine(
+                                        // ADDED: BY MG: Dotted line
+                                        dashLength: 2,
+                                        dashGapLength: 2,
+                                        dashRadius: 1,
+                                        lineThickness: 1,
+                                        dashColor: Theme.of(context).dividerColor,
+                                                                      ),
+                                                SizedBox(height: size.width * 0.012),
+                                                SizedBox(
+                                                  width: size.width * 0.9,
+                                                  child: MyText(
+                                                    text: (userData!.role == 'driver')
+                                                        ? AppLocalizations.of(context)!
+                                                            .followSteps
+                                                        : AppLocalizations.of(context)!
+                                                            .followStepsOwner,
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .copyWith(
+                                                            fontSize: 12,
+                                                            color: AppColors.black
+                                                                .withOpacity(0.5)),
+                                                  ),
+                                                ),
+                                                SizedBox(height: size.width * 0.07),
+                                                SizedBox(
+                                                  width: size.width * 0.725,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Container(
+                                                        height: size.width * 0.077,
+                                                        width: size.width * 0.077,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            border: Border.all(
+                                                                width: 2,
+                                                                color: AppColors.black),
+                                                            color: Theme.of(context).cardColor),
+                                                        alignment: Alignment.center,
+                                                        child: MyText(
+                                                          text: '1',
+                                                          textStyle: Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .copyWith(
+                                                                  fontSize: 12,
+                                                                  color: AppColors.black),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Row(
+                                                          children: [
+                                                            const SizedBox(
+                                                              width: 5,
                                                             ),
-                                                          )
-                                                        : ((context
-                                                            .read<
-                                                                DriverProfileBloc>()
-                                                            .modifyDocument ==
-                                                        false|| context.read<DriverProfileBloc>().reUploadDocument)&& !userData!.available)
-                                                    ? NeededDocumentsWidget(cont : context,arg:  args)
-                                                    : SizedBox(
-                                                      child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Image.asset(
-                                                                  AppImages
-                                                                      .waitingApprovel,
-                                                                  height:
-                                                                      size.width *
-                                                                          0.6,
-                                                                ),
-                                                                MyText(
-                                                                  text: AppLocalizations.of(
-                                                                          context)!
-                                                                      .waitingForApprovelText
-                                                                      .toString()
-                                                                      .replaceAll(
-                                                                          '\\n',
-                                                                          '\n'),
-                                                                  textStyle: const TextStyle(
-                                                                      color:
-                                                                          AppColors
-                                                                              .red,
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                  maxLines: 3,
-                                                                ),
-                                                              ],
+                                                            const Expanded(
+                                                              child: Text(
+                                                                '---------------------',
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        AppColors.black),
+                                                                maxLines: 1,
+                                                              ),
                                                             ),
-                                                    ))),
+                                                            Icon(
+                                                              Icons.arrow_forward_ios,
+                                                              size: size.width * 0.04,
+                                                              color: AppColors.black,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: size.width * 0.077,
+                                                        width: size.width * 0.077,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            border: Border.all(
+                                                                width: 2,
+                                                                color: (userData!
+                                                                        .serviceLocationId !=
+                                                                    '')?  AppColors.black : Theme.of(context).disabledColor.withAlpha(100)),
+                                                            color: (userData!
+                                                                        .serviceLocationId !=
+                                                                    '')
+                                                                ? Theme.of(context).cardColor
+                                                                : Colors.transparent),
+                                                        alignment: Alignment.center,
+                                                        child: MyText(
+                                                          text: '2',
+                                                          textStyle: Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .copyWith(
+                                                                  fontSize: 12,
+                                                                  color:  (userData!
+                                                                        .serviceLocationId !=
+                                                                    '')?  AppColors.black : Theme.of(context).disabledColor.withAlpha(100)),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: (userData!
+                                                                    .serviceLocationId !=
+                                                                '')
+                                                            ? Row(
+                                                                children: [
+                                                                  const SizedBox(
+                                                                    width: 5,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      '---------------------',
+                                                                      style: TextStyle(
+                                                                          color: AppColors
+                                                                              .black),
+                                                                      maxLines: 1,
+                                                                    ),
+                                                                  ),
+                                                                  Icon(
+                                                                    Icons
+                                                                        .arrow_forward_ios,
+                                                                    size:
+                                                                        size.width * 0.04,
+                                                                    color:
+                                                                        AppColors.black,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    width: 5,
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : Container(),
+                                                      ),
+                                                      Container(
+                                                        height: size.width * 0.077,
+                                                        width: size.width * 0.077,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            border: Border.all(
+                                                                width: 2,
+                                                                color:(context
+                                                                    .read<
+                                                                        DriverProfileBloc>()
+                                                                    .showSubmitButton)
+                                                                ? AppColors.black : Theme.of(context).disabledColor.withAlpha(100)),
+                                                            color: (context
+                                                                    .read<
+                                                                        DriverProfileBloc>()
+                                                                    .showSubmitButton)
+                                                                ? Theme.of(context).cardColor
+                                                                : Colors.transparent)
+                                                                ,
+                                                        alignment: Alignment.center,
+                                                        child: MyText(
+                                                          text: '3',
+                                                          textStyle: Theme.of(context)
+                                                              .textTheme
+                                                              .bodyLarge!
+                                                              .copyWith(
+                                                                  fontSize: 12,
+                                                                  color: (context
+                                                                    .read<
+                                                                        DriverProfileBloc>()
+                                                                    .showSubmitButton)
+                                                                ? AppColors.black : Theme.of(context).disabledColor.withAlpha(100)),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(height: size.width * 0.015),
+                                                SizedBox(
+                                                  width: size.width * 0.9,
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: size.width * 0.25,
+                                                        height: 20,
+                                                        child: MyText(
+                                                            text: AppLocalizations.of(
+                                                                    context)!
+                                                                .profile,
+                                                            textStyle: Theme.of(context)
+                                                                .textTheme
+                                                                .bodySmall!
+                                                                .copyWith(
+                                                                    fontSize: 12,
+                                                                    color: AppColors
+                                                                        .blackText),
+                                                            maxLines: 2,
+                                                            textAlign: TextAlign.center),
+                                                      ),
+                                                      Expanded(
+                                                        child: MyText(
+                                                            text: (userData!.role ==
+                                                                    'driver')
+                                                                ? AppLocalizations.of(
+                                                                        context)!
+                                                                    .vehicleInfo
+                                                                : AppLocalizations.of(
+                                                                        context)!
+                                                                    .companyInfo,
+                                                            textStyle: Theme.of(context)
+                                                                .textTheme
+                                                                .bodySmall!
+                                                                .copyWith(
+                                                                    fontSize: 12,
+                                                                    color: 
+                                                                    
+                                                                    (userData!
+                                                                        .serviceLocationId !=
+                                                                    '')?  AppColors.black : Theme.of(context).disabledColor.withAlpha(100)),
+                                                            maxLines: 2,
+                                                            textAlign: TextAlign.center),
+                                                      ),
+                                                      SizedBox(
+                                                          width: size.width * 0.25,
+                                                          height: 20,
+                                                          child: MyText(
+                                                            text: AppLocalizations.of(
+                                                                    context)!
+                                                                .documents,
+                                                            textStyle: Theme.of(context)
+                                                                .textTheme
+                                                                .bodySmall!
+                                                                .copyWith(
+                                                                  fontSize: 12,
+                                                                  color:
+                                                                      (context
+                                                                    .read<
+                                                                        DriverProfileBloc>()
+                                                                    .showSubmitButton)?  AppColors.black : Theme.of(context).disabledColor.withAlpha(100),
+                                                                ),
+                                                            maxLines: 2,
+                                                            textAlign: TextAlign.center,
+                                                          ))
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(height: size.width * 0.05),
+                                                Expanded(
+                                                  child: SingleChildScrollView(
+                                                    child: (userData!.serviceLocationId ==
+                                                            '')
+                                                        ? VehicleInformationWidget(
+                                                            cont: context,args: args)
+                                                        : (context.read<DriverProfileBloc>().isRejected && !context.read<DriverProfileBloc>().reUploadDocument && !userData!.available)
+                                                                 ? DocumentDeclinedWidget(cont: context)
+                                                                 :(((userData!.uploadedDocument == true && !context.read<DriverProfileBloc>().modifyDocument)
+                                                                ? SizedBox(
+                                                                    child: Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Image.asset(
+                                                                          AppImages
+                                                                              .waitingApprovel,
+                                                                          height:
+                                                                              size.width *
+                                                                                  0.6,
+                                                                        ),
+                                                                        MyText(
+                                                                          text: AppLocalizations.of(
+                                                                                  context)!
+                                                                              .waitingForApprovelText
+                                                                              .toString()
+                                                                              .replaceAll(
+                                                                                  '\\n',
+                                                                                  '\n'),
+                                                                          textStyle: const TextStyle(
+                                                                              color:
+                                                                                  AppColors
+                                                                                      .red,
+                                                                              fontSize:
+                                                                                  16,
+                                                                              fontWeight:
+                                                                                  FontWeight
+                                                                                      .bold),
+                                                                          maxLines: 3,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : ((context
+                                                                    .read<
+                                                                        DriverProfileBloc>()
+                                                                    .modifyDocument ==
+                                                                false|| context.read<DriverProfileBloc>().reUploadDocument)&& !userData!.available)
+                                                            ? NeededDocumentsWidget(cont : context,arg:  args)
+                                                            : SizedBox(
+                                                              child: Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Image.asset(
+                                                                          AppImages
+                                                                              .waitingApprovel,
+                                                                          height:
+                                                                              size.width *
+                                                                                  0.6,
+                                                                        ),
+                                                                        MyText(
+                                                                          text: AppLocalizations.of(
+                                                                                  context)!
+                                                                              .waitingForApprovelText
+                                                                              .toString()
+                                                                              .replaceAll(
+                                                                                  '\\n',
+                                                                                  '\n'),
+                                                                          textStyle: const TextStyle(
+                                                                              color:
+                                                                                  AppColors
+                                                                                      .red,
+                                                                              fontSize:
+                                                                                  16,
+                                                                              fontWeight:
+                                                                                  FontWeight
+                                                                                      .bold),
+                                                                          maxLines: 3,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                            )
+                                                            
+                                                            )
+                                                            ),
+                                                  ),
+                                                )
+                                                /////////
+                                              // ]),
+                                              ],
+                                            ),
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-              ),
+                                ),
+              // ),
             
             ],
           ),

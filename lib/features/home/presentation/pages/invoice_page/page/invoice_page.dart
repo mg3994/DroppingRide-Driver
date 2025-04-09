@@ -1,9 +1,11 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/features/home/application/home_bloc.dart';
 import 'package:restart_tagxi/features/home/presentation/pages/invoice_page/widget/Invoice_bottom_painter.dart';
@@ -32,6 +34,8 @@ class InvoicePage extends StatelessWidget {
               ),
               Positioned(
                   top: 0,
+                  
+                 
                   child: CustomPaint(
                     painter: InvoiceTopPainter(
                         textDirection: context.read<HomeBloc>().textDirection),
@@ -42,40 +46,62 @@ class InvoicePage extends StatelessWidget {
                           (context.read<HomeBloc>().textDirection == 'ltr')
                               ? Alignment.topLeft
                               : Alignment.topRight,
-                      child: Container(
-                        height: size.width * 0.1,
-                        width: size.width * 0.6,
-                        margin: EdgeInsets.only(top: size.height * 0.07),
-                        padding: EdgeInsets.fromLTRB(
-                            size.width * 0.05,
-                            size.width * 0.025,
-                            size.width * 0.05,
-                            size.width * 0.025),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: size.width * 0.065,
-                              width: size.width * 0.065,
-                              child: Image.asset(AppImages.tripSummary),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: size.width * 0.1,
+                            width: size.width * 0.5,
+                            margin: EdgeInsets.only(top: size.height * 0.07),
+                            padding: EdgeInsets.fromLTRB(
+                                size.width * 0.05,
+                                size.width * 0.025,
+                                size.width * 0.05,
+                                size.width * 0.025),
+                            decoration: BoxDecoration(
+                               borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(4),
+                                            bottomLeft: Radius.circular(4),
+                                            topRight: Radius.circular(4),
+                                            bottomRight: Radius.circular(4),
+                                          ),
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                               boxShadow: [
+                                    BoxShadow(
+                                      color: Theme.of(context).shadowColor.withAlpha(100),
+                                      spreadRadius:1.2,
+                                      blurStyle: BlurStyle.solid,
+                                      offset: const Offset(-2, 0),
+                                    ),
+                                  ],
+                                // borderRadius: const BorderRadius.only(
+                                //     // topRight: Radius.circular(10),
+                                //     // bottomLeft: Radius.circular(10)
+                                //     )
+                                    )
+                                    ,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: size.width * 0.065,
+                                  width: size.width * 0.065,
+                                  child: Image.asset(AppImages.tripSummary),
+                                ),
+                                SizedBox(width: size.width * 0.03),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.tripSummary,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: Theme.of(context).disabledColor),
+                                ),
+                              ],
                             ),
-                            SizedBox(width: size.width * 0.03),
-                            MyText(
-                              text: AppLocalizations.of(context)!.tripSummary,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: Theme.of(context).disabledColor),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   )),
@@ -90,21 +116,30 @@ class InvoicePage extends StatelessWidget {
                       height: size.height * 0.76,
                       width: size.width * 0.9,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
                             height: size.height * 0.1,
                           ),
-                          SizedBox(
-                            width: size.width * 0.8,
-                            child: MyText(
-                              text: userData!.onTripRequest!.requestNumber,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    color: Theme.of(context).primaryColorDark,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: size.width * 0.48,
+                              child: CustomCard(
+                                blurRadius: 4,
+                                border: Border.all(color: Theme.of(context).disabledColor.withAlpha(100),width: 0.5),
+                                padding: EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+                                child: MyText(
+                                  text: userData!.onTripRequest!.requestNumber,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -117,12 +152,16 @@ class InvoicePage extends StatelessWidget {
                                   Container(
                                     width: size.width * 0.8,
                                     padding: EdgeInsets.all(size.width * 0.05),
+                                    
                                     decoration: BoxDecoration(
-                                        color:
-                                            AppColors.darkGrey.withOpacity(0.3),
-                                        borderRadius: BorderRadius.circular(5)),
+                                      border: Border.all(width: 0.6,color: Theme.of(context)
+                                                    .hintColor,),
+                                        color:Theme.of(context).cardColor,
+                                            // AppColors.darkGrey.withOpacity(0.3),
+                                        borderRadius: BorderRadius.circular(4)),
                                     child: Column(
                                       children: [
+                                        // SizedBox(height: size.height *0.01,),
                                         Row(
                                           children: [
                                             RotatedBox(
@@ -134,10 +173,10 @@ class InvoicePage extends StatelessWidget {
                                                   : 0,
                                               child: Icon(
                                                 CupertinoIcons
-                                                    .arrowtriangle_right_fill,
+                                                    .circle_filled,
                                                 size: 15,
                                                 color: Theme.of(context)
-                                                    .primaryColorDark,
+                                                    .hintColor,
                                               ),
                                             ),
                                             const SizedBox(
@@ -151,8 +190,7 @@ class InvoicePage extends StatelessWidget {
                                                 textStyle:
                                                     AppTextStyle.normalStyle()
                                                         .copyWith(
-                                                            color: AppColors
-                                                                .darkGrey,
+                                                           
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -168,11 +206,20 @@ class InvoicePage extends StatelessWidget {
                                                   .textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      color: Theme.of(context)
-                                                          .hintColor),
+                                                      // color: Theme.of(context)
+                                                      //     .hintColor
+                                                          ),
                                             )
                                           ],
                                         ),
+                                          DottedLine(
+                            // ADDED: BY MG: Dotted line
+                            dashLength: 2,
+                            dashGapLength: 2,
+                            dashRadius: 1,
+                            lineThickness: 1,
+                            dashColor: Theme.of(context).dividerColor,
+                          ),
                                         SizedBox(
                                           height: size.width * 0.05
                                         ),
@@ -187,10 +234,10 @@ class InvoicePage extends StatelessWidget {
                                                   : 0,
                                               child: Icon(
                                                 CupertinoIcons
-                                                    .arrowtriangle_right_fill,
+                                                    .circle_filled,
                                                 size: 15,
                                                 color: Theme.of(context)
-                                                    .primaryColorDark,
+                                                    .hintColor,
                                               ),
                                             ),
                                             const SizedBox(
@@ -204,8 +251,8 @@ class InvoicePage extends StatelessWidget {
                                                 textStyle:
                                                     AppTextStyle.normalStyle()
                                                         .copyWith(
-                                                            color: AppColors
-                                                                .darkGrey,
+                                                            // color: AppColors
+                                                            //     .darkGrey,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -221,11 +268,20 @@ class InvoicePage extends StatelessWidget {
                                                   .textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      color: Theme.of(context)
-                                                          .hintColor),
+                                                      // color: Theme.of(context)
+                                                      //     .hintColor
+                                                          ),
                                             )
                                           ],
                                         ),
+                                          DottedLine(
+                            // ADDED: BY MG: Dotted line
+                            dashLength: 2,
+                            dashGapLength: 2,
+                            dashRadius: 1,
+                            lineThickness: 1,
+                            dashColor: Theme.of(context).dividerColor,
+                          ),
                                         SizedBox(
                                           height: size.width * 0.05
                                         ),
@@ -239,11 +295,11 @@ class InvoicePage extends StatelessWidget {
                                                   ? 2
                                                   : 0,
                                               child: Icon(
-                                                CupertinoIcons
-                                                    .arrowtriangle_right_fill,
+                                                 CupertinoIcons
+                                                    .circle_filled,
                                                 size: 15,
                                                 color: Theme.of(context)
-                                                    .primaryColorDark,
+                                                    .hintColor,
                                               ),
                                             ),
                                             const SizedBox(
@@ -257,8 +313,8 @@ class InvoicePage extends StatelessWidget {
                                                 textStyle:
                                                     AppTextStyle.normalStyle()
                                                         .copyWith(
-                                                            color: AppColors
-                                                                .darkGrey,
+                                                            // color: AppColors
+                                                            //     .darkGrey,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -287,11 +343,20 @@ class InvoicePage extends StatelessWidget {
                                                   .textTheme
                                                   .bodyMedium!
                                                   .copyWith(
-                                                      color: Theme.of(context)
-                                                          .hintColor),
+                                                      // color: Theme.of(context)
+                                                      //     .hintColor
+                                                          ),
                                             )
                                           ],
-                                        )
+                                        ),
+                                          DottedLine(
+                            // ADDED: BY MG: Dotted line
+                            dashLength: 2,
+                            dashGapLength: 2,
+                            dashRadius: 1,
+                            lineThickness: 1,
+                            dashColor: Theme.of(context).dividerColor,
+                          ),
                                       ],
                                     ),
                                   ),
@@ -302,7 +367,7 @@ class InvoicePage extends StatelessWidget {
                                           EdgeInsets.all(size.width * 0.015),
                                       decoration: BoxDecoration(
                                         color: Theme.of(context)
-                                            .scaffoldBackgroundColor,
+                                            .cardColor,
                                         borderRadius: BorderRadius.circular(2),
                                         border: Border.all(
                                           width: size.width * 0.001,
@@ -340,6 +405,15 @@ class InvoicePage extends StatelessWidget {
                                               ),
                                             ],
                                           ),
+                                          SizedBox(height: 2,),
+                                            DottedLine(
+                            // ADDED: BY MG: Dotted line
+                            dashLength: 2,
+                            dashGapLength: 2,
+                            dashRadius: 1,
+                            lineThickness: 1,
+                            dashColor: Theme.of(context).dividerColor,
+                          ),
                                           if (userData!.onTripRequest!
                                               .requestStops.isNotEmpty)
                                             ListView.separated(
@@ -380,9 +454,14 @@ class InvoicePage extends StatelessWidget {
                                               },
                                               separatorBuilder:
                                                   (context, index) {
-                                                return SizedBox(
-                                                    height:
-                                                        size.width * 0.0025);
+                                                return   DottedLine(
+                            // ADDED: BY MG: Dotted line
+                            dashLength: 2,
+                            dashGapLength: 2,
+                            dashRadius: 1,
+                            lineThickness: 1,
+                            dashColor: Theme.of(context).dividerColor,
+                          );
                                               },
                                             ),
                                           if (userData!.onTripRequest!
@@ -442,83 +521,86 @@ class InvoicePage extends StatelessWidget {
                                         SizedBox(
                                           height: size.width * 0.025,
                                         ),
-                                        Column(
-                                          children: [
-                                            if (userData!.onTripRequest!
-                                                    .requestBill!.basePrice !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .basePrice,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.basePrice}'),
-                                            if (userData!
-                                                    .onTripRequest!
-                                                    .requestBill!
-                                                    .distancePrice !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .distancePrice,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.distancePrice}'),
-                                            if (userData!.onTripRequest!
-                                                    .requestBill!.timePrice !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .timePrice,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.timePrice}'),
-                                            if (userData!
-                                                    .onTripRequest!
-                                                    .requestBill!
-                                                    .waitingCharge !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name:
-                                                      '${AppLocalizations.of(context)!.waitingPrice} (${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.waitingChargePerMin} x ${userData!.onTripRequest!.requestBill!.calculatedWaitingTime} mins)',
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.waitingCharge}'),
-                                            if (userData!
-                                                    .onTripRequest!
-                                                    .requestBill!
-                                                    .adminCommission !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .convFee,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.adminCommission}'),
-                                            if (userData!.onTripRequest!
-                                                    .requestBill!.serviceTax !=
-                                                0)
-                                              FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .taxes,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.serviceTax}'),
-                                          if(context.read<HomeBloc>().driverTips !=0.0)
-                                          FareBreakdownWidget(
-                                                  cont: context,
-                                                  name: AppLocalizations.of(
-                                                          context)!
-                                                      .tips,
-                                                  price:
-                                                      '${userData!.onTripRequest!.requestBill!.currencySymbol}${context.read<HomeBloc>().driverTips}'),
-                                          
-                                          ],
+                                        CustomCard(
+                                          padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                                          child: Column(
+                                            children: [
+                                              if (userData!.onTripRequest!
+                                                      .requestBill!.basePrice !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .basePrice,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.basePrice}'),
+                                              if (userData!
+                                                      .onTripRequest!
+                                                      .requestBill!
+                                                      .distancePrice !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .distancePrice,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.distancePrice}'),
+                                              if (userData!.onTripRequest!
+                                                      .requestBill!.timePrice !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .timePrice,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.timePrice}'),
+                                              if (userData!
+                                                      .onTripRequest!
+                                                      .requestBill!
+                                                      .waitingCharge !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name:
+                                                        '${AppLocalizations.of(context)!.waitingPrice} (${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.waitingChargePerMin} x ${userData!.onTripRequest!.requestBill!.calculatedWaitingTime} mins)',
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.waitingCharge}'),
+                                              if (userData!
+                                                      .onTripRequest!
+                                                      .requestBill!
+                                                      .adminCommission !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .convFee,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.adminCommission}'),
+                                              if (userData!.onTripRequest!
+                                                      .requestBill!.serviceTax !=
+                                                  0)
+                                                FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .taxes,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${userData!.onTripRequest!.requestBill!.serviceTax}'),
+                                            if(context.read<HomeBloc>().driverTips !=0.0)
+                                            FareBreakdownWidget(
+                                                    cont: context,
+                                                    name: AppLocalizations.of(
+                                                            context)!
+                                                        .tips,
+                                                    price:
+                                                        '${userData!.onTripRequest!.requestBill!.currencySymbol}${context.read<HomeBloc>().driverTips}'),
+                                            
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -552,6 +634,7 @@ class InvoicePage extends StatelessWidget {
                                           textStyle: AppTextStyle.boldStyle()
                                               .copyWith(
                                                   fontSize: 30,
+                                                  color: AppColors.green,
                                                   fontWeight: FontWeight.w500),
                                         ),
                                       ],
@@ -562,9 +645,11 @@ class InvoicePage extends StatelessWidget {
                           ),
                           SizedBox(height: size.width * 0.025),
                           SizedBox(
-                            width: size.width * 0.8,
+                            // width: size.width * 0.8,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                
                                 MyText(
                                   text: userData!.onTripRequest!.paymentType,
                                   textStyle: AppTextStyle.boldStyle().copyWith(
@@ -580,6 +665,7 @@ class InvoicePage extends StatelessWidget {
                                       '${userData!.onTripRequest!.requestBill!.currencySymbol}${(userData!.onTripRequest!.requestBill!.totalAmount + context.read<HomeBloc>().driverTips)}',
                                   textStyle: AppTextStyle.boldStyle().copyWith(
                                       fontSize: 16,
+                                      color: AppColors.green,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(

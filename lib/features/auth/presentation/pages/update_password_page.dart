@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/app_constants.dart';
 // ignore: unused_import
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 
 import '../../../../common/common.dart';
 import '../../../../core/utils/custom_background.dart';
@@ -53,8 +54,9 @@ class UpdatePasswordPage extends StatelessWidget {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Scaffold(
-                body: CustomBackground(
-                  child: SafeArea(
+                body: 
+                  // CustomBackground(child:
+                   SafeArea(
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(20),
@@ -66,8 +68,9 @@ class UpdatePasswordPage extends StatelessWidget {
                               SizedBox(
                                   height:
                                       MediaQuery.of(context).size.width * 0.05),
-                              Center(
-                                child: MyText(
+                              // Center(
+                              //   child: 
+                                MyText(
                                   text: AppLocalizations.of(context)!
                                       .forgotPassword,
                                   textAlign: TextAlign.center,
@@ -75,13 +78,15 @@ class UpdatePasswordPage extends StatelessWidget {
                                       .textTheme
                                       .displayMedium!
                                       .copyWith(
-                                        color: AppColors.blackText,
+                                       fontSize:   AppConstants().headerSize
+                                        // color: AppColors.blackText,
                                       ),
                                 ),
-                              ),
+                              // ),
                               SizedBox(height: size.width * 0.1),
                               Center(
                                 child: MyText(
+                                  maxLines: 2,
                                   text: AppLocalizations.of(context)!
                                       .enterNewPassword,
                                   textAlign: TextAlign.center,
@@ -95,18 +100,31 @@ class UpdatePasswordPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: size.width * 0.05),
-                              MyText(
-                                text: AppLocalizations.of(context)!.password,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: AppColors.blackText,
+                               CustomCard(
+                                  blurRadius: 2,
+                                  border: Border.all(width: 1.2,color:Theme.of(context).disabledColor.withAlpha(100)),
+                                  
+                                child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText(
+                                      text: AppLocalizations.of(context)!.password,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w500,
+                                              fontSize: AppConstants().subHeaderSize
+                                            // color: AppColors.blackText,
+                                          ),
                                     ),
+                                SizedBox(height: size.width * 0.02),
+                                buildPasswordField(context, size),
+                                SizedBox(height: size.width * 0.02),
+                                  ],
+                                ),
                               ),
-                              SizedBox(height: size.width * 0.02),
-                              buildPasswordField(context, size),
-                              SizedBox(height: size.width * 0.02),
+                              
                               SizedBox(height: size.width * 0.1),
                               buildButton(context),
                               SizedBox(height: size.width * 0.3),
@@ -116,7 +134,7 @@ class UpdatePasswordPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                // ),
               ),
             );
           },
@@ -129,8 +147,9 @@ class UpdatePasswordPage extends StatelessWidget {
     return Center(
       child: CustomButton(
         buttonName: AppLocalizations.of(context)!.change,
-        borderRadius: 10,
-        height: MediaQuery.of(context).size.height * 0.06,
+        borderRadius: 2,
+        height: MediaQuery.of(context).size.height * 0.07,
+        width: MediaQuery.of(context).size.width * 0.8,
         isLoader: context.read<AuthBloc>().isLoading,
         onTap: () async {
           final role = await AppSharedPreference.getUserType();

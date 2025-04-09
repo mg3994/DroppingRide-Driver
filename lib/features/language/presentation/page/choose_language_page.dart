@@ -117,7 +117,7 @@ class ChooseLanguagePage extends StatelessWidget {
                                             child: Icon(
                                               Icons.arrow_back,
                                               size: size.width * 0.07,
-                                              color: AppColors.black,
+                                               color: Theme.of(context).primaryColorDark,
                                             )),
                                         SizedBox(width: size.width * 0.05)
                                       ],

@@ -121,7 +121,7 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                           textStyle: Theme.of(context)
                               .textTheme
                               .titleLarge!
-                              .copyWith(fontSize: 14),
+                              .copyWith(fontSize: AppConstants().subHeaderSize),
                         ),
                         const SizedBox(width: 10),
                         SvgPicture.asset(AppImages.hi, height: 20, width: 25)
@@ -152,7 +152,7 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                       key: widget.formKey,
                       child: CustomTextField(
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                         borderRadius: 4,
                         controller: widget.emailOrMobile,
                         filled: true,

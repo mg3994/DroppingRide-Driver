@@ -45,7 +45,7 @@ class VehicleInformationWidget extends StatelessWidget {
                             text: AppLocalizations.of(context)!.registerFor,
                             textStyle:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      fontSize: 15,
+                                     fontSize: 14,
                                       color: AppColors.blackText,
                                     ),
                           ))
@@ -108,7 +108,7 @@ class VehicleInformationWidget extends StatelessWidget {
                                                   border: Border.all(
                                                       color: AppColors.black),
                                                   borderRadius:
-                                                      BorderRadius.circular(2)),
+                                                      BorderRadius.circular(1)),
                                               child: (context
                                                           .read<
                                                               DriverProfileBloc>()
@@ -174,7 +174,7 @@ class VehicleInformationWidget extends StatelessWidget {
                                 .chooseServiceLocation,
                             textStyle:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: (context
                                                   .read<DriverProfileBloc>()
                                                   .registerFor !=
@@ -326,8 +326,9 @@ class VehicleInformationWidget extends StatelessWidget {
                                 }
                               },
                               child: Container(
-                                height: size.width * 0.10,
+                                height: size.width * 0.12,
                                 decoration: BoxDecoration(
+                                  color: Theme.of(context).cardColor,
                                     border: Border.all(
                                         color: (context
                                                     .read<DriverProfileBloc>()
@@ -335,7 +336,7 @@ class VehicleInformationWidget extends StatelessWidget {
                                                 null)
                                             ? AppColors.darkGrey
                                             : AppColors.black.withOpacity(0.5)),
-                                    borderRadius: BorderRadius.circular(5)),
+                                    borderRadius: BorderRadius.circular(2)),
                                 padding: EdgeInsets.only(
                                     left: size.width * 0.05,
                                     right: size.width * 0.05),
@@ -464,6 +465,7 @@ class VehicleInformationWidget extends StatelessWidget {
                     SizedBox(height: size.width * 0.05)
                   ],
                 )
+                
             ],
           );
         },

@@ -50,7 +50,7 @@ class LanguageListWidget extends StatelessWidget {
                                   (context.read<LanguageBloc>().selectedIndex ==
                                           index)
                                       ? Theme.of(context).primaryColor
-                                      : Theme.of(context).dialogBackgroundColor,
+                                      : Theme.of(context).dividerColor.withAlpha(100),
                               width:
                                   (context.read<LanguageBloc>().selectedIndex ==
                                           index)
@@ -92,9 +92,9 @@ class LanguageListWidget extends StatelessWidget {
                                   textStyle: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
-                                      .copyWith(
-                                        color: AppColors.blackText,
-                                      ),
+                                      // .copyWith(
+                                      //   color: Theme.of(context).primaryColorDark,
+                                      // ),
                                 ),
                               ],
                             ),

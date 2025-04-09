@@ -181,8 +181,9 @@ class GetVehicleInfo extends StatelessWidget {
                           }
                         },
                         child: Container(
-                          height: size.width * 0.10,
+                          height: size.width * 0.12,
                           decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
                               border: Border.all(
                                   color: (context
                                               .read<DriverProfileBloc>()
@@ -266,7 +267,7 @@ class GetVehicleInfo extends StatelessWidget {
                       text: AppLocalizations.of(context)!.provideVehicleMake,
                       textStyle:
                           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: (context
                                             .read<DriverProfileBloc>()
                                             .choosenVehicleType !=
@@ -305,6 +306,12 @@ class GetVehicleInfo extends StatelessWidget {
                     SizedBox(width: size.width * 0.07),
                     Expanded(
                       child: CustomTextField(
+                        borderRadius: 2,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: size.width * 0.035,
+                            horizontal: size.width * 0.05),
+                        filled: true,
+                        fillColor: Theme.of(context).cardColor,
                         onChange: (v) {
                           context
                               .read<DriverProfileBloc>()
@@ -364,7 +371,7 @@ class GetVehicleInfo extends StatelessWidget {
                       text: AppLocalizations.of(context)!.provideVehicleModel,
                       textStyle:
                           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: (context
                                         .read<DriverProfileBloc>()
                                         .customMake
@@ -404,6 +411,12 @@ class GetVehicleInfo extends StatelessWidget {
                     SizedBox(width: size.width * 0.07),
                     Expanded(
                       child: CustomTextField(
+                        borderRadius: 2,
+                        filled: true,
+                        fillColor: Theme.of(context).cardColor,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: size.width * 0.035,
+                            horizontal: size.width * 0.05),
                         onChange: (v) {
                           context
                               .read<DriverProfileBloc>()
@@ -465,7 +478,7 @@ class GetVehicleInfo extends StatelessWidget {
                       text: AppLocalizations.of(context)!.provideModelYear,
                       textStyle:
                           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: (context
                                         .read<DriverProfileBloc>()
                                         .customModel
@@ -507,6 +520,12 @@ class GetVehicleInfo extends StatelessWidget {
                     SizedBox(width: size.width * 0.07),
                     Expanded(
                       child: CustomTextField(
+                        borderRadius: 2,
+                        filled: true,
+                        fillColor: Theme.of(context).cardColor,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: size.width * 0.035,
+                            horizontal: size.width * 0.05),
                         maxLength: 4,
                         onChange: (v) {
                           context
@@ -580,7 +599,7 @@ class GetVehicleInfo extends StatelessWidget {
                       text: AppLocalizations.of(context)!.provideVehicleNumber,
                       textStyle:
                           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: (context
                                         .read<DriverProfileBloc>()
                                         .vehicleYear
@@ -620,6 +639,12 @@ class GetVehicleInfo extends StatelessWidget {
                     SizedBox(width: size.width * 0.07),
                     Expanded(
                       child: CustomTextField(
+                        borderRadius: 2,
+                        filled: true,
+                        fillColor: Theme.of(context).cardColor,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: size.width * 0.035,
+                            horizontal: size.width * 0.05),
                         enabled: context
                             .read<DriverProfileBloc>()
                             .vehicleYear
@@ -682,7 +707,7 @@ class GetVehicleInfo extends StatelessWidget {
                       text: AppLocalizations.of(context)!.provideVehicleColor,
                       textStyle:
                           Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: (context
                                         .read<DriverProfileBloc>()
                                         .vehicleNumber
@@ -716,6 +741,12 @@ class GetVehicleInfo extends StatelessWidget {
                     SizedBox(width: size.width * 0.07),
                     Expanded(
                       child: CustomTextField(
+                        borderRadius: 2,
+                        filled: true,
+                        fillColor: Theme.of(context).cardColor,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: size.width * 0.035,
+                            horizontal: size.width * 0.05),
                         enabled: context
                             .read<DriverProfileBloc>()
                             .vehicleNumber

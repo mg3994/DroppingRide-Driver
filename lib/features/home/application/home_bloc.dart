@@ -2171,7 +2171,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (val.child('lat_lng_array').value != null) {
       latlngArray = jsonDecode(jsonEncode(val.child('lat_lng_array').value));
       latlngArray.add(
-          {"lat": currentLatLng!.latitude, 'lng': currentLatLng!.longitude});
+          {"lat": currentLatLng?.latitude, 'lng': currentLatLng?.longitude});
     }
     add(WaitingTimeEvent());
     waitingTimer = Timer.periodic(const Duration(seconds: 60), (timer) {
