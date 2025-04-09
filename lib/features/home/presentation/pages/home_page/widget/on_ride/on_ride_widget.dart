@@ -1,9 +1,11 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
 import 'package:restart_tagxi/core/network/endpoints.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/features/home/application/home_bloc.dart';
 import 'package:restart_tagxi/l10n/app_localizations.dart';
@@ -158,327 +160,350 @@ class OnRideWidget extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: size.width * 0.05),
-                Column(
-                  children: [
-                    if (userData?.onTripRequest!.arrivedAt == null)
-                      SizedBox(
-                        width: size.width * 0.9,
-                        child: Row(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                          children: [
-                            const PickupIcon(),
-                            SizedBox(width: size.width * 0.025),
-                            Expanded(
-                              child: MyText(
-                                text: userData!
-                                    .onTripRequest!.pickAddress,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                maxLines: 5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    
-                    // Drop-off or Stops
-                    (userData!.onTripRequest!.requestStops.isEmpty &&
-                            userData!.onTripRequest!.dropAddress !=
-                                null)
-                        ? Column(
+                ////
+                CustomCard(
+                  blurRadius: 8,
+                  border:Border.all(width: 0.5, color: Theme.of(context).disabledColor) ,
+                  padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
+                  child: Column(
+                    children: [
+                      if (userData?.onTripRequest!.arrivedAt == null)
+                        SizedBox(
+                          width: size.width * 0.9,
+                          child: Row(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: size.width * 0.03),
-                              SizedBox(
-                                width: size.width * 0.91,
-                                child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    const DropIcon(),
-                                    SizedBox(
-                                        width: size.width * 0.025),
-                                    Expanded(
-                                      child: MyText(
-                                        text: userData!.onTripRequest!
-                                            .dropAddress,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                fontSize: 13,
-                                                fontWeight:
-                                                    FontWeight.w500),
-                                        maxLines: 5,
+                              const PickupIcon(),
+                              SizedBox(width: size.width * 0.025),
+                              Expanded(
+                                child: MyText(
+                                  text: userData!
+                                      .onTripRequest!.pickAddress,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                    ),
-                                    if (userData!.onTripRequest!
-                                                .transportType ==
-                                            'delivery' &&
-                                        userData!.onTripRequest!
-                                                .dropPocMobile !=
-                                            null)
+                                  maxLines: 5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                       
+                      // Drop-off or Stops
+                      (userData!.onTripRequest!.requestStops.isEmpty &&
+                              userData!.onTripRequest!.dropAddress !=
+                                  null)
+                          ? Column(
+                              children: [
+                                // SizedBox(height: size.width * 0.03),
+                                SizedBox(
+                                  width: size.width * 0.91,
+                                  child: Column(
+                                    spacing: 4,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
+                                          const DropIcon(),
                                           SizedBox(
-                                              width:
-                                                  size.width * 0.025),
-                                          InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(
-                                                    size.width *
-                                                        0.05),
-                                            onTap: () {
-                                              context.read<HomeBloc>().add(
-                                                  OpenAnotherFeatureEvent(
-                                                      value:
-                                                          'tel:${userData!.onTripRequest!.dropPocMobile!}'));
-                                            },
-                                            child: Image.asset(
-                                              AppImages.call,
-                                              width:
-                                                  size.width * 0.05,
-                                              height:
-                                                  size.width * 0.05,
-                                              fit: BoxFit.contain,
+                                              width: size.width * 0.025),
+                                          Expanded(
+                                            child: MyText(
+                                              text: userData!.onTripRequest!
+                                                  .dropAddress,
+                                              textStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                              maxLines: 5,
                                             ),
                                           ),
+                                                        
+                                          
+                                          if (userData!.onTripRequest!
+                                                      .transportType ==
+                                                  'delivery' &&
+                                              userData!.onTripRequest!
+                                                      .dropPocMobile !=
+                                                  null)
+                                            Row(
+                                              children: [
+                                                
+                                                SizedBox(
+                                                    width:
+                                                        size.width * 0.025),
+                                                InkWell(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          size.width *
+                                                              0.05),
+                                                  onTap: () {
+                                                    context.read<HomeBloc>().add(
+                                                        OpenAnotherFeatureEvent(
+                                                            value:
+                                                                'tel:${userData!.onTripRequest!.dropPocMobile!}'));
+                                                  },
+                                                  child: Image.asset(
+                                                    AppImages.call,
+                                                    width:
+                                                        size.width * 0.05,
+                                                    height:
+                                                        size.width * 0.05,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                        ],
+                                      ),
+                                       DottedLine(
+                      // ADDED: BY MG: Dotted line
+                      dashLength: 2,
+                      dashGapLength: 2,
+                      dashRadius: 1,
+                      lineThickness: 1,
+                      dashColor: Theme.of(context).dividerColor,
+                    ),
+                                    ],
+                                  ),
+                                ),
+                                if (userData!.onTripRequest!
+                                            .dropPocInstruction !=
+                                        null &&
+                                    userData!.onTripRequest!
+                                            .dropPocInstruction !=
+                                        '')
+                                  Column(
+                                    children: [
+                                      // SizedBox(
+                                      //     height: size.width * 0.03),
+                                      SizedBox(
+                                        width: size.width * 0.8,
+                                        child: MyText(
+                                            text: userData!
+                                                .onTripRequest!
+                                                .dropPocInstruction),
+                                      ),
+                                    ],
+                                  ),
+                                SizedBox(height: size.width * 0.01)
+                              ],
+                            )
+                          : (userData!.onTripRequest!.requestStops
+                                  .isNotEmpty)
+                              ? Column(
+                                  children: [
+                                    for (var i = 0;
+                                        i <
+                                            userData!.onTripRequest!
+                                                .requestStops.length;
+                                        i++)
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                              height:
+                                                  size.width * 0.03),
+                                          SizedBox(
+                                            width: size.width * 0.9,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                              children: [
+                                                Image.asset(
+                                                  AppImages
+                                                      .dropAddressImageIcon,
+                                                  height:
+                                                      size.width * 0.05,
+                                                  width:
+                                                      size.width * 0.05,
+                                                  fit: BoxFit.contain,
+                                                  color: (userData!
+                                                                  .onTripRequest!
+                                                                  .requestStops[i]
+                                                              [
+                                                              'completed_at'] !=
+                                                          null)
+                                                      ? AppColors
+                                                          .secondary
+                                                      : null,
+                                                ),
+                                                SizedBox(
+                                                    width: size.width *
+                                                        0.025),
+                                                Expanded(
+                                                  child: MyText(
+                                                    text: userData!
+                                                            .onTripRequest!
+                                                            .requestStops[
+                                                        i]['address'],
+                                                    textStyle: Theme.of(
+                                                            context)
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .copyWith(
+                                                            color: (userData!.onTripRequest!.requestStops[i]['completed_at'] !=
+                                                                    null)
+                                                                ? AppColors
+                                                                    .darkGrey
+                                                                : null,
+                                                            fontSize:
+                                                                13,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                    maxLines: 5,
+                                                  ),
+                                                ),
+                                                if (userData!
+                                                        .onTripRequest!
+                                                        .transportType ==
+                                                    'delivery')
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                          width: size
+                                                                  .width *
+                                                              0.025),
+                                                      InkWell(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                size.width *
+                                                                    0.05),
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                  HomeBloc>()
+                                                              .add(OpenAnotherFeatureEvent(
+                                                                  value:
+                                                                      'tel:${userData!.onTripRequest!.requestStops[i]['poc_mobile']}'));
+                                                        },
+                                                        child:
+                                                            Image.asset(
+                                                          AppImages
+                                                              .call,
+                                                          width:
+                                                              size.width *
+                                                                  0.05,
+                                                          height:
+                                                              size.width *
+                                                                  0.05,
+                                                          fit: BoxFit
+                                                              .contain,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                if (userData!
+                                                        .onTripRequest!
+                                                        .transportType ==
+                                                    'delivery')
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                          width: size
+                                                                  .width *
+                                                              0.025),
+                                                      InkWell(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                size.width *
+                                                                    0.05),
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                  HomeBloc>()
+                                                              .add(OpenAnotherFeatureEvent(
+                                                                  value:
+                                                                      '${ApiEndpoints.openMap}${userData!.onTripRequest!.requestStops[i]['latitude']},${userData!.onTripRequest!.requestStops[i]['longitude']}'));
+                                                        },
+                                                        child: Icon(
+                                                          CupertinoIcons
+                                                              .location_fill,
+                                                          size:
+                                                              size.width *
+                                                                  0.05,
+                                                          color:
+                                                              AppColors
+                                                                  .black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                          if (userData!.onTripRequest!
+                                                          .requestStops[i]
+                                                      [
+                                                      'poc_instruction'] !=
+                                                  null &&
+                                              userData!.onTripRequest!
+                                                          .requestStops[i]
+                                                      [
+                                                      'poc_instruction'] !=
+                                                  '')
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                    height: size.width *
+                                                        0.03),
+                                                SizedBox(
+                                                  width:
+                                                      size.width * 0.8,
+                                                  child: MyText(
+                                                      text: userData!
+                                                              .onTripRequest!
+                                                              .requestStops[i]
+                                                          [
+                                                          'poc_instruction']),
+                                                ),
+                                              ],
+                                            ),
                                         ],
                                       ),
                                   ],
+                                )
+                              : Container(),
+                      
+                      if (userData?.onTripRequest!.arrivedAt != null)
+                        SizedBox(
+                          width: size.width * 0.9,
+                          child: Row(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                            children: [
+                              const PickupIcon(),
+                              SizedBox(width: size.width * 0.025),
+                              Expanded(
+                                child: MyText(
+                                  text: userData!
+                                      .onTripRequest!.pickAddress,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  maxLines: 5,
                                 ),
                               ),
-                              if (userData!.onTripRequest!
-                                          .dropPocInstruction !=
-                                      null &&
-                                  userData!.onTripRequest!
-                                          .dropPocInstruction !=
-                                      '')
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                        height: size.width * 0.03),
-                                    SizedBox(
-                                      width: size.width * 0.8,
-                                      child: MyText(
-                                          text: userData!
-                                              .onTripRequest!
-                                              .dropPocInstruction),
-                                    ),
-                                  ],
-                                ),
-                              SizedBox(height: size.width * 0.05)
                             ],
-                          )
-                        : (userData!.onTripRequest!.requestStops
-                                .isNotEmpty)
-                            ? Column(
-                                children: [
-                                  for (var i = 0;
-                                      i <
-                                          userData!.onTripRequest!
-                                              .requestStops.length;
-                                      i++)
-                                    Column(
-                                      children: [
-                                        SizedBox(
-                                            height:
-                                                size.width * 0.03),
-                                        SizedBox(
-                                          width: size.width * 0.9,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                            children: [
-                                              Image.asset(
-                                                AppImages
-                                                    .dropAddressImageIcon,
-                                                height:
-                                                    size.width * 0.05,
-                                                width:
-                                                    size.width * 0.05,
-                                                fit: BoxFit.contain,
-                                                color: (userData!
-                                                                .onTripRequest!
-                                                                .requestStops[i]
-                                                            [
-                                                            'completed_at'] !=
-                                                        null)
-                                                    ? AppColors
-                                                        .secondary
-                                                    : null,
-                                              ),
-                                              SizedBox(
-                                                  width: size.width *
-                                                      0.025),
-                                              Expanded(
-                                                child: MyText(
-                                                  text: userData!
-                                                          .onTripRequest!
-                                                          .requestStops[
-                                                      i]['address'],
-                                                  textStyle: Theme.of(
-                                                          context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .copyWith(
-                                                          color: (userData!.onTripRequest!.requestStops[i]['completed_at'] !=
-                                                                  null)
-                                                              ? AppColors
-                                                                  .darkGrey
-                                                              : null,
-                                                          fontSize:
-                                                              13,
-                                                          fontWeight:
-                                                              FontWeight
-                                                                  .w500),
-                                                  maxLines: 5,
-                                                ),
-                                              ),
-                                              if (userData!
-                                                      .onTripRequest!
-                                                      .transportType ==
-                                                  'delivery')
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                        width: size
-                                                                .width *
-                                                            0.025),
-                                                    InkWell(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              size.width *
-                                                                  0.05),
-                                                      onTap: () {
-                                                        context
-                                                            .read<
-                                                                HomeBloc>()
-                                                            .add(OpenAnotherFeatureEvent(
-                                                                value:
-                                                                    'tel:${userData!.onTripRequest!.requestStops[i]['poc_mobile']}'));
-                                                      },
-                                                      child:
-                                                          Image.asset(
-                                                        AppImages
-                                                            .call,
-                                                        width:
-                                                            size.width *
-                                                                0.05,
-                                                        height:
-                                                            size.width *
-                                                                0.05,
-                                                        fit: BoxFit
-                                                            .contain,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              if (userData!
-                                                      .onTripRequest!
-                                                      .transportType ==
-                                                  'delivery')
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                        width: size
-                                                                .width *
-                                                            0.025),
-                                                    InkWell(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              size.width *
-                                                                  0.05),
-                                                      onTap: () {
-                                                        context
-                                                            .read<
-                                                                HomeBloc>()
-                                                            .add(OpenAnotherFeatureEvent(
-                                                                value:
-                                                                    '${ApiEndpoints.openMap}${userData!.onTripRequest!.requestStops[i]['latitude']},${userData!.onTripRequest!.requestStops[i]['longitude']}'));
-                                                      },
-                                                      child: Icon(
-                                                        CupertinoIcons
-                                                            .location_fill,
-                                                        size:
-                                                            size.width *
-                                                                0.05,
-                                                        color:
-                                                            AppColors
-                                                                .black,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                        if (userData!.onTripRequest!
-                                                        .requestStops[i]
-                                                    [
-                                                    'poc_instruction'] !=
-                                                null &&
-                                            userData!.onTripRequest!
-                                                        .requestStops[i]
-                                                    [
-                                                    'poc_instruction'] !=
-                                                '')
-                                          Column(
-                                            children: [
-                                              SizedBox(
-                                                  height: size.width *
-                                                      0.03),
-                                              SizedBox(
-                                                width:
-                                                    size.width * 0.8,
-                                                child: MyText(
-                                                    text: userData!
-                                                            .onTripRequest!
-                                                            .requestStops[i]
-                                                        [
-                                                        'poc_instruction']),
-                                              ),
-                                            ],
-                                          ),
-                                      ],
-                                    ),
-                                ],
-                              )
-                            : Container(),
-                    
-                    if (userData?.onTripRequest!.arrivedAt != null)
-                      SizedBox(
-                        width: size.width * 0.9,
-                        child: Row(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                          children: [
-                            const PickupIcon(),
-                            SizedBox(width: size.width * 0.025),
-                            Expanded(
-                              child: MyText(
-                                text: userData!
-                                    .onTripRequest!.pickAddress,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                maxLines: 5,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
                 SizedBox(height: size.width * 0.05),
                 Container(
@@ -488,10 +513,9 @@ class OnRideWidget extends StatelessWidget {
                       border: Border.all(
                           width: 0.5,
                           color: Theme.of(context).disabledColor),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(4),
                       color: Theme.of(context)
-                          .disabledColor
-                          .withOpacity(0.3)),
+                          .cardColor),
                   child: Row(
                     children: [
                       Container(
@@ -670,8 +694,7 @@ class OnRideWidget extends StatelessWidget {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Theme.of(context)
-                                      .disabledColor
-                                      .withOpacity(0.3),
+                                      .cardColor,
                                   border: Border.all(
                                       width: 0.5,
                                       color: AppColors.darkGrey
@@ -724,8 +747,7 @@ class OnRideWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Theme.of(context)
-                                  .disabledColor
-                                  .withOpacity(0.3),
+                                 .cardColor,
                               border: Border.all(
                                   width: 0.5,
                                   color: AppColors.darkGrey
@@ -793,9 +815,15 @@ class OnRideWidget extends StatelessWidget {
                     ],
                 SizedBox(height: size.width * 0.03),
                 Container(
+                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                   margin: EdgeInsets.only(
                       left: size.width * 0.05,
                       right: size.width * 0.05),
+                   decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border:
+                              Border.all(color: AppColors.darkGrey, width: 0.5),
+                          color: Theme.of(context).cardColor),
                   child: Row(
                     children: [
                       Expanded(

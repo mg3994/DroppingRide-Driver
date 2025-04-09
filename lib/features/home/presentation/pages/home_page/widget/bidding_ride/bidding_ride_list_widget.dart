@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/app_colors.dart';
 import 'package:restart_tagxi/common/app_images.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
+import 'package:restart_tagxi/core/utils/custom_divider.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/features/home/application/home_bloc.dart';
 import 'package:restart_tagxi/l10n/app_localizations.dart';
@@ -38,6 +41,7 @@ class BiddingRideListWidget extends StatelessWidget {
             margin: EdgeInsets.all(size.width * 0.05),
             padding: EdgeInsets.all(size.width * 0.05),
             child: Column(
+              spacing: 2,
               children: [
                 SizedBox(height: MediaQuery.of(context).padding.top),
                 SizedBox(
@@ -49,16 +53,18 @@ class BiddingRideListWidget extends StatelessWidget {
                         color: Theme.of(context).primaryColorDark),
                   ),
                 ),
+                const HorizontalDotDividerWidget(),
                 SizedBox(height: size.width * 0.05),
                 Container(
                   padding: EdgeInsets.all(size.width * 0.05),
                   width: size.width * 0.9,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(4),
                       border: Border.all(
+                        width: 0.2,
                           color: Theme.of(context)
-                              .primaryColorDark
-                              .withOpacity(0.5))),
+                              .disabledColor)),
                   child: Column(
                     children: [
                       SizedBox(
@@ -144,6 +150,7 @@ class BiddingRideListWidget extends StatelessWidget {
                               fontSize: 16,
                               color: Theme.of(context).primaryColorDark)),
                 ),
+                  const HorizontalDotDividerWidget(),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
@@ -188,9 +195,8 @@ class BiddingRideListWidget extends StatelessWidget {
                                       width: size.width * 0.9,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: AppColors.secondary
-                                              .withOpacity(0.4)),
+                                              BorderRadius.circular(4),
+                                          color: Theme.of(context).cardColor),
                                       child: Column(
                                         children: [
                                           Row(
@@ -306,6 +312,7 @@ class BiddingRideListWidget extends StatelessWidget {
                                                   ),
                                                 ],
                                               )),
+                                              
                                               SizedBox(
                                                 width: size.width * 0.05,
                                               ),
@@ -313,16 +320,22 @@ class BiddingRideListWidget extends StatelessWidget {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 children: [
-                                                  MyText(
-                                                      text:
-                                                          '${context.read<HomeBloc>().rideList[key]['currency']}${context.read<HomeBloc>().rideList[key]['price']}',
-                                                      textStyle:
-                                                          Theme.of(context)
-                                                              .textTheme
-                                                              .bodyLarge!
-                                                              .copyWith(
-                                                                  fontSize:
-                                                                      16)),
+                                                  CustomCard(
+                                                    borderRadius: 4,
+                                                    color: Theme.of(context).disabledColor.withOpacity(0.2),
+                                                    // border:Border.all(width: 0.5, color: Theme.of(context).disabledColor),
+                                                    padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                                                    child: MyText(
+                                                        text:
+                                                            '${context.read<HomeBloc>().rideList[key]['currency']}${context.read<HomeBloc>().rideList[key]['price']}',
+                                                        textStyle:
+                                                            Theme.of(context)
+                                                                .textTheme
+                                                                .bodyLarge!
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        16)),
+                                                  ),
                                                   MyText(
                                                       text:
                                                           '${(dist / 1000).toStringAsFixed(2)} ${AppLocalizations.of(context)!.kmAway}',
@@ -336,6 +349,14 @@ class BiddingRideListWidget extends StatelessWidget {
                                               )
                                             ],
                                           ),
+                                            DottedLine(
+                                // ADDED: BY MG: Dotted line
+                                dashLength: 2,
+                                dashGapLength: 2,
+                                dashRadius: 1,
+                                lineThickness: 1,
+                                dashColor: Theme.of(context).dividerColor,
+                              ),
                                           SizedBox(
                                             height: size.width * 0.05,
                                           ),

@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,15 +31,27 @@ class ShowSubscriptionWidget extends StatelessWidget {
                 SizedBox(height: size.width * 0.1),
                 SizedBox(
                   width: size.width * 0.9,
-                  child: MyText(
-                    text: AppLocalizations.of(context)!.subscriptionHeading,
-                    maxLines: 4,
-                    textAlign: TextAlign.center,
-                    textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: AppColors.red,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyText(
+                        text: AppLocalizations.of(context)!.subscriptionHeading,
+                        maxLines: 4,
+                        textAlign: TextAlign.center,
+                        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: AppColors.red,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                          DottedLine( // ADDED: BY MG: Dotted line
+                                                                   dashLength: 2,
+                                                                   dashGapLength: 2,
+                                                                   dashRadius: 1,
+                                                                   lineThickness: 1,
+                                                                   dashColor: Theme.of(context).dividerColor,
+                                                                 ),
+                    ],
                   ),
                 ),
                 SizedBox(height: size.width * 0.05),

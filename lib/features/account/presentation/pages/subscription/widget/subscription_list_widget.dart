@@ -99,10 +99,20 @@ class SubscriptionListWidget extends StatelessWidget {
                                 margin:
                                     EdgeInsets.only(bottom: size.width * 0.025),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  color:(context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)? Theme.of(context).primaryColor.withOpacity(0.1): Theme.of(context).cardColor,
+                                  borderRadius: BorderRadius.circular(6),
                                   border: Border.all(
-                                      width: 1,
-                                      color: Theme.of(context).dividerColor),
+                                      width: (context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index) ? 1 :0.5,
+                                      color:(context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)? Theme.of(context).primaryColor: Theme.of(context).dividerColor),
                                 ),
                                 child: Row(
                                   children: [

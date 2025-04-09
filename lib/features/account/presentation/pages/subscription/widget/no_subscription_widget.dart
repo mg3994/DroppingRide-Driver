@@ -1,5 +1,7 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 
 import '../../../../../../common/common.dart';
 import '../../../../../../core/utils/custom_button.dart';
@@ -22,32 +24,44 @@ class NoSubscriptionWidget extends StatelessWidget {
           return Center(
               child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(30),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppImages.noSubscription),
-                    SizedBox(height: size.height * 0.04),
-                    MyText(
-                      text: AppLocalizations.of(context)!.noSubscription,
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: AppColors.blackText, fontSize: 20),
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    MyText(
-                      text: AppLocalizations.of(context)!.noSubscriptionContent,
-                      textStyle:
-                          Theme.of(context).textTheme.bodySmall!.copyWith(
-                                color: AppColors.black,
-                                fontSize: 16,
-                              ),
-                      maxLines: 5,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+              CustomCard(
+                padding: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppImages.noSubscription),
+                      SizedBox(height: size.height * 0.04),
+                      MyText(
+                        text: AppLocalizations.of(context)!.noSubscription,
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: AppColors.blackText, fontSize: 20),
+                      ),
+                      SizedBox(height: size.height * 0.015),
+                          DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                      SizedBox(height: size.height * 0.015),
+                
+                      MyText(
+                        text: AppLocalizations.of(context)!.noSubscriptionContent,
+                        textStyle:
+                            Theme.of(context).textTheme.bodySmall!.copyWith(
+                                  color: AppColors.black,
+                                  fontSize: 16,
+                                ),
+                        maxLines: 5,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(

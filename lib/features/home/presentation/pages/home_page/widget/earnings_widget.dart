@@ -100,9 +100,29 @@ class EarningsWidget extends StatelessWidget {
               const HorizontalDotDividerWidget(),
               SizedBox(height: size.width * 0.05),
               Row(
+                spacing: 4,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: size.width * 0.3,
+                  Container(
+                    // margin: EdgeInsets.symmetric(horizontal: 2),
+                    padding: EdgeInsets.symmetric(horizontal: 2,vertical: 8),
+                    width: size.width * 0.25,
+                    decoration:  BoxDecoration(
+                      boxShadow: [
+                         BoxShadow(
+                                    color: Theme.of(context).shadowColor,
+                                    spreadRadius: 2.0,
+                                    blurRadius: 2.0)
+                        
+                      ],
+                      borderRadius: BorderRadius.circular(4),
+                      color: Theme.of(context).cardColor,
+                        border: Border(
+      bottom: BorderSide(
+        color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+        width: 3.0, // Choose the thickness of the bottom bar
+      ),
+    ),),
                     child: Column(
                       children: [
                         MyText(
@@ -129,11 +149,25 @@ class EarningsWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    decoration: const BoxDecoration(
+                    // margin: EdgeInsets.symmetric(horizontal: 2),
+                     padding: EdgeInsets.symmetric(horizontal: 2,vertical: 8),
+                    width: size.width * 0.25,
+                    decoration:  BoxDecoration(
+                      boxShadow: [
+                         BoxShadow(
+                                    color: Theme.of(context).shadowColor,
+                                    spreadRadius: 2.0,
+                                    blurRadius: 2.0)
+                        
+                      ],
+                      borderRadius: BorderRadius.circular(4),
+                      color: Theme.of(context).cardColor,
                         border: Border(
-                            right: BorderSide(color: AppColors.darkGrey),
-                            left: BorderSide(color: AppColors.darkGrey))),
-                    width: size.width * 0.3,
+      bottom: BorderSide(
+        color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+        width: 3.0, // Choose the thickness of the bottom bar
+      ),
+    ),),
                     child: Column(
                       children: [
                         MyText(
@@ -159,8 +193,26 @@ class EarningsWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: size.width * 0.3,
+                    Container(
+                    // margin: EdgeInsets.symmetric(horizontal: 2),
+                     padding: EdgeInsets.symmetric(horizontal: 2,vertical: 8),
+                    width: size.width * 0.25,
+                    decoration:  BoxDecoration(
+                      boxShadow: [
+                         BoxShadow(
+                                    color: Theme.of(context).shadowColor,
+                                    spreadRadius: 2.0,
+                                    blurRadius: 2.0)
+                        
+                      ],
+                      borderRadius: BorderRadius.circular(4),
+                      color: Theme.of(context).cardColor,
+                        border: Border(
+      bottom: BorderSide(
+        color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+        width: 3.0, // Choose the thickness of the bottom bar
+      ),
+    ),),
                     child: Column(
                       children: [
                         MyText(
