@@ -1,4 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
@@ -68,6 +69,7 @@ class HistoryPage extends StatelessWidget {
               body: TopBarDesign(
                 topCenterWidget: true,
                 isHistoryPage: true,
+                icon: Icon(CupertinoIcons.equal_square,color: Theme.of(context).disabledColor,),
                 title: AppLocalizations.of(context)!.history,
                 onTap: () {
                   Navigator.of(context).pop();

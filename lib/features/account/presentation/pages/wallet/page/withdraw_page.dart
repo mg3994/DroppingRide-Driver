@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_snack_bar.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/core/utils/custom_textfield.dart';
@@ -466,7 +467,7 @@ class WithdrawPage extends StatelessWidget {
                               return BlocBuilder<AccBloc, AccState>(
                                 builder: (_, state) {
                                   return Container(
-                                    color: Theme.of(context).cardColor,
+                                    color: Theme.of(context).scaffoldBackgroundColor,
 
                                     width: size.width,
                                     padding: EdgeInsets.all(size.width * 0.05),
@@ -529,13 +530,32 @@ class WithdrawPage extends StatelessWidget {
                                                     size.width * 0.05,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    
+                                                     border: Border.all(width:0.4,color:Theme.of(context).dividerColor),
+                                                      // boxShadow: [
+                                                      //   BoxShadow(
+                                                      //     color: Theme.of(context)
+                                                      //         .disabledColor
+                                                      //         .withOpacity(0.5),
+                                                      //     // blurRadius: 0,
+                                                      //     // spreadRadius: 1.2,
+                                                      //     // blurStyle:
+                                                      //     //     BlurStyle.solid,
+                                                      //     // offset:
+                                                      //     //     const Offset(-4, 0),
+                                                      //   ),
+                                                      // ],
+                                                      // color: Theme.of(context)
+                                                      //     .disabledColor
+                                                      //     .withOpacity(0.5),
+                                                    color:Theme.of(context).cardColor,
+                                                   
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              10),
-                                                      color: Theme.of(context)
-                                                          .disabledColor
-                                                          .withOpacity(0.5)),
+                                                              4),
+                                                      // color: Theme.of(context)
+                                                      //     .disabledColor
+                                                      //     .withOpacity(0.5)
+                                                          ),
                                                   child: Row(
                                                     children: [
                                                       Expanded(
@@ -694,77 +714,90 @@ class WithdrawPage extends StatelessWidget {
                           SizedBox(
                             height: size.height * 0.6,
                             child: SingleChildScrollView(
-                              child: Column(children: [
-                                if (context
-                                    .read<AccBloc>()
-                                    .choosenBankList
-                                    .isNotEmpty)
-                                  ListView.builder(
-                                    itemCount: context
-                                        .read<AccBloc>()
-                                        .choosenBankList
-                                        .length,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    itemBuilder: (context, index) {
-                                      return Column(
-                                        children: [
-                                          SizedBox(height: size.width * 0.05),
-                                          SizedBox(
-                                            width: size.width * 0.9,
-                                            child: MyText(
-                                              text: context
-                                                      .read<AccBloc>()
-                                                      .choosenBankList[index]
-                                                  ['placeholder'],
-                                              textStyle: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium!
-                                                  .copyWith(fontSize: 16),
+                              child: CustomCard(
+                                blurRadius: 4,
+                                border: Border.all(width: 0.2,color: Theme.of(context).dividerColor),
+                                child: Column(children: [
+                                  if (context
+                                      .read<AccBloc>()
+                                      .choosenBankList
+                                      .isNotEmpty)
+                                    ListView.builder(
+                                      itemCount: context
+                                          .read<AccBloc>()
+                                          .choosenBankList
+                                          .length,
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      padding: EdgeInsets.zero,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            SizedBox(height: size.width * 0.05),
+                                            SizedBox(
+                                              width: size.width * 0.9,
+                                              child: MyText(
+                                                text: context
+                                                        .read<AccBloc>()
+                                                        .choosenBankList[index]
+                                                    ['placeholder'],
+                                                textStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium!
+                                                    .copyWith(fontSize: 16),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(height: size.width * 0.025),
-                                          SizedBox(
-                                            width: size.width * 0.9,
-                                            child: CustomTextField(
-                                              keyboardType: context
-                                                              .read<AccBloc>()
-                                                              .choosenBankList[index]
-                                                          [
-                                                          'input_field_type'] ==
-                                                      "text"
-                                                  ? TextInputType.text
-                                                  : TextInputType.number,
-                                              controller: context
-                                                  .read<AccBloc>()
-                                                  .bankDetailsText[index],
-                                              hintText: context
-                                                      .read<AccBloc>()
-                                                      .choosenBankList[index]
-                                                  ['placeholder'],
-                                              enabledBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: Theme.of(context)
-                                                          .primaryColorDark)),
-                                              focusedBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: Theme.of(context)
-                                                          .primaryColorDark)),
-                                              disabledBorder:
-                                                  UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .primaryColorDark)),
+                                            SizedBox(height: size.width * 0.025),
+                                            SizedBox(
+                                              width: size.width * 0.9,
+                                              child: CustomTextField(
+                                                borderRadius: 4,
+                                                fillColor: Theme.of(context)
+                                                    .cardColor,
+                                                    filled:true,
+                                                    contentPadding: EdgeInsets.symmetric(
+                                                        vertical: size.width *
+                                                            0.04,
+                                                        horizontal:
+                                                            size.width * 0.05),
+                                                keyboardType: context
+                                                                .read<AccBloc>()
+                                                                .choosenBankList[index]
+                                                            [
+                                                            'input_field_type'] ==
+                                                        "text"
+                                                    ? TextInputType.text
+                                                    : TextInputType.number,
+                                                controller: context
+                                                    .read<AccBloc>()
+                                                    .bankDetailsText[index],
+                                                hintText: context
+                                                        .read<AccBloc>()
+                                                        .choosenBankList[index]
+                                                    ['placeholder'],
+                                                // enabledBorder: UnderlineInputBorder(
+                                                //     borderSide: BorderSide(
+                                                //         color: Theme.of(context)
+                                                //             .primaryColorDark)),
+                                                // focusedBorder: UnderlineInputBorder(
+                                                //     borderSide: BorderSide(
+                                                //         color: Theme.of(context)
+                                                //             .primaryColorDark)),
+                                                // disabledBorder:
+                                                //     UnderlineInputBorder(
+                                                //         borderSide: BorderSide(
+                                                //             color: Theme.of(
+                                                //                     context)
+                                                //                 .primaryColorDark)),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  )
-                              ]),
+                                          ],
+                                        );
+                                      },
+                                    )
+                                ]),
+                              ),
                             ),
                           ),
                           SizedBox(height: size.width * 0.05),
