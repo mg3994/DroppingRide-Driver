@@ -94,7 +94,7 @@ class AdminChatHistoryWidget extends StatelessWidget {
                                                               .brightness ==
                                                           Brightness.dark)
                                                       ? const Color(0xffE7EDEF)
-                                                      : AppColors.black
+                                                      : Theme.of(context).cardColor
                                                   : const Color(0xffE7EDEF)),
                                           child: MyText(
                                             text: adminChatList[index].message,
@@ -112,7 +112,7 @@ class AdminChatHistoryWidget extends StatelessWidget {
                                                                     .brightness ==
                                                                 Brightness.dark)
                                                             ? AppColors.black
-                                                            : AppColors.white
+                                                            :Theme.of(context).primaryColorDark
                                                         : AppColors.black),
                                           ),
                                         ),
@@ -156,7 +156,7 @@ class AdminChatHistoryWidget extends StatelessWidget {
                                                           Brightness.dark)
                                                       ? const Color(0xffE7EDEF)
                                                       : AppColors.black
-                                                  : const Color(0xffE7EDEF)),
+                                                  : Theme.of(context).primaryColor),
                                           child: MyText(
                                             text: adminChatList[index].message,
                                             overflow: TextOverflow.visible,
@@ -174,7 +174,7 @@ class AdminChatHistoryWidget extends StatelessWidget {
                                                                 Brightness.dark)
                                                             ? AppColors.black
                                                             : AppColors.white
-                                                        : AppColors.black),
+                                                        :AppColors.white,),
                                           ),
                                         ),
                                       ),

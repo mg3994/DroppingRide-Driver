@@ -24,6 +24,8 @@ class AdminChat extends StatelessWidget {
         child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
             body: TopBarDesign(
+              topCenterWidget: true,
+              icon: Icon(Icons.chat, color: Theme.of(context).disabledColor,),
               isHistoryPage: false,
               title: AppLocalizations.of(context)!.adminChat,
               onTap: () {
@@ -54,10 +56,10 @@ class AdminChat extends StatelessWidget {
                           size.width * 0.025, 0, size.width * 0.025, 0),
                       width: size.width * 0.9,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(4),
                           border:
                               Border.all(color: AppColors.darkGrey, width: 1.2),
-                          color: Theme.of(context).scaffoldBackgroundColor),
+                          color: Theme.of(context).cardColor),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -110,8 +112,9 @@ class AdminChat extends StatelessWidget {
                                   context.read<AccBloc>().adminchatText.clear();
                                 }
                               },
-                              child: const Icon(
+                              child:  Icon(
                                 Icons.send,
+                                color: Theme.of(context).primaryColor,
                               ))
                         ],
                       ),
