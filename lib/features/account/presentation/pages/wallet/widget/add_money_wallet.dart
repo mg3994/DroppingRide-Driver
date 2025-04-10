@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,24 +22,36 @@ class AddMoneyWalletWidget extends StatelessWidget {
       return Container(
         padding: MediaQuery.of(context).viewInsets,
         decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(size.width * 0.05),
                 topRight: Radius.circular(size.width * 0.05))),
         child: Container(
           padding: EdgeInsets.all(size.width * 0.05),
           child: Column(
+            spacing: 4,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(mainAxisAlignment: MainAxisAlignment.start,children: [
+                MyText(text: AppLocalizations.of(context)?.addMoney, textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),)
+              ],),
+               DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
               Container(
                 height: size.width * 0.128,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(4),
                     border: Border.all(
-                        width: 1.2, color: Theme.of(context).disabledColor)),
+                        width: 0.8, color: Theme.of(context).disabledColor)),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       width: size.width * 0.15,
@@ -46,21 +59,22 @@ class AddMoneyWalletWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: (context.read<AccBloc>().textDirection == 'ltr')
                               ? const BorderRadius.only(
-                                  topLeft: Radius.circular(12),
-                                  bottomLeft: Radius.circular(12),
+                                  topLeft: Radius.circular(4),
+                                  bottomLeft: Radius.circular(4),
                                 )
                               : const BorderRadius.only(
-                                  topRight: Radius.circular(12),
-                                  bottomRight: Radius.circular(12)),
+                                  topRight: Radius.circular(4),
+                                  bottomRight: Radius.circular(4)),
                           color: Theme.of(context).scaffoldBackgroundColor),
                       alignment: Alignment.center,
-                      child: MyText(text: userData!.currencySymbol.toString()),
+                      child: MyText(text: userData!.currencySymbol.toString(),textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),),
                     ),
                     SizedBox(width: size.width * 0.05),
                     Container(
                       height: size.width * 0.128,
                       width: size.width * 0.6,
                       alignment: Alignment.center,
+                      decoration: BoxDecoration(color: Theme.of(context).cardColor),
                       child: TextField(
                         controller:
                             context.read<AccBloc>().walletAmountController,
@@ -70,6 +84,7 @@ class AddMoneyWalletWidget extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             border: InputBorder.none,
+                            hintStyle: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
                             hintText:
                                 AppLocalizations.of(context)!.enterAmount),
                         maxLines: 1,
@@ -84,78 +99,91 @@ class AddMoneyWalletWidget extends StatelessWidget {
               SizedBox(
                 height: size.width * 0.05
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                spacing: 4,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      context.read<AccBloc>().walletAmountController.text =
-                          double.parse(minWalletAmount).toString();
-                      context.read<AccBloc>().addMoney = double.parse(minWalletAmount);
-                    },
-                    child: Container(
-                      height: size.width * 0.11,
-                      width: size.width * 0.17,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Theme.of(context).disabledColor,
-                              width: 1.2),
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(6)),
-                      alignment: Alignment.center,
-                      child: MyText(
-                          text:
-                              '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount)}'),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          context.read<AccBloc>().walletAmountController.text =
+                              double.parse(minWalletAmount).toString();
+                          context.read<AccBloc>().addMoney = double.parse(minWalletAmount);
+                        },
+                        child: Container(
+                          height: size.width * 0.11,
+                          width: size.width * 0.17,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Theme.of(context).disabledColor,
+                                  width: 1.2),
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              borderRadius: BorderRadius.circular(4)),
+                          alignment: Alignment.center,
+                          child: MyText(
+                              text:
+                                  '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount)}'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.05
+                      ),
+                      InkWell(
+                        onTap: () {
+                          context.read<AccBloc>().walletAmountController.text =
+                              (double.parse(minWalletAmount) *2).toString();
+                          context.read<AccBloc>().addMoney = double.parse(minWalletAmount) * 2;
+                        },
+                        child: Container(
+                          height: size.width * 0.11,
+                          width: size.width * 0.17,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Theme.of(context).disabledColor,
+                                  width: 1.2),
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              borderRadius: BorderRadius.circular(4)),
+                          alignment: Alignment.center,
+                          child: MyText(
+                              text:
+                                  '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount) * 2}'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.05
+                      ),
+                      InkWell(
+                        onTap: () {
+                          context.read<AccBloc>().walletAmountController.text =
+                              (double.parse(minWalletAmount) * 3).toString();
+                          context.read<AccBloc>().addMoney = double.parse(minWalletAmount) * 3;
+                        },
+                        child: Container(
+                          height: size.width * 0.11,
+                          width: size.width * 0.17,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Theme.of(context).disabledColor,
+                                  width: 1.2),
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              borderRadius: BorderRadius.circular(4)),
+                          alignment: Alignment.center,
+                          child: MyText(
+                              text:
+                                  '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount) * 3}'),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: size.width * 0.05
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.read<AccBloc>().walletAmountController.text =
-                          (double.parse(minWalletAmount) *2).toString();
-                      context.read<AccBloc>().addMoney = double.parse(minWalletAmount) * 2;
-                    },
-                    child: Container(
-                      height: size.width * 0.11,
-                      width: size.width * 0.17,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Theme.of(context).disabledColor,
-                              width: 1.2),
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(6)),
-                      alignment: Alignment.center,
-                      child: MyText(
-                          text:
-                              '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount) * 2}'),
-                    ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.05
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.read<AccBloc>().walletAmountController.text =
-                          (double.parse(minWalletAmount) * 3).toString();
-                      context.read<AccBloc>().addMoney = double.parse(minWalletAmount) * 3;
-                    },
-                    child: Container(
-                      height: size.width * 0.11,
-                      width: size.width * 0.17,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Theme.of(context).disabledColor,
-                              width: 1.2),
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(6)),
-                      alignment: Alignment.center,
-                      child: MyText(
-                          text:
-                              '${context.read<AccBloc>().walletResponse!.currencySymbol.toString()}${double.parse(minWalletAmount) * 3}'),
-                    ),
-                  ),
+                                               DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     lineLength: size.width * 0.7,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                 ],
               ),
               SizedBox(
@@ -176,7 +204,7 @@ class AddMoneyWalletWidget extends StatelessWidget {
                               color: Theme.of(context).primaryColor,
                               width: 1.2),
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(6)),
+                          borderRadius: BorderRadius.circular(4)),
                       alignment: Alignment.center,
                       child: MyText(
                         text: AppLocalizations.of(context)!.cancel,
@@ -226,7 +254,7 @@ class AddMoneyWalletWidget extends StatelessWidget {
                       width: size.width * 0.425,
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(6)),
+                          borderRadius: BorderRadius.circular(4)),
                       alignment: Alignment.center,
                       child: MyText(
                         text: AppLocalizations.of(context)!.addMoney,

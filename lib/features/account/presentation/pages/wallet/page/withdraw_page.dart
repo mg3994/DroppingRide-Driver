@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,7 @@ class WithdrawPage extends StatelessWidget {
         },
         child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).disabledColor.withAlpha(150),
             resizeToAvoidBottomInset: false,
             body: Stack(
               children: [
@@ -58,6 +59,7 @@ class WithdrawPage extends StatelessWidget {
                                 height: MediaQuery.of(context).padding.top,
                               ),
                               Row(
+                                spacing: size.width * 0.1,
                                 children: [
                                   Container(
                                     height: size.height * 0.08,
@@ -88,6 +90,47 @@ class WithdrawPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Theme.of(context)
+                                            .disabledColor,
+                                        // blurRadius: 0,
+                                        spreadRadius: 1.2,
+                                        blurStyle: BlurStyle.solid,
+                                        offset: const Offset(-4, 0),
+                                      ),
+                                    ],
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(4),
+                                      bottomLeft: Radius.circular(4),
+                                      topRight: Radius.circular(4),
+                                      bottomRight: Radius.circular(4),
+                                    ),
+                                  ),
+                                  width: size.width * 0.45,
+                                  height: size.height * 0.051,
+                                      child: Center(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.wallet),
+                                            MyText(
+                                                text: AppLocalizations.of(context)!
+                                                    .walletBalance,
+                                                textStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium!
+                                                    // .copyWith(color: Colors.white)
+                                                    ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  
                                 ],
                               ),
                               SizedBox(
@@ -96,13 +139,38 @@ class WithdrawPage extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    MyText(
-                                        text: AppLocalizations.of(context)!
-                                            .walletBalance,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(color: Colors.white)),
+                                  //    Container(
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow: [
+                                  //     BoxShadow(
+                                  //       color: Theme.of(context)
+                                  //           .disabledColor,
+                                  //       // blurRadius: 0,
+                                  //       spreadRadius: 1.2,
+                                  //       blurStyle: BlurStyle.solid,
+                                  //       offset: const Offset(-4, 0),
+                                  //     ),
+                                  //   ],
+                                  //   color: Theme.of(context).cardColor,
+                                  //   borderRadius: BorderRadius.only(
+                                  //     topLeft: Radius.circular(4),
+                                  //     bottomLeft: Radius.circular(4),
+                                  //     topRight: Radius.circular(4),
+                                  //     bottomRight: Radius.circular(4),
+                                  //   ),
+                                  // ),
+                                  // width: size.width * 0.45,
+                                  // height: size.height * 0.051,
+                                  //     child: Center(
+                                  //       child: MyText(
+                                  //           text: AppLocalizations.of(context)!
+                                  //               .walletBalance,
+                                  //           textStyle: Theme.of(context)
+                                  //               .textTheme
+                                  //               .bodyMedium!
+                                  //               .copyWith(color: Colors.white)),
+                                  //     ),
+                                  //   ),
                                     if (context
                                             .read<AccBloc>()
                                             .isWithdrawLoading &&
@@ -131,7 +199,9 @@ class WithdrawPage extends StatelessWidget {
                                                   .textTheme
                                                   .displayLarge!
                                                   .copyWith(
-                                                      color: Colors.white)),
+                                                      color: Colors.white
+                                                      )
+                                                      ),
                                         ],
                                       ),
                                   ],
@@ -171,6 +241,14 @@ class WithdrawPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                               DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                              
                               SizedBox(height: size.width * 0.025),
                               if (context.read<AccBloc>().isWithdrawLoading &&
                                   context.read<AccBloc>().firstWithdrawLoad)
@@ -271,6 +349,13 @@ class WithdrawPage extends StatelessWidget {
                                                                         .primaryColorDark),
                                                           ),
                                                         ),
+                                                         DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                                                         SizedBox(
                                                             height: size.width *
                                                                 0.05),
@@ -324,12 +409,10 @@ class WithdrawPage extends StatelessWidget {
                                                                   decoration: BoxDecoration(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              10),
+                                                                              4),
                                                                       color: Theme.of(
                                                                               context)
-                                                                          .disabledColor
-                                                                          .withOpacity(
-                                                                              0.3)),
+                                                                          .cardColor),
                                                                   child: Row(
                                                                     children: [
                                                                       Expanded(
@@ -372,8 +455,8 @@ class WithdrawPage extends StatelessWidget {
                 ),
                 Positioned(
                     top: size.width * 0.45,
-                    left: size.width * 0.05,
-                    right: size.width * 0.05,
+                    left: size.width * 0.15,
+                    right: size.width * 0.15,
                     child: InkWell(
                       onTap: () {
                         showModalBottomSheet(
@@ -383,9 +466,8 @@ class WithdrawPage extends StatelessWidget {
                               return BlocBuilder<AccBloc, AccState>(
                                 builder: (_, state) {
                                   return Container(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor
-                                        .withOpacity(0.8),
+                                    color: Theme.of(context).cardColor,
+
                                     width: size.width,
                                     padding: EdgeInsets.all(size.width * 0.05),
                                     child: Column(
@@ -447,6 +529,7 @@ class WithdrawPage extends StatelessWidget {
                                                     size.width * 0.05,
                                                   ),
                                                   decoration: BoxDecoration(
+                                                    
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
@@ -515,7 +598,8 @@ class WithdrawPage extends StatelessWidget {
                             size.width * 0.025),
                         width: size.width * 0.5,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).scaffoldBackgroundColor,
+                          color: AppColors.darkGreen,
+                          // color: Theme.of(context).scaffoldBackgroundColor,
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -533,7 +617,7 @@ class WithdrawPage extends StatelessWidget {
                               .textTheme
                               .bodyLarge!
                               .copyWith(
-                                  color: Theme.of(context).primaryColorDark),
+                                  color: Theme.of(context).cardColor),
                         ),
                       ),
                     )),
@@ -685,6 +769,7 @@ class WithdrawPage extends StatelessWidget {
                           ),
                           SizedBox(height: size.width * 0.05),
                           CustomButton(
+                            borderRadius: 4,
                               buttonName: AppLocalizations.of(context)!.confirm,
                               onTap: () {
                                 Map body = {

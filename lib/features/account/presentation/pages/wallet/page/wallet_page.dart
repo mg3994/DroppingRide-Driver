@@ -1,8 +1,10 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/features/account/application/acc_bloc.dart';
 import 'package:restart_tagxi/features/account/presentation/pages/wallet/page/withdraw_page.dart';
@@ -147,7 +149,7 @@ class WalletHistoryPage extends StatelessWidget {
         },
         child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).disabledColor.withAlpha(150),
             // backgroundColor: AppColors.commonColor,
             body: Stack(
               children: [
@@ -164,35 +166,90 @@ class WalletHistoryPage extends StatelessWidget {
                                 height: MediaQuery.of(context).padding.top,
                               ),
                               Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
-                                    height: size.height * 0.08,
-                                    width: size.width * 0.08,
-                                    margin: EdgeInsets.only(
-                                        left: size.width * 0.05,
-                                        right: size.width * 0.05),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      shape: BoxShape.circle,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: Offset(5.0, 5.0),
-                                          blurRadius: 10.0,
-                                          spreadRadius: 2.0,
+                                     Container(
+                                          height: size.height * 0.08,
+                                          width: size.width * 0.08,
+                                          margin: EdgeInsets.only(
+                                              left: size.width * 0.05,
+                                              right: size.width * 0.05),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            shape: BoxShape.circle,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: Offset(5.0, 5.0),
+                                                blurRadius: 10.0,
+                                                spreadRadius: 2.0,
+                                              ),
+                                            ],
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            icon: Icon(
+                                              CupertinoIcons.back,
+                                              size: 20,
+                                              color: AppColors.black,
+                                            ),
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      icon: Icon(
-                                        CupertinoIcons.back,
-                                        size: 20,
-                                        color: AppColors.black,
+                                        SizedBox(width: size.width * 0.1,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                     
+                                        Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Theme.of(context)
+                                            .disabledColor,
+                                        // blurRadius: 0,
+                                        spreadRadius: 1.2,
+                                        blurStyle: BlurStyle.solid,
+                                        offset: const Offset(-4, 0),
                                       ),
+                                    ],
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(4),
+                                      bottomLeft: Radius.circular(4),
+                                      topRight: Radius.circular(4),
+                                      bottomRight: Radius.circular(4),
                                     ),
+                                  ),
+                                  width: size.width * 0.45,
+                                  height: size.height * 0.051,
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Icon(Icons.wallet, color: Theme.of(context).disabledColor,),
+                                                 Wrap(
+                                                                    alignment:WrapAlignment.center,
+                                                                    runAlignment: WrapAlignment.center,
+                                                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                                                    children: [
+                                                    MyText(
+                                                    text: AppLocalizations.of(context)!
+                                                        .walletBalance,
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .copyWith(
+                                                            color: Theme.of(context).primaryColorDark,
+                                                            fontSize: 20)),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -202,15 +259,7 @@ class WalletHistoryPage extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    MyText(
-                                        text: AppLocalizations.of(context)!
-                                            .walletBalance,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                color: AppColors.white,
-                                                fontSize: 20)),
+                                  
                                     if (context.read<AccBloc>().isLoading &&
                                         !context.read<AccBloc>().loadMore)
                                       SizedBox(
@@ -253,7 +302,7 @@ class WalletHistoryPage extends StatelessWidget {
                             color: Theme.of(context).scaffoldBackgroundColor,
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(25),
-                              topRight: Radius.circular(25),
+                              // topRight: Radius.circular(25),
                             ),
                           ),
                           child: Column(
@@ -273,7 +322,16 @@ class WalletHistoryPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: size.width * 0.012),
+                               DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                               SizedBox(height: size.width * 0.025),
+
                               if (context.read<AccBloc>().isLoading &&
                                   context.read<AccBloc>().firstLoad)
                                 Expanded(
@@ -360,23 +418,23 @@ class WalletHistoryPage extends StatelessWidget {
                     left: size.width * 0.05,
                     right: size.width * 0.05,
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(
-                          size.width * 0.05,
-                          size.width * 0.025,
-                          size.width * 0.05,
-                          size.width * 0.025),
+                      // padding: EdgeInsets.fromLTRB(
+                      //     size.width * 0.05,
+                      //     size.width * 0.025,
+                      //     size.width * 0.05,
+                      //     size.width * 0.025),
                       width: size.width * 0.7,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.4),
-                              offset: const Offset(0, 4),
-                              spreadRadius: 0,
-                              blurRadius: 5)
-                        ],
-                      ),
+                      // decoration: BoxDecoration(
+                      //   color: Theme.of(context).scaffoldBackgroundColor,
+                      //   borderRadius: BorderRadius.circular(5),
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //         color: Colors.black.withOpacity(0.4),
+                      //         offset: const Offset(0, 4),
+                      //         spreadRadius: 0,
+                      //         blurRadius: 5)
+                      //   ],
+                      // ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.min,
@@ -397,37 +455,40 @@ class WalletHistoryPage extends StatelessWidget {
                                     return AddMoneyWalletWidget(cont: context,minWalletAmount :context.read<AccBloc>().walletResponse!.minimumAmountAddedToWallet);
                                   });
                             },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                MyText(
-                                    text:
-                                        AppLocalizations.of(context)!.addMoney,
-                                    textStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .primaryColorDark,
-                                            fontSize: 14)),
-                                SizedBox(
-                                  width: size.width * 0.02,
-                                ),
-                                Container(
-                                  height: size.width * 0.04,
-                                  width: size.width * 0.04,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Theme.of(context)
-                                              .primaryColorDark)),
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.add,
-                                      size: size.width * 0.03,
-                                      color:
-                                          Theme.of(context).primaryColorDark),
-                                ),
-                              ],
+                            child: CustomCard(
+                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  MyText(
+                                      text:
+                                          AppLocalizations.of(context)!.addMoney,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark,
+                                              fontSize: 14)),
+                                  // SizedBox(
+                                  //   width: size.width * 0.02,
+                                  // ),
+                                  // Container(
+                                  //   height: size.width * 0.04,
+                                  //   width: size.width * 0.04,
+                                  //   decoration: BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       border: Border.all(
+                                  //           color: Theme.of(context)
+                                  //               .primaryColorDark)),
+                                  //   alignment: Alignment.center,
+                                  //   child: Icon(Icons.add,
+                                  //       size: size.width * 0.03,
+                                  //       color:
+                                  //           Theme.of(context).primaryColorDark),
+                                  // ),
+                                ],
+                              ),
                             ),
                           ),
                           InkWell(
@@ -435,35 +496,38 @@ class WalletHistoryPage extends StatelessWidget {
                               Navigator.pushNamed(
                                   context, WithdrawPage.routeName,arguments: WithdrawPageArguments(minWalletAmount :context.read<AccBloc>().walletResponse!.minimumAmountAddedToWallet));
                             },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                MyText(
-                                  text: AppLocalizations.of(context)!.withdraw,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                          fontSize: 14),
-                                ),
-                                SizedBox(width: size.width * 0.02),
-                                Container(
-                                  height: size.width * 0.04,
-                                  width: size.width * 0.04,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Theme.of(context)
-                                              .primaryColorDark)),
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.arrow_downward,
-                                      size: size.width * 0.03,
-                                      color:
-                                          Theme.of(context).primaryColorDark),
-                                ),
-                              ],
+                            child: CustomCard(
+                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  MyText(
+                                    text: AppLocalizations.of(context)!.withdraw,
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .primaryColorDark,
+                                            fontSize: 14),
+                                  ),
+                                  // SizedBox(width: size.width * 0.02),
+                                  // Container(
+                                  //   height: size.width * 0.04,
+                                  //   width: size.width * 0.04,
+                                  //   decoration: BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       border: Border.all(
+                                  //           color: Theme.of(context)
+                                  //               .primaryColorDark)),
+                                  //   alignment: Alignment.center,
+                                  //   child: Icon(Icons.arrow_downward,
+                                  //       size: size.width * 0.03,
+                                  //       color:
+                                  //           Theme.of(context).primaryColorDark),
+                                  // ),
+                                ],
+                              ),
                             ),
                           ),
                           if (userData!
@@ -487,34 +551,37 @@ class WalletHistoryPage extends StatelessWidget {
                                           cont: context);
                                     });
                               },
-                              child: Row(
-                                children: [
-                                  MyText(
-                                      text: AppLocalizations.of(context)!
-                                          .transferText,
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .primaryColorDark,
-                                              fontSize: 14)),
-                                  SizedBox(width: size.width * 0.02),
-                                  Container(
-                                    height: size.width * 0.04,
-                                    width: size.width * 0.04,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Theme.of(context)
-                                                .primaryColorDark)),
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.redo,
-                                        size: size.width * 0.03,
-                                        color:
-                                            Theme.of(context).primaryColorDark),
-                                  ),
-                                ],
+                              child: CustomCard(
+                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                                child: Row(
+                                  children: [
+                                    MyText(
+                                        text: AppLocalizations.of(context)!
+                                            .transferText,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .primaryColorDark,
+                                                fontSize: 14)),
+                                    // SizedBox(width: size.width * 0.02),
+                                    // Container(
+                                    //   height: size.width * 0.04,
+                                    //   width: size.width * 0.04,
+                                    //   decoration: BoxDecoration(
+                                    //       shape: BoxShape.circle,
+                                    //       border: Border.all(
+                                    //           color: Theme.of(context)
+                                    //               .primaryColorDark)),
+                                    //   alignment: Alignment.center,
+                                    //   child: Icon(Icons.redo,
+                                    //       size: size.width * 0.03,
+                                    //       color:
+                                    //           Theme.of(context).primaryColorDark),
+                                    // ),
+                                  ],
+                                ),
                               ),
                             )
                         ],
