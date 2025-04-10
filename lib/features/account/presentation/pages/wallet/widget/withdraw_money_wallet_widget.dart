@@ -38,6 +38,7 @@ class WithdrawMoneyWalletWidget extends StatelessWidget {
                   Container(
                     height: size.width * 0.128,
                     decoration: BoxDecoration(
+                      // color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                             width: 1.2,
