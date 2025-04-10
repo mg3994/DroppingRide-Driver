@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,166 +23,180 @@ class TripVehicleInfoWidget extends StatelessWidget {
           return Container(
             padding: EdgeInsets.all(size.width * 0.05),
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
+            child: Column(
+              children: [
+                 Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              image: arg.historyData.vehicleTypeImage.isNotEmpty
-                                  ? DecorationImage(
-                                      image: NetworkImage(
-                                          arg.historyData.vehicleTypeImage),
-                                    )
-                                  : const DecorationImage(
-                                      image: AssetImage(AppImages.noImage),
+                          Column(
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  image: arg.historyData.vehicleTypeImage.isNotEmpty
+                                      ? DecorationImage(
+                                          image: NetworkImage(
+                                              arg.historyData.vehicleTypeImage),
+                                        )
+                                      : const DecorationImage(
+                                          image: AssetImage(AppImages.noImage),
+                                        ),
+                                  shape: BoxShape.circle,
+                                  color: Theme.of(context).scaffoldBackgroundColor,
+                                ),
+                              ),
+                              MyText(
+                                text: arg.historyData.vehicleTypeName,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              MyText(
+                                text: AppLocalizations.of(context)!.typeOfRide,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      color: Theme.of(context).hintColor,
                                     ),
-                              shape: BoxShape.circle,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
-                          ),
-                          MyText(
-                            text: arg.historyData.vehicleTypeName,
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          MyText(
-                            text: AppLocalizations.of(context)!.typeOfRide,
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Theme.of(context).hintColor,
+                              ),
+                              MyText(
+                                text: (arg.historyData.isRental == false)
+                                    ? (arg.historyData.isOutStation == 1)
+                                        ? AppLocalizations.of(context)!.outStation
+                                        : (arg.historyData.isLater == true)
+                                            ? AppLocalizations.of(context)!
+                                                .rideLater
+                                            : AppLocalizations.of(context)!.regular
+                                    : '${AppLocalizations.of(context)!.rental}-${arg.historyData.rentalPackageName}',
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
+                              if (arg.historyData.isOutStation == 1)
+                                MyText(
+                                  text: (arg.historyData.isOutStation == 1 &&
+                                          arg.historyData.isRoundTrip != '')
+                                      ? AppLocalizations.of(context)!.roundTrip
+                                      : AppLocalizations.of(context)!.oneWayTrip,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: AppColors.yellowColor,
+                                      ),
                                 ),
-                          ),
-                          MyText(
-                            text: (arg.historyData.isRental == false)
-                                ? (arg.historyData.isOutStation == 1)
-                                    ? AppLocalizations.of(context)!.outStation
-                                    : (arg.historyData.isLater == true)
-                                        ? AppLocalizations.of(context)!
-                                            .rideLater
-                                        : AppLocalizations.of(context)!.regular
-                                : '${AppLocalizations.of(context)!.rental}-${arg.historyData.rentalPackageName}',
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold, fontSize: 13),
-                          ),
-                          if (arg.historyData.isOutStation == 1)
-                            MyText(
-                              text: (arg.historyData.isOutStation == 1 &&
-                                      arg.historyData.isRoundTrip != '')
-                                  ? AppLocalizations.of(context)!.roundTrip
-                                  : AppLocalizations.of(context)!.oneWayTrip,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color: AppColors.yellowColor,
-                                  ),
-                            ),
-                          MyText(
-                            text: (arg.historyData.laterRide == true &&
-                                    arg.historyData.isOutStation == 1)
-                                ? arg.historyData.tripStartTime
-                                : (arg.historyData.laterRide == true &&
-                                        arg.historyData.isOutStation != 1)
-                                    ? arg.historyData.tripStartTimeWithDate
-                                    : arg.historyData.isCompleted == 1
-                                        ? arg.historyData.convertedCompletedAt
-                                        : arg.historyData.isCancelled == 1
-                                            ? arg.historyData
-                                                .convertedCancelledAt
-                                            : arg
-                                                .historyData.convertedCreatedAt,
-                            textStyle: Theme.of(context).textTheme.labelMedium,
+                              MyText(
+                                text: (arg.historyData.laterRide == true &&
+                                        arg.historyData.isOutStation == 1)
+                                    ? arg.historyData.tripStartTime
+                                    : (arg.historyData.laterRide == true &&
+                                            arg.historyData.isOutStation != 1)
+                                        ? arg.historyData.tripStartTimeWithDate
+                                        : arg.historyData.isCompleted == 1
+                                            ? arg.historyData.convertedCompletedAt
+                                            : arg.historyData.isCancelled == 1
+                                                ? arg.historyData
+                                                    .convertedCancelledAt
+                                                : arg
+                                                    .historyData.convertedCreatedAt,
+                                textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(color: Theme.of(context).disabledColor),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: size.width * 0.035),
-                  if (arg.historyData.isCompleted == 1)
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SizedBox(height: size.width * 0.035),
+
+                       DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     
+                      SizedBox(height: size.width * 0.035),
+                      if (arg.historyData.isCompleted == 1)
+                        Column(
                           children: [
-                            Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                MyText(
-                                  text: AppLocalizations.of(context)!.duration,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        color: Theme.of(context).hintColor,
-                                      ),
+                                Column(
+                                  children: [
+                                    MyText(
+                                      text: AppLocalizations.of(context)!.duration,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                    ),
+                                    MyText(
+                                      text:
+                                          '${arg.historyData.totalTime} ${AppLocalizations.of(context)!.mins}',
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13),
+                                    ),
+                                  ],
                                 ),
-                                MyText(
-                                  text:
-                                      '${arg.historyData.totalTime} ${AppLocalizations.of(context)!.mins}',
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),
+                                Column(
+                                  children: [
+                                    MyText(
+                                      text: AppLocalizations.of(context)!.distance,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                    ),
+                                    MyText(
+                                      text:
+                                          '${arg.historyData.totalDistance} ${arg.historyData.unit}',
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            Column(
-                              children: [
-                                MyText(
-                                  text: AppLocalizations.of(context)!.distance,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                ),
-                                MyText(
-                                  text:
-                                      '${arg.historyData.totalDistance} ${arg.historyData.unit}',
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),
-                                ),
-                              ],
-                            ),
+                            SizedBox(height: size.width * 0.025),
                           ],
                         ),
-                        SizedBox(height: size.width * 0.025),
-                      ],
-                    ),
-                  SizedBox(height: size.width * 0.02),
-                ],
-              ),
+                      SizedBox(height: size.width * 0.02),
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
         },

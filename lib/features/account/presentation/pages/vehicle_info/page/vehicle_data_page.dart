@@ -5,6 +5,7 @@ import 'package:restart_tagxi/common/app_colors.dart';
 import 'package:restart_tagxi/common/app_images.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_loader.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
 import 'package:restart_tagxi/features/account/application/acc_bloc.dart';
@@ -85,107 +86,113 @@ class _VehicleDataPageState extends State<VehicleDataPage> {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(height: size.width * 0.1),
-                          (userData!.role == 'driver')
-                              ? (userData!.vehicleTypeName != '')
-                                  ? Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: Column(
-                                        children: [
-                                          EditOptions(
-                                            text: userData!.vehicleTypeName,
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .vehicleType,
-                                            onTap: () {},
-                                          ),
-                                          EditOptions(
-                                            text: userData!.carMake,
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .vehicleMake,
-                                            onTap: () {},
-                                          ),
-                                          EditOptions(
-                                            text: userData!.carModel,
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .vehicleModel,
-                                            onTap: () {},
-                                          ),
-                                          EditOptions(
-                                            text:
-                                                userData!.carNumber.toString(),
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .vehicleNumber,
-                                            onTap: () {},
-                                          ),
-                                          EditOptions(
-                                            text: userData!.carColor.toString(),
-                                            header:
-                                                AppLocalizations.of(context)!
-                                                    .vehicleColor,
-                                            onTap: () {},
-                                          ),
-                                          SizedBox(height: size.height * 0.05),
-                                          if(userData!.ownerId == null || userData!.ownerId == '')
-                                          CustomButton(
-                                              buttonName:
+                      child: CustomCard(
+                        blurRadius: 8,
+                        border: Border.all(color: Theme.of(context).disabledColor,width: 0.2),
+                        margin: EdgeInsets.symmetric(horizontal:  size.width * 0.035,vertical: size.width * 0.1),
+                        padding: EdgeInsets.symmetric(vertical: 4,horizontal: 4),
+                        child: Column(
+                          children: [
+                            SizedBox(height: size.width * 0.04),
+                            (userData!.role == 'driver')
+                                ? (userData!.vehicleTypeName != '')
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Column(
+                                          children: [
+                                            EditOptions(
+                                              text: userData!.vehicleTypeName,
+                                              header:
                                                   AppLocalizations.of(context)!
-                                                      .edit,
-                                              onTap: () async {
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  DriverProfilePage.routeName,
-                                                  arguments:
-                                                      VehicleUpdateArguments(
-                                                          from: 'vehicle'),
-                                                ).then((_) {
-                                                  if (!context.mounted) return;
-                                                  context
-                                                      .read<AccBloc>()
-                                                      .add(UpdateEvent());
-                                                });
-                                              })
+                                                      .vehicleType,
+                                              onTap: () {},
+                                            ),
+                                            EditOptions(
+                                              text: userData!.carMake,
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .vehicleMake,
+                                              onTap: () {},
+                                            ),
+                                            EditOptions(
+                                              text: userData!.carModel,
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .vehicleModel,
+                                              onTap: () {},
+                                            ),
+                                            EditOptions(
+                                              text:
+                                                  userData!.carNumber.toString(),
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .vehicleNumber,
+                                              onTap: () {},
+                                            ),
+                                            EditOptions(
+                                              text: userData!.carColor.toString(),
+                                              header:
+                                                  AppLocalizations.of(context)!
+                                                      .vehicleColor,
+                                              onTap: () {},
+                                            ),
+                                            SizedBox(height: size.height * 0.05),
+                                            if(userData!.ownerId == null || userData!.ownerId == '')
+                                            CustomButton(
+                                                buttonName:
+                                                    AppLocalizations.of(context)!
+                                                        .edit,
+                                                onTap: () async {
+                                                  await Navigator.pushNamed(
+                                                    context,
+                                                    DriverProfilePage.routeName,
+                                                    arguments:
+                                                        VehicleUpdateArguments(
+                                                            from: 'vehicle'),
+                                                  ).then((_) {
+                                                    if (!context.mounted) return;
+                                                    context
+                                                        .read<AccBloc>()
+                                                        .add(UpdateEvent());
+                                                  });
+                                                })
+                                          ],
+                                        ),
+                                      )
+                                    : Column(
+                                        children: [
+                                          Image.asset(AppImages.historyNoData),
+                                          MyText(
+                                            text: AppLocalizations.of(context)!
+                                                .vehicleNotAssigned,
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
                                         ],
-                                      ),
-                                    )
-                                  : Column(
-                                      children: [
-                                        Image.asset(AppImages.historyNoData),
-                                        MyText(
-                                          text: AppLocalizations.of(context)!
-                                              .vehicleNotAssigned,
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
-                                        ),
-                                      ],
-                                    )
-                              : (context.read<AccBloc>().vehicleData.isEmpty)
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          AppImages.noVehicleInfo,
-                                          width: 300,
-                                        ),
-                                        MyText(
-                                          text: AppLocalizations.of(context)!
-                                              .noVehicleCreated,
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
-                                        ),
-                                      ],
-                                    )
-                                  : FleetVehicleDetailsWidget(cont: context)
-                        ],
+                                      )
+                                : (context.read<AccBloc>().vehicleData.isEmpty)
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            AppImages.noVehicleInfo,
+                                            width: 300,
+                                          ),
+                                          MyText(
+                                            text: AppLocalizations.of(context)!
+                                                .noVehicleCreated,
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
+                                        ],
+                                      )
+                                    : FleetVehicleDetailsWidget(cont: context)
+                          ],
+                        ),
                       ),
                     ),
                   ),

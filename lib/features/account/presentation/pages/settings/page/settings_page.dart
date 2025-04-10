@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/features/account/application/acc_bloc.dart';
 import 'package:restart_tagxi/features/account/presentation/pages/settings/page/faq_page.dart';
+import 'package:restart_tagxi/features/account/presentation/pages/settings/widget/settings_card.dart';
 import 'package:restart_tagxi/features/account/presentation/widgets/top_bar.dart';
 import 'package:restart_tagxi/features/language/presentation/page/choose_language_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,14 +54,15 @@ class SettingsPage extends StatelessWidget {
               isHistoryPage: false,
               title: AppLocalizations.of(context)!.settings,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 12),
                 child: Column(
+                  spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: size.height * 0.04),
-                    PageOptions(
-                      icon: Icons.question_answer,
-                      list: AppLocalizations.of(context)!.faq,
+                    SettingsCard(
+                      optionName: AppLocalizations.of(context)!.faq,
+                      // icon: Icons.question_answer,
                       onTap: () {
                         Navigator.pushNamed(
                           context,
@@ -68,9 +70,10 @@ class SettingsPage extends StatelessWidget {
                         );
                       },
                     ),
-                    PageOptions(
-                      icon: Icons.privacy_tip,
-                      list: AppLocalizations.of(context)!.privacy,
+                    SettingsCard(
+                      optionName: 
+                    AppLocalizations.of(context)!.privacy,
+                      // icon: Icons.privacy_tip,
                       onTap: () async {
                         const browseUrl = AppConstants.privacyPolicy;
                         if (browseUrl.isNotEmpty) {
@@ -80,9 +83,9 @@ class SettingsPage extends StatelessWidget {
                         }
                       },
                     ),
-                    PageOptions(
-                      icon: Icons.logout,
-                      list: AppLocalizations.of(context)!.logout,
+                    SettingsCard(
+                      optionName:  AppLocalizations.of(context)!.logout,
+                      // icon: Icons.logout,
                       onTap: () {
                         showDialog(
                           context: context,
@@ -106,9 +109,9 @@ class SettingsPage extends StatelessWidget {
                         );
                       },
                     ),
-                    PageOptions(
-                      icon: Icons.delete,
-                      list: AppLocalizations.of(context)!.deleteAccount,
+                    SettingsCard(
+                      optionName:  AppLocalizations.of(context)!.deleteAccount,
+                      // icon: Icons.delete,
                       onTap: () {
                         showDialog(
                           context: context,

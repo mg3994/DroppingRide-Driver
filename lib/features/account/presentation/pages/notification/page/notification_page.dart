@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/core/utils/custom_dialoges.dart';
@@ -42,6 +43,7 @@ class NotificationPage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pop();
               },
+              icon: Icon(Icons.copy,color: Theme.of(context).disabledColor,),
               child: CustomScrollView(
                 slivers: [
                   SliverPadding(
@@ -91,64 +93,77 @@ class NotificationPage extends StatelessWidget {
                             return Padding(
                               padding: EdgeInsets.only(
                                   top: size.height * 0.03, bottom: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  MyText(
-                                    text: AppLocalizations.of(context)!
-                                        .notifications,
-                                    textStyle: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      // context
-                                      //     .read<AccBloc>()
-                                      //     .add(ClearAllNotificationsEvent());
-
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext _) {
-                                          return BlocProvider.value(
-                                              value: BlocProvider.of<AccBloc>(
-                                                  context),
-                                              child: CustomDoubleButtonDialoge(
-                                                title: AppLocalizations.of(
-                                                        context)!
-                                                    .clearNotifications,
-                                                content: AppLocalizations.of(
-                                                        context)!
-                                                    .clearNotificationsText,
-                                                yesBtnName: AppLocalizations.of(
-                                                        context)!
-                                                    .confirm,
-                                                noBtnName: AppLocalizations.of(
-                                                        context)!
-                                                    .cancel,
-                                                yesBtnFunc: () {
-                                                  context.read<AccBloc>().add(
-                                                      ClearAllNotificationsEvent());
-                                                  Navigator.pop(context);
-                                                },
-                                                noBtnFunc: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              ));
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      MyText(
+                                        text: AppLocalizations.of(context)!
+                                            .notifications,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          // context
+                                          //     .read<AccBloc>()
+                                          //     .add(ClearAllNotificationsEvent());
+                                  
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext _) {
+                                              return BlocProvider.value(
+                                                  value: BlocProvider.of<AccBloc>(
+                                                      context),
+                                                  child: CustomDoubleButtonDialoge(
+                                                    title: AppLocalizations.of(
+                                                            context)!
+                                                        .clearNotifications,
+                                                    content: AppLocalizations.of(
+                                                            context)!
+                                                        .clearNotificationsText,
+                                                    yesBtnName: AppLocalizations.of(
+                                                            context)!
+                                                        .confirm,
+                                                    noBtnName: AppLocalizations.of(
+                                                            context)!
+                                                        .cancel,
+                                                    yesBtnFunc: () {
+                                                      context.read<AccBloc>().add(
+                                                          ClearAllNotificationsEvent());
+                                                      Navigator.pop(context);
+                                                    },
+                                                    noBtnFunc: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ));
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    child: Text(
-                                      AppLocalizations.of(context)!.clearAll,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .primaryColorDark),
-                                    ),
+                                        child: Text(
+                                          AppLocalizations.of(context)!.clearAll,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                   DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                                 ],
                               ),
                             );

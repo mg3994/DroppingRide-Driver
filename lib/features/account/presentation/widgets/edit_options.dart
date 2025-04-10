@@ -52,7 +52,7 @@ class EditOptions extends StatelessWidget {
 
                 CustomCard
                 (
-                  padding: EdgeInsets.symmetric(horizontal: 9,vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 9,vertical: 8),
                   width: MediaQuery.sizeOf(context).width * 0.8,
                   blurRadius: 4,
                   border: Border.all(

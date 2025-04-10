@@ -52,7 +52,7 @@ class FareBreakup extends StatelessWidget {
           MyText(
             text: price,
             textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: size.width * 0.04,
+                fontSize: size.width * 0.045,
                 fontWeight: fntweight ?? FontWeight.w400,
                 color: pricecolor ?? Theme.of(context).primaryColorDark),
           ),

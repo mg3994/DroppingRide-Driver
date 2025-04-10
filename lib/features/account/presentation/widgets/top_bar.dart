@@ -13,6 +13,8 @@ class TopBarDesign extends StatelessWidget {
   final bool? isOngoingPage;
   final Widget? child;
   final Function()? onTap;
+  final bool topCenterWidget;
+    final Icon? icon;
 
   const TopBarDesign(
       {super.key,
@@ -20,7 +22,8 @@ class TopBarDesign extends StatelessWidget {
       required this.isHistoryPage,
       required this.title,
       this.onTap,
-      this.isOngoingPage});
+      this.isOngoingPage,
+      this.topCenterWidget = false, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class TopBarDesign extends StatelessWidget {
           decoration: BoxDecoration(
             // color: AppColors.commonColor,
 
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).disabledColor.withAlpha(200),
             image: const DecorationImage(
               alignment: Alignment.topCenter,
               image: AssetImage(AppImages.map),
@@ -43,109 +46,157 @@ class TopBarDesign extends StatelessWidget {
               SafeArea(
                 child: SizedBox(
                   width: size.width,
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                (onTap != null)
-                                    ? Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Container(
-                                          height: size.height * 0.08,
-                                          width: size.width * 0.08,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.white,
-                                            shape: BoxShape.circle,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: Offset(5.0, 5.0),
-                                                blurRadius: 10.0,
-                                                spreadRadius: 2.0,
+                      Row(
+                        mainAxisAlignment:(topCenterWidget)?  MainAxisAlignment.spaceBetween: MainAxisAlignment.start,
+                        children: [
+                            (onTap != null)
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Container(
+                                            height: size.height * 0.08,
+                                            width: size.width * 0.08,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.white,
+                                              shape: BoxShape.circle,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: Offset(5.0, 5.0),
+                                                  blurRadius: 10.0,
+                                                  spreadRadius: 2.0,
+                                                ),
+                                              ],
+                                            ),
+                                            child: InkWell(
+                                                onTap: () {
+                                                  Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 100), () {
+                                                    if (onTap != null) {
+                                                      onTap!();
+                                                    }
+                                                  });
+                                                },
+                                                highlightColor: Theme.of(context)
+                                                    .disabledColor
+                                                    .withOpacity(0.1),
+                                                splashColor: Theme.of(context)
+                                                    .disabledColor
+                                                    .withOpacity(0.2),
+                                                hoverColor: Theme.of(context)
+                                                    .disabledColor
+                                                    .withOpacity(0.05),
+                                                child: Icon(
+                                                  CupertinoIcons.back,
+                                                  size: 20,
+                                                  color: AppColors.black,
+                                                )),
+                                          ),
+                                        )
+                                      : SizedBox(
+                                          width: size.width * 0.05,
+                                          height: size.width * 0.15,
+                                        ),
+                          (topCenterWidget)
+                              ? Center(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Theme.of(context)
+                                              .disabledColor,
+                                          // blurRadius: 0,
+                                          spreadRadius: 1.2,
+                                          blurStyle: BlurStyle.solid,
+                                          offset: const Offset(-4, 0),
+                                        ),
+                                      ],
+                                      color: Theme.of(context).cardColor,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4),
+                                        bottomLeft: Radius.circular(4),
+                                        topRight: Radius.circular(4),
+                                        bottomRight: Radius.circular(4),
+                                      ),
+                                    ),
+                                    width: size.width * 0.45,
+                                    height: size.height * 0.051,
+                                    child: Center(
+                                      child:  Row(
+                                        children: [
+                                            if(icon != null)icon!,
+                                                                    SizedBox(
+                                                                      width: size.width * 0.02,
+                                                                    ), 
+                                          Wrap(
+                                                                      alignment:WrapAlignment.center,
+                                                                      runAlignment: WrapAlignment.center,
+                                                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                                                      children: [
+                                                                       
+                                              MyText(
+                                                text: title,
+                                                textStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .titleLarge!
+                                                    .copyWith(fontSize: 20),
                                               ),
                                             ],
                                           ),
-                                          child: InkWell(
-                                              onTap: () {
-                                                Future.delayed(
-                                                    const Duration(
-                                                        milliseconds: 100), () {
-                                                  if (onTap != null) {
-                                                    onTap!();
-                                                  }
-                                                });
-                                              },
-                                              highlightColor: Theme.of(context)
-                                                  .disabledColor
-                                                  .withOpacity(0.1),
-                                              splashColor: Theme.of(context)
-                                                  .disabledColor
-                                                  .withOpacity(0.2),
-                                              hoverColor: Theme.of(context)
-                                                  .disabledColor
-                                                  .withOpacity(0.05),
-                                              child: Icon(
-                                                CupertinoIcons.back,
-                                                size: 20,
-                                                color: AppColors.black,
-                                              )),
-                                        ),
-                                      )
-                                    : SizedBox(
-                                        width: size.width * 0.05,
-                                        height: size.width * 0.15,
+                                        ],
                                       ),
-                                MyText(
+                                    ),
+                                  ),
+                              )
+                              : MyText(
                                   text: title,
                                   textStyle: Theme.of(context)
                                       .textTheme
                                       .titleLarge!
                                       .copyWith(
-                                          color: AppColors.white, fontSize: 20),
+                                          color: AppColors.white,
+                                          fontSize: 20),
                                 ),
-                              ],
-                            ),
-                            if (isHistoryPage)
-                              BlocBuilder<AccBloc, AccState>(
-                                builder: (context, state) {
-                                  final selectedIndex = context
-                                      .read<AccBloc>()
-                                      .selectedHistoryType;
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      _buildTab(
-                                          context,
-                                          AppLocalizations.of(context)!
-                                              .completed,
-                                          0,
-                                          selectedIndex),
-                                      _buildTab(
-                                          context,
-                                          AppLocalizations.of(context)!
-                                              .upcoming,
-                                          1,
-                                          selectedIndex),
-                                      _buildTab(
-                                          context,
-                                          AppLocalizations.of(context)!
-                                              .cancelled,
-                                          2,
-                                          selectedIndex),
-                                    ],
-                                  );
-                                },
-                              )
-                            else
-                              const SizedBox(),
-                          ],
-                        ),
+                                SizedBox()
+                        ],
                       ),
+                      if (isHistoryPage)
+                        BlocBuilder<AccBloc, AccState>(
+                          builder: (context, state) {
+                            final selectedIndex = context
+                                .read<AccBloc>()
+                                .selectedHistoryType;
+                            return Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                              children: [
+                                _buildTab(
+                                    context,
+                                    AppLocalizations.of(context)!
+                                        .completed,
+                                    0,
+                                    selectedIndex),
+                                _buildTab(
+                                    context,
+                                    AppLocalizations.of(context)!
+                                        .upcoming,
+                                    1,
+                                    selectedIndex),
+                                _buildTab(
+                                    context,
+                                    AppLocalizations.of(context)!
+                                        .cancelled,
+                                    2,
+                                    selectedIndex),
+                              ],
+                            );
+                          },
+                        )
+                      else
+                        const SizedBox(),
                     ],
                   ),
                 ),
@@ -159,9 +210,15 @@ class TopBarDesign extends StatelessWidget {
                           color: Theme.of(context).scaffoldBackgroundColor,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(
-                                  (context.read<AccBloc>().textDirection == 'ltr') ? 50 : 0),
+                                  (context.read<AccBloc>().textDirection ==
+                                          'ltr')
+                                      ? 50
+                                      : 0),
                               topRight: Radius.circular(
-                                  (context.read<AccBloc>().textDirection == 'ltr') ? 0 : 50)),
+                                  (context.read<AccBloc>().textDirection ==
+                                          'ltr')
+                                      ? 0
+                                      : 50)),
                         ),
                         child: child,
                       ),
@@ -175,9 +232,15 @@ class TopBarDesign extends StatelessWidget {
                               color: Theme.of(context).scaffoldBackgroundColor,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(
-                                      (context.read<AccBloc>().textDirection == 'ltr') ? 50 : 0),
+                                      (context.read<AccBloc>().textDirection ==
+                                              'ltr')
+                                          ? 50
+                                          : 0),
                                   topRight: Radius.circular(
-                                      (context.read<AccBloc>().textDirection == 'ltr') ? 0 : 50)),
+                                      (context.read<AccBloc>().textDirection ==
+                                              'ltr')
+                                          ? 0
+                                          : 50)),
                             ),
                             child: child,
                           );

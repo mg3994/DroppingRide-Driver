@@ -25,11 +25,11 @@ class NotificationCardWidget extends StatelessWidget {
             margin: EdgeInsets.only(bottom: size.width * 0.05),
             padding: EdgeInsets.all(size.width * 0.025),
             decoration: BoxDecoration(
-                color: Theme.of(context).dividerColor.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(4),
                 border: Border.all(
                   width: size.width * 0.0025,
-                  color: Theme.of(context).primaryColorDark.withOpacity(0.5),
+                  color: Theme.of(context).primaryColorDark.withOpacity(0.3),
                 )),
             child: Column(
               children: [

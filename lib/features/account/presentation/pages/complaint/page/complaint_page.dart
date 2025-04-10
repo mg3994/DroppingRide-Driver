@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
@@ -49,6 +50,8 @@ class ComplaintPage extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               body: TopBarDesign(
                 isHistoryPage: false,
+                topCenterWidget: true,
+                icon: Icon(Icons.newspaper),
                 title: AppLocalizations.of(context)!.complaintDetails,
                 onTap: () {
                   Navigator.of(context).pop();
@@ -68,10 +71,20 @@ class ComplaintPage extends StatelessWidget {
                                   .bodyLarge!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
+                            SizedBox(height: size.height * 0.005),
+                             DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                             SizedBox(height: size.height * 0.02),
+
                             Container(
                               height: size.width * 0.5,
                               decoration: BoxDecoration(
+                                color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
                                     color: Theme.of(context).dividerColor,
@@ -84,6 +97,7 @@ class ComplaintPage extends StatelessWidget {
                                   children: [
                                     SizedBox(height: size.width * 0.03),
                                     TextField(
+                                      
                                         controller: context
                                             .read<AccBloc>()
                                             .complaintController,

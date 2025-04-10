@@ -171,8 +171,7 @@ class HistoryTripSummaryPage extends StatelessWidget {
                               Container(
                                   padding: EdgeInsets.all(size.width * 0.05),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                                    color: Theme.of(context).cardColor,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Row(

@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
@@ -65,6 +66,7 @@ class HistoryPage extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               body: TopBarDesign(
+                topCenterWidget: true,
                 isHistoryPage: true,
                 title: AppLocalizations.of(context)!.history,
                 onTap: () {
@@ -91,19 +93,31 @@ class HistoryPage extends StatelessWidget {
                                     return Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 15),
-                                      child: Row(
+                                      child: Column(
                                         children: [
-                                          MyText(
-                                            text: AppLocalizations.of(context)!
-                                                .historyDetails,
-                                            textStyle: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .primaryColorDark),
+                                          Row(
+                                            children: [
+                                              MyText(
+                                                text: AppLocalizations.of(context)!
+                                                    .historyDetails,
+                                                textStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium!
+                                                    .copyWith(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .primaryColorDark),
+                                              ),
+                                            ],
                                           ),
+                                          DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+      
                                         ],
                                       ),
                                     );
