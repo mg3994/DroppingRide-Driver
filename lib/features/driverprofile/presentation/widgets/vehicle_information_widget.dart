@@ -406,7 +406,12 @@ class VehicleInformationWidget extends StatelessWidget {
                     (userData!.role == 'driver' || args.from == 'owner')
                         ? GetVehicleInfo(cont: context)
                         : GetCompanyInfo(cont: context),
-                    if (((userData!.role == 'driver' || args.from == 'owner') &&
+                    
+                      
+                  ],
+                ),
+              ),
+              if (((userData!.role == 'driver' || args.from == 'owner') &&
                             context
                                 .read<DriverProfileBloc>()
                                 .vehicleColor
@@ -460,6 +465,7 @@ class VehicleInformationWidget extends StatelessWidget {
                                 .text
                                 .isNotEmpty))
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CustomButton(
                               buttonName: AppLocalizations.of(context)!.submit,
@@ -471,10 +477,6 @@ class VehicleInformationWidget extends StatelessWidget {
                           SizedBox(height: size.width * 0.05)
                         ],
                       )
-                      
-                  ],
-                ),
-              ),
             ],
           );
         },
