@@ -169,7 +169,7 @@ class SubscriptionPage extends StatelessWidget {
         child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
             body: SafeArea(
-              child: CustomBackground(
+              // child: CustomBackground(
                 child: (userData != null &&
                         userData!.subscription == null &&
                         !context.read<AccBloc>().isPlansChooseds)
@@ -205,7 +205,7 @@ class SubscriptionPage extends StatelessWidget {
                                     subscriptionListDatas: context
                                         .read<AccBloc>()
                                         .subscriptionList),
-              ),
+              // ),
             ),
           );
         }),

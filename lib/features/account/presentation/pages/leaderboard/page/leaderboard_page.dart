@@ -52,11 +52,11 @@ class LeaderboardPage extends StatelessWidget {
                     Container(
                       width: size.width,
                       padding: EdgeInsets.all(size.width * 0.05),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(25),
                               bottomRight: Radius.circular(25)),
-                          color: AppColors.primary),
+                          color: Colors.grey.shade600),
                       child: Column(
                         children: [
                           SizedBox(
@@ -633,6 +633,7 @@ class LeaderboardPage extends StatelessWidget {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
+                                  // Dotted Line Missing Here
                                   for (var i = 3;
                                       i <
                                           context
@@ -651,9 +652,9 @@ class LeaderboardPage extends StatelessWidget {
                                       width: size.width * 0.9,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(12),
+                                              BorderRadius.circular(4),
                                           color: Theme.of(context)
-                                              .scaffoldBackgroundColor,
+                                              .cardColor,
                                           boxShadow: [
                                             BoxShadow(
                                                 color: Theme.of(context)
@@ -802,9 +803,9 @@ class LeaderboardPage extends StatelessWidget {
                                     height: size.width * 0.2,
                                     width: size.width * 0.9,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(4),
                                         color: Theme.of(context)
-                                            .scaffoldBackgroundColor,
+                                            .cardColor,
                                         boxShadow: [
                                           BoxShadow(
                                               color:

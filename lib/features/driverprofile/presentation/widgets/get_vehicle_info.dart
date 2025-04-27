@@ -33,8 +33,8 @@ class GetVehicleInfo extends StatelessWidget {
                                   .read<DriverProfileBloc>()
                                   .choosenServiceLocation !=
                               null)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                          ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(width: size.width * 0.025),
                     Expanded(
@@ -47,8 +47,8 @@ class GetVehicleInfo extends StatelessWidget {
                                             .read<DriverProfileBloc>()
                                             .choosenServiceLocation !=
                                         null)
-                                    ? AppColors.blackText
-                                    : AppColors.black.withOpacity(0.5),
+                                    ?   Theme.of(context).primaryColorDark
+                                    : Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -73,7 +73,7 @@ class GetVehicleInfo extends StatelessWidget {
                                         .choosenVehicleType !=
                                     null)
                                 ? AppColors.darkGrey
-                                : AppColors.black.withOpacity(0.5),
+                                : Theme.of(context).primaryColorDark.withOpacity(0.5),
                           )
                       ],
                     ),
@@ -190,7 +190,7 @@ class GetVehicleInfo extends StatelessWidget {
                                               .choosenServiceLocation !=
                                           null)
                                       ? AppColors.darkGrey
-                                      : AppColors.black.withOpacity(0.5)),
+                                      : Theme.of(context).primaryColorDark.withOpacity(0.5)),
                               borderRadius: BorderRadius.circular(5)),
                           padding: EdgeInsets.only(
                               left: size.width * 0.05,
@@ -223,8 +223,8 @@ class GetVehicleInfo extends StatelessWidget {
                                                     .read<DriverProfileBloc>()
                                                     .choosenVehicleType !=
                                                 null)
-                                            ? AppColors.blackText
-                                            : AppColors.black.withOpacity(0.5),
+                                            ? Theme.of(context).primaryColorDark
+                                            : Theme.of(context).primaryColorDark.withOpacity(0.5),
                                       ),
                                 ),
                               ),
@@ -258,8 +258,8 @@ class GetVehicleInfo extends StatelessWidget {
                                   .read<DriverProfileBloc>()
                                   .choosenVehicleType !=
                               null)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                          ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(width: size.width * 0.025),
                     Expanded(
@@ -272,8 +272,8 @@ class GetVehicleInfo extends StatelessWidget {
                                             .read<DriverProfileBloc>()
                                             .choosenVehicleType !=
                                         null)
-                                    ? AppColors.blackText
-                                    : AppColors.black.withOpacity(0.5),
+                                    ? Theme.of(context).primaryColorDark
+                                    : Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -299,7 +299,7 @@ class GetVehicleInfo extends StatelessWidget {
                                     .text
                                     .isNotEmpty)
                                 ? AppColors.darkGrey
-                                : AppColors.black.withOpacity(0.5),
+                                : Theme.of(context).primaryColorDark.withOpacity(0.5),
                           )
                       ],
                     ),
@@ -325,7 +325,7 @@ class GetVehicleInfo extends StatelessWidget {
                             AppLocalizations.of(context)!.enterVehicleMake,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               fontSize: 14,
-                              color: AppColors.blackText,
+                              // color: AppColors.blackText,
                             ),
                         controller:
                             context.read<DriverProfileBloc>().customMake,
@@ -341,7 +341,8 @@ class GetVehicleInfo extends StatelessWidget {
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.5),
+                            color: Theme.of(context).primaryColorDark.withAlpha(50),
+                              // color: AppColors.black.withOpacity(0.5),
                               width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -362,8 +363,8 @@ class GetVehicleInfo extends StatelessWidget {
                               .customMake
                               .text
                               .isNotEmpty)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                         ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(width: size.width * 0.025),
                     Expanded(
@@ -377,8 +378,8 @@ class GetVehicleInfo extends StatelessWidget {
                                         .customMake
                                         .text
                                         .isNotEmpty)
-                                    ? AppColors.black
-                                    : AppColors.black.withOpacity(0.5),
+                                    ? Theme.of(context).primaryColorDark
+                                    : Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -404,7 +405,7 @@ class GetVehicleInfo extends StatelessWidget {
                                     .text
                                     .isNotEmpty)
                                 ? AppColors.darkGrey
-                                : AppColors.black.withOpacity(0.5),
+                                : Theme.of(context).primaryColorDark.withOpacity(0.5),
                           )
                       ],
                     ),
@@ -448,7 +449,7 @@ class GetVehicleInfo extends StatelessWidget {
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.5),
+                               color: Theme.of(context).primaryColorDark.withAlpha(50),
                               width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -469,8 +470,8 @@ class GetVehicleInfo extends StatelessWidget {
                               .customModel
                               .text
                               .isNotEmpty)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                          ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(width: size.width * 0.025),
                     Expanded(
@@ -484,8 +485,8 @@ class GetVehicleInfo extends StatelessWidget {
                                         .customModel
                                         .text
                                         .isNotEmpty)
-                                    ? AppColors.blackText
-                                    : AppColors.black.withOpacity(0.5),
+                                    ?   Theme.of(context).primaryColorDark
+                                    :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -513,7 +514,7 @@ class GetVehicleInfo extends StatelessWidget {
                                     .text
                                     .isNotEmpty)
                                 ? AppColors.darkGrey
-                                : AppColors.black.withOpacity(0.5),
+                                : Theme.of(context).primaryColorDark.withOpacity(0.5),
                           )
                       ],
                     ),
@@ -560,7 +561,7 @@ class GetVehicleInfo extends StatelessWidget {
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.5),
+                               color: Theme.of(context).primaryColorDark.withAlpha(50),
                               width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -590,8 +591,8 @@ class GetVehicleInfo extends StatelessWidget {
                               .vehicleYear
                               .text
                               .isNotEmpty)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                          ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(width: size.width * 0.025),
                     Expanded(
@@ -605,8 +606,8 @@ class GetVehicleInfo extends StatelessWidget {
                                         .vehicleYear
                                         .text
                                         .isNotEmpty)
-                                    ? AppColors.blackText
-                                    : AppColors.black.withOpacity(0.5),
+                                    ?  Theme.of(context).primaryColorDark
+                                    :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -632,7 +633,7 @@ class GetVehicleInfo extends StatelessWidget {
                                     .text
                                     .isNotEmpty)
                                 ? AppColors.darkGrey
-                                : AppColors.black.withOpacity(0.5),
+                                : Theme.of(context).primaryColorDark.withOpacity(0.5),
                           )
                       ],
                     ),
@@ -675,7 +676,7 @@ class GetVehicleInfo extends StatelessWidget {
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.5),
+                               color: Theme.of(context).primaryColorDark.withAlpha(50),
                               width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -696,8 +697,8 @@ class GetVehicleInfo extends StatelessWidget {
                               .vehicleNumber
                               .text
                               .isNotEmpty)
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.5),
+                          ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                     ),
                     SizedBox(
                       width: size.width * 0.025,
@@ -713,8 +714,8 @@ class GetVehicleInfo extends StatelessWidget {
                                         .vehicleNumber
                                         .text
                                         .isNotEmpty)
-                                    ? AppColors.blackText
-                                    : AppColors.black.withOpacity(0.5),
+                                    ?  Theme.of(context).primaryColorDark
+                                    :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                               ),
                     ))
                   ],
@@ -777,7 +778,7 @@ class GetVehicleInfo extends StatelessWidget {
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.5),
+                               color: Theme.of(context).primaryColorDark.withAlpha(50),
                               width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),

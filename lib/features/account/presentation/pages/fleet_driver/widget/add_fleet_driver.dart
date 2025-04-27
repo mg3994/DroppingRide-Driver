@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 
 import '../../../../../../common/common.dart';
 import '../../../../../../core/utils/custom_button.dart';
@@ -65,137 +66,156 @@ class AddFleetDriverWidget extends StatelessWidget {
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                              width: size.width * 0.9,
-                              child: MyText(
-                                text: AppLocalizations.of(context)!.driverName,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 16,
-                                    ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
+                        child: CustomCard(
+                          blurRadius: 4,
+                          child: Column(
+                            children: [
+                              // SizedBox(
+                              //   height: size.width * 0.05,
+                              // ),
+                              SizedBox(
                                 width: size.width * 0.9,
-                                child: CustomTextField(
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                      color: AppColors.darkGrey,
-                                      width: 1,
-                                    )),
-                                    hintText: AppLocalizations.of(context)!
-                                        .enterDriverName,
-                                    controller: context
-                                        .read<AccBloc>()
-                                        .driverNameController)),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                              width: size.width * 0.9,
-                              child: MyText(
-                                text: AppLocalizations.of(context)!.driverMobile,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 16,
-                                    ),
+                                child: MyText(
+                                  text: AppLocalizations.of(context)!.driverName,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                      ),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                                width: size.width * 0.9,
-                                child: CustomTextField(
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                      color: AppColors.darkGrey,
-                                      width: 1,
-                                    )),
-                                    hintText: AppLocalizations.of(context)!
-                                        .enterDriverMobile,
-                                    controller: context
-                                        .read<AccBloc>()
-                                        .driverMobileController)),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                              width: size.width * 0.9,
-                              child: MyText(
-                                text: AppLocalizations.of(context)!.driverEmail,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 16,
-                                    ),
+                              SizedBox(
+                                height: size.width * 0.05,
                               ),
-                            ),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                                width: size.width * 0.9,
-                                child: CustomTextField(
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                      color: AppColors.darkGrey,
-                                      width: 1,
-                                    )),
-                                    hintText: AppLocalizations.of(context)!
-                                        .enterDriverEmail,
-                                    controller: context
-                                        .read<AccBloc>()
-                                        .driverEmailController)),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
-                              width: size.width * 0.9,
-                              child: MyText(
-                                text: AppLocalizations.of(context)!.driverAddress,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      fontSize: 16,
-                                    ),
+                              SizedBox(
+                                  width: size.width * 0.9,
+                                  child: CustomTextField(
+                                    borderRadius: 2,
+                                   contentPadding: EdgeInsets.symmetric(
+                                        vertical: size.width * 0.035,
+                                        horizontal: size.width * 0.05),
+                                      focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: AppColors.darkGrey,
+                                        width: 1,
+                                      )),
+                                      hintText: AppLocalizations.of(context)!
+                                          .enterDriverName,
+                                      controller: context
+                                          .read<AccBloc>()
+                                          .driverNameController)),
+                              SizedBox(
+                                height: size.width * 0.05,
                               ),
-                            ),
-                            SizedBox(
-                              height: size.width * 0.05,
-                            ),
-                            SizedBox(
+                              SizedBox(
                                 width: size.width * 0.9,
-                                child: CustomTextField(
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                      color: AppColors.darkGrey,
-                                      width: 1,
-                                    )),
-                                    hintText: AppLocalizations.of(context)!
-                                        .enterDriverAddress,
-                                    controller: context
-                                        .read<AccBloc>()
-                                        .driverAddressController)),
-                          ],
+                                child: MyText(
+                                  text: AppLocalizations.of(context)!.driverMobile,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                      ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.width * 0.05,
+                              ),
+                              SizedBox(
+                                  width: size.width * 0.9,
+                                  child: CustomTextField(
+                                     borderRadius: 2,
+                                   contentPadding: EdgeInsets.symmetric(
+                                        vertical: size.width * 0.035,
+                                        horizontal: size.width * 0.05),
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: AppColors.darkGrey,
+                                        width: 1,
+                                      )),
+                                      hintText: AppLocalizations.of(context)!
+                                          .enterDriverMobile,
+                                      controller: context
+                                          .read<AccBloc>()
+                                          .driverMobileController)),
+                              SizedBox(
+                                height: size.width * 0.05,
+                              ),
+                              SizedBox(
+                                width: size.width * 0.9,
+                                child: MyText(
+                                  text: AppLocalizations.of(context)!.driverEmail,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                      ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.width * 0.05,
+                              ),
+                              SizedBox(
+                                  width: size.width * 0.9,
+                                  child: CustomTextField(
+                                     borderRadius: 2,
+                                   contentPadding: EdgeInsets.symmetric(
+                                        vertical: size.width * 0.035,
+                                        horizontal: size.width * 0.05),
+                                      focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: AppColors.darkGrey,
+                                        width: 1,
+                                      )),
+                                      hintText: AppLocalizations.of(context)!
+                                          .enterDriverEmail,
+                                      controller: context
+                                          .read<AccBloc>()
+                                          .driverEmailController)),
+                              SizedBox(
+                                height: size.width * 0.05,
+                              ),
+                              SizedBox(
+                                width: size.width * 0.9,
+                                child: MyText(
+                                  text: AppLocalizations.of(context)!.driverAddress,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                      ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.width * 0.05,
+                              ),
+                              SizedBox(
+                                  width: size.width * 0.9,
+                                  child: CustomTextField(
+                                     borderRadius: 2,
+                                   contentPadding: EdgeInsets.symmetric(
+                                        vertical: size.width * 0.035,
+                                        horizontal: size.width * 0.05),
+                                      focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: AppColors.darkGrey,
+                                        width: 1,
+                                      )),
+                                      hintText: AppLocalizations.of(context)!
+                                          .enterDriverAddress,
+                                      controller: context
+                                          .read<AccBloc>()
+                                          .driverAddressController)),
+                            ],
+                          ),
                         ),
                       ),
                     ),

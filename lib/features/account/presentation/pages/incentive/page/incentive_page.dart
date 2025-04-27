@@ -53,7 +53,7 @@ class IncentivePage extends StatelessWidget {
         },
         child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
           return Scaffold(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).disabledColor,
             // backgroundColor: AppColors.commonColor,
             body: Stack(
               children: [

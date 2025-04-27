@@ -25,7 +25,12 @@ class NoSubscriptionWidget extends StatelessWidget {
               child: Stack(
             children: [
               CustomCard(
-                padding: EdgeInsets.zero,
+                margin: EdgeInsets.only(
+                  top: size.height * 0.08,
+                  left: size.width * 0.05,
+                  right: size.width * 0.05,
+                  bottom: size.height * 0.05,
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: Column(
@@ -38,9 +43,12 @@ class NoSubscriptionWidget extends StatelessWidget {
                         textStyle: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .copyWith(color: AppColors.blackText, fontSize: 20),
+                            .copyWith(
+                            //   color:
+                            //  AppColors.blackText,
+                              fontSize: 16),
                       ),
-                      SizedBox(height: size.height * 0.015),
+                      SizedBox(height: size.height * 0.004),
                           DottedLine( // ADDED: BY MG: Dotted line
                                                                      dashLength: 2,
                                                                      dashGapLength: 2,
@@ -54,8 +62,8 @@ class NoSubscriptionWidget extends StatelessWidget {
                         text: AppLocalizations.of(context)!.noSubscriptionContent,
                         textStyle:
                             Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  color: AppColors.black,
-                                  fontSize: 16,
+                                  // color: AppColors.black,
+                                  fontSize: 12,
                                 ),
                         maxLines: 5,
                         textAlign: TextAlign.center,
@@ -95,7 +103,7 @@ class NoSubscriptionWidget extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 20,
+                bottom: size.height * 0.08,
                 left: 0,
                 right: 0,
                 child: CustomButton(

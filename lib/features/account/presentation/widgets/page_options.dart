@@ -20,7 +20,7 @@ class PageOptions extends StatelessWidget {
         InkWell(
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 4, top: 4),
+            padding: const EdgeInsets.only(bottom: 9, top: 9,left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,13 +59,16 @@ class PageOptions extends StatelessWidget {
           ),
         ),
         // const SizedBox(height: 20),
-                          DottedLine( // ADDED: BY MG: Dotted line
-                                                                     dashLength: 2,
-                                                                     dashGapLength: 2,
-                                                                     dashRadius: 1,
-                                                                     lineThickness: 1,
-                                                                     dashColor: Theme.of(context).dividerColor,
-                                                                   ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: DottedLine( // ADDED: BY MG: Dotted line
+                                                                       dashLength: 2,
+                                                                       dashGapLength: 2,
+                                                                       dashRadius: 1,
+                                                                       lineThickness: 1,
+                                                                       dashColor: Theme.of(context).dividerColor,
+                                                                     ),
+                          ),
       ],
     );
   }

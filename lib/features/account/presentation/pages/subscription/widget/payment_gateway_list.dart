@@ -50,6 +50,7 @@ class PaymentGatewayListWidget extends StatelessWidget {
                                       margin: EdgeInsets.only(
                                           bottom: size.width * 0.025),
                                       decoration: BoxDecoration(
+                                        color: Theme.of(context).cardColor,
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           border: Border.all(

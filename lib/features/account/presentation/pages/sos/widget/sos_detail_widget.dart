@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/features/account/application/acc_bloc.dart';
@@ -33,9 +34,10 @@ class SosDetailWidget extends StatelessWidget {
                         width: size.width,
                         margin: const EdgeInsets.only(right: 10, bottom: 10),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(4),
+                            color: Theme.of(context).cardColor,
                             border: Border.all(
-                                width: 1.2,
+                                width: 0.2,
                                 color: Theme.of(context).disabledColor)),
                         child: Padding(
                           padding: EdgeInsets.all(size.width * 0.025),
@@ -83,6 +85,19 @@ class SosDetailWidget extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(
+                                height: size.width * 0.01,
+                              ),
+                                     DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                                                                       SizedBox(
+                                height: size.width * 0.01,
+                              ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -90,8 +105,9 @@ class SosDetailWidget extends StatelessWidget {
                                             text: sosdata[index].number,
                                             textStyle: Theme.of(context)
                                                 .textTheme
-                                                .bodyMedium!
+                                                .labelSmall!
                                                 .copyWith(
+                                                  fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.w600),
                                             maxLines: 2,
@@ -139,6 +155,7 @@ class SosDetailWidget extends StatelessWidget {
                                   },
                                   child: const Icon(
                                     Icons.delete,
+                                    color: AppColors.red,
                                   ))
                             ],
                           ),

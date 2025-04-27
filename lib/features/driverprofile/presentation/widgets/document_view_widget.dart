@@ -38,7 +38,8 @@ class DocumentViewWidget extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_back,
                     size: size.width * 0.07,
-                    color: AppColors.blackText,
+                     color: Theme.of(context).primaryColorDark,
+                    // color: AppColors.blackText,
                   )),
               SizedBox(width: size.width * 0.05),
               Expanded(
@@ -52,7 +53,8 @@ class DocumentViewWidget extends StatelessWidget {
                       .name,
                   textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 18,
-                        color: AppColors.blackText,
+                        //  color: Theme.of(context).primaryColorDark,
+                        // color: AppColors.blackText,
                       ),
                 ),
               ),
@@ -176,12 +178,12 @@ class DocumentViewWidget extends StatelessWidget {
                             style:
                                 Theme.of(context).textTheme.bodySmall!.copyWith(
                                       fontSize: 16,
-                                      color: AppColors.blackText,
+                                      // color: AppColors.blackText,
                                     ),
                             hintTextStyle:
                                 Theme.of(context).textTheme.bodySmall!.copyWith(
                                       fontSize: 16,
-                                      color: AppColors.blackText,
+                                      // color: AppColors.blackText,
                                     ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -195,7 +197,7 @@ class DocumentViewWidget extends StatelessWidget {
                             ),
                             disabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: AppColors.black.withOpacity(0.5),
+                                  // color: AppColors.black.withOpacity(0.5),
                                   width: 1),
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -257,12 +259,12 @@ class DocumentViewWidget extends StatelessWidget {
                               style:
                                   Theme.of(context).textTheme.bodySmall!.copyWith(
                                         fontSize: 16,
-                                        color: AppColors.blackText,
+                                        // color: AppColors.blackText,
                                       ),
                               hintTextStyle:
                                   Theme.of(context).textTheme.bodySmall!.copyWith(
                                         fontSize: 16,
-                                        color: AppColors.blackText,
+                                        // color: AppColors.blackText,
                                       ),
                               enabled: false,
                               enabledBorder: OutlineInputBorder(

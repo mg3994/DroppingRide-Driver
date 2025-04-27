@@ -87,7 +87,7 @@ class SelectUserPage extends StatelessWidget {
                           children: [
                             Material(
                               borderRadius: BorderRadius.circular(4),
-                              color: Colors.transparent,
+                              color:Theme.of(context).cardColor,
                               child: InkWell(
                                 splashColor: AppColors.black.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(4),
@@ -205,7 +205,8 @@ class SelectUserPage extends StatelessWidget {
                             ///////////////////
                             Material(
                               borderRadius: BorderRadius.circular(4),
-                              color: Colors.transparent,
+                                                            color:Theme.of(context).cardColor,
+
                               child: InkWell(
                                 splashColor: AppColors.black.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(4),

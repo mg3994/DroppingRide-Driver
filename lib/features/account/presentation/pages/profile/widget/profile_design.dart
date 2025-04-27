@@ -219,7 +219,7 @@ class ProfileWidget extends StatelessWidget {
                   ),
                 ),
                     ),
-                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
                       
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -259,33 +259,54 @@ class ProfileWidget extends StatelessWidget {
                       child: VerticalDivider(
                           color: Theme.of(context).dividerColor),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MyText(
-                            text: AppLocalizations.of(context)!.wallet,
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                    fontSize: 14,
-                                    color: Theme.of(context)
+                    Container(
+                        width: size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.darkSecondaryColor, // Choose the color of the bottom bar
+                    width: 3.0, // Choose the thickness of the bottom bar
+                  ),
+                ),
+                    ),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
+                     
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          MyText(
+                              text: AppLocalizations.of(context)!.wallet,
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      fontSize: 14,
+                                      color: Theme.of(context)
                                         .disabledColor
-                                        .withOpacity(0.8))),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            MyText(
-                                text: wallet,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .primaryColorDark)),
-                          ],
-                        )
-                      ],
+                                        .withOpacity(0.8)
+                                      /////////////////////////////////////////////////////////////
+                                      // color: 
+                                      // Theme.of(context)
+                                      //     .disabledColor
+                                      //     .withOpacity(0.8)
+                                          )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              MyText(
+                                  text: wallet,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .primaryColorDark)),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -311,7 +332,7 @@ class ProfileWidget extends StatelessWidget {
                   ),
                 ),
                     ),
-                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -364,7 +385,7 @@ class ProfileWidget extends StatelessWidget {
                   ),
                 ),
                     ),
-                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                   padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -19,7 +19,7 @@ class LandingContentWidget extends StatelessWidget {
           return Column(
             children: [
               CustomCard(
-                padding: EdgeInsets.symmetric(horizontal: 6,vertical: 2),
+                padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
                 child: SizedBox(
                   height: size.height * 0.2,
                   width: size.width,

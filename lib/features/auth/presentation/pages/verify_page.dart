@@ -158,7 +158,7 @@ class _VerifyPageState extends State<VerifyPage>
                                 maxLines: 2,
                                 textAlign: TextAlign.center,
                                 textStyle:
-                                    Theme.of(context).textTheme.labelSmall
+                                    Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14)
                                 // .copyWith(
                                 //   color: AppColors.blackText,
                                 // )
@@ -169,7 +169,7 @@ class _VerifyPageState extends State<VerifyPage>
                                     .enterYourPassword,
                                 textAlign: TextAlign.center,
                                 textStyle:
-                                    Theme.of(context).textTheme.labelSmall
+                                    Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 14)
                                 // .copyWith(
                                 //   color: AppColors.blackText,
                                 // )
@@ -465,7 +465,7 @@ class _VerifyPageState extends State<VerifyPage>
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: CustomButton(
             borderRadius: 4,
-            height: MediaQuery.of(context).size.height * 0.07,
+            height: MediaQuery.of(context).size.height * 0.06,
             buttonName: (!widget.arg.userExist)
                 ? AppLocalizations.of(context)!.signup
                 : AppLocalizations.of(context)!.login,

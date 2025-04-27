@@ -47,7 +47,7 @@ class ShowUpcomingIncentivesWidget extends StatelessWidget {
                       height: size.width * 1.27,
                       width: size.width,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(

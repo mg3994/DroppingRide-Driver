@@ -163,6 +163,8 @@ class OnRideWidget extends StatelessWidget {
                 ////
                 CustomCard(
                   blurRadius: 8,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: size.width * 0.05),
                   border:Border.all(width: 0.5, color: Theme.of(context).disabledColor) ,
                   padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
                   child: Column(

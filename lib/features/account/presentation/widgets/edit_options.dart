@@ -76,7 +76,9 @@ class EditOptions extends StatelessWidget {
                           color: Theme.of(context).disabledColor,
                         ),
                     )
-                    : const SizedBox()
+                    : const SizedBox(
+                      height: 35,
+                    )
                   ]),
                 )
                 ],

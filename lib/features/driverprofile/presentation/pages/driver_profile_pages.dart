@@ -20,7 +20,7 @@ import 'package:restart_tagxi/l10n/app_localizations.dart';
 import '../widgets/document_declined_widget.dart';
 import '../widgets/needed_documents_shimmer.dart';
 import 'package:dotted_line/dotted_line.dart';
-
+/// Thinking to Modify it again
 class DriverProfilePage extends StatelessWidget {
   static const String routeName = '/driverProfilePage';
   final VehicleUpdateArguments args;
@@ -103,7 +103,7 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                             child: Icon(
                                               Icons.arrow_back,
                                               size: size.width * 0.07,
-                                              color: AppColors.black,
+                                              color:  Theme.of(context).primaryColorDark,
                                             ),
                                           ),
                                           SizedBox(width: size.width * 0.05),
@@ -118,7 +118,7 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                                 .headlineMedium!
                                                 .copyWith(
                                                     fontSize: 20,
-                                                    color: AppColors.blackText),
+                                                    color:  Theme.of(context).primaryColorDark),
                                           ),
                                         ],
                                       ),
@@ -128,7 +128,7 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                       child: SingleChildScrollView(
                                           child: Column(
                                         children: [
-                                          SizedBox(height: size.width * 0.06),
+                                          SizedBox(height: size.width * 0.01),
                                           VehicleInformationWidget(
                                               cont:context, args: args),
                                         ],
@@ -162,7 +162,7 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                                 child: Icon(
                                                   Icons.arrow_back,
                                                   size: size.width * 0.07,
-                                                  color: AppColors.black,
+                                                  color: Theme.of(context).primaryColorDark,
                                                 ),
                                               ),
                                               SizedBox(width: size.width * 0.05),
@@ -175,8 +175,9 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                                     .headlineMedium!
                                                     .copyWith(
                                                         fontSize: 20,
-                                                        color:
-                                                            AppColors.blackText),
+                                                        // color:
+                                                        //     AppColors.blackText
+                                                            ),
                                               ),
                                             ],
                                           ),
@@ -571,7 +572,8 @@ Widget builderWidget(Size size, VehicleUpdateArguments? args) {
                                                                     .read<
                                                                         DriverProfileBloc>()
                                                                     .modifyDocument ==
-                                                                false|| context.read<DriverProfileBloc>().reUploadDocument)&& !userData!.available)
+                                                                    // false
+                                                                true|| context.read<DriverProfileBloc>().reUploadDocument)&& !userData!.available)
                                                             ? NeededDocumentsWidget(cont : context,arg:  args)
                                                             : SizedBox(
                                                               child: Column(

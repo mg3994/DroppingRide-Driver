@@ -83,8 +83,9 @@ class ProfileInfoPage extends StatelessWidget {
                         height: size.height * 0.7 - size.width * 0.2,
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 4),
                             child: CustomCard(
+                              borderRadius: 8,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

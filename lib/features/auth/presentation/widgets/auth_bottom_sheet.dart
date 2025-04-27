@@ -139,7 +139,9 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                     SizedBox(height: size.width * 0.04),
                     MyText(
                       text:
-                          '${AppLocalizations.of(context)!.email}/${AppLocalizations.of(context)!.mobile}',
+                          
+                          // '${AppLocalizations.of(context)!.email}/'
+                          '${AppLocalizations.of(context)!.enterMobileNumber}',
                       textStyle:
                           Theme.of(context).textTheme.labelSmall!.copyWith(
                                 // color: AppColors.darkGrey,
@@ -157,11 +159,11 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                         controller: widget.emailOrMobile,
                         filled: true,
                         focusNode: widget.focusNode,
-                        hintText: AppLocalizations.of(context)!.emailOrMobile,
+                        hintText: AppLocalizations.of(context)!.enterMobileNumber,
                         prefixConstraints:
                             BoxConstraints(maxWidth: size.width * 0.23),
-                        prefixIcon: !widget.isLoginByEmail
-                            ? Center(
+                        prefixIcon:  //!widget.isLoginByEmail
+                             Center(
                                 child: InkWell(
                                   onTap: widget.countrySelectFunc,
                                   child: Row(
@@ -198,8 +200,8 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                                     ],
                                   ),
                                 ),
-                              )
-                            : null,
+                              ),
+                              keyboardType: TextInputType.number,
                         onTap: widget.onTapEvent,
                         onSubmitted: widget.onSubmitEvent,
                         onChange: widget.onChangeEvent,
@@ -208,10 +210,12 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                               !AppValidation.emailValidate(value) &&
                               !AppValidation.mobileNumberValidate(value)) {
                             return AppLocalizations.of(context)!
-                                .enterValidEmailOrMobile;
+                            .enterValidMobile;
+                                // .enterValidEmailOrMobile;
                           } else if (value.isEmpty) {
                             return AppLocalizations.of(context)!
-                                .enterEmailOrMobile;
+                            .enterValidMobile;
+                                // .enterEmailOrMobile;
                           } else {
                             return null;
                           }
@@ -369,7 +373,7 @@ class AuthBottomSheetState extends State<AuthBottomSheet>
                   // buttonName: AppLocalizations.of(context)!.continueText,
                   borderRadius: 4,
                   width: size.width * 0.85,
-                  height: size.width * 0.15,
+                  height: size.width * 0.12,
                   // textColor: AppColors.white,
                   buttonColor: (widget.emailOrMobile.text.isEmpty)
                       ? Theme.of(context).disabledColor.withOpacity(0.5)

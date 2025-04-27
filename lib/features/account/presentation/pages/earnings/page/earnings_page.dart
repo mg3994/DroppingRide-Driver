@@ -258,8 +258,8 @@ class _EarningsPageState extends State<EarningsPage> {
                                           k,
                                           Container(
                                             width: size.width * 0.9,
-                                            padding: EdgeInsets.all(
-                                                size.width * 0.05),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal:   size.width * 0.05,vertical: size.width * 0.035),
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
@@ -799,8 +799,7 @@ class _EarningsPageState extends State<EarningsPage> {
                                                       size.width * 0.05),
                                                   decoration: BoxDecoration(
                                                     color: Theme.of(context)
-                                                        .disabledColor
-                                                        .withOpacity(0.3),
+                                                        .cardColor,
                                                   ),
                                                   child: Row(
                                                     children: [

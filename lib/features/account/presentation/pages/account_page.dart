@@ -100,20 +100,25 @@ class AccountPage extends StatelessWidget {
                                                  SizedBox(
                                       height: size.width * 0.01,
                                     ),
-                                                  DottedLine( // ADDED: BY MG: Dotted line
-                                                                     dashLength: 2,
-                                                                     dashGapLength: 2,
-                                                                     dashRadius: 1,
-                                                                     lineThickness: 1,
-                                                                     dashColor: Theme.of(context).dividerColor,
-                                                                   ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                    child: DottedLine( // ADDED: BY MG: Dotted line
+                                                                       dashLength: 2,
+                                                                       dashGapLength: 2,
+                                                                       dashRadius: 1,
+                                                                       lineThickness: 1,
+                                                                      
+                                                                       dashColor: Theme.of(context).dividerColor,
+                                                                     ),
+                                                  ),
                                                                      SizedBox(
-                                      height: size.width * 0.01,
+                                      height: size.width * 0.04,
                                     ),
                                     ///////
                                     CustomCard(
-                                      blurRadius: 8,
-                                      padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                                     borderRadius: 8,
+                                     border: Border.all(color: Theme.of(context).dividerColor,width: 0.2),
+                                      padding: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
                                       child: Column(
                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                     children: [
@@ -358,6 +363,9 @@ class AccountPage extends StatelessWidget {
                                                                     ),
                                                                     const SizedBox(height: 20),
                                                                     ])),
+                                                                     SizedBox(
+                                      height: size.width * 0.03,
+                                    ),
                                                                     MyText(
                                                                         text: AppLocalizations.of(context)!.general,
                                                                         textStyle: Theme.of(context)
@@ -366,20 +374,24 @@ class AccountPage extends StatelessWidget {
                                                                                                             .copyWith(
                                                                                                                 fontSize: AppConstants().subHeaderSize),
                                                                       ),
-                                                                    DottedLine( // ADDED: BY MG: Dotted line
-                                                                     dashLength: 2,
-                                                                     dashGapLength: 2,
-                                                                     dashRadius: 1,
-                                                                     lineThickness: 1,
-                                                                     dashColor: Theme.of(context).dividerColor,
-                                                                   ),
+                                                                    Padding(
+                                                                       padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                                      child: DottedLine( // ADDED: BY MG: Dotted line
+                                                                       dashLength: 2,
+                                                                       dashGapLength: 2,
+                                                                       dashRadius: 1,
+                                                                       lineThickness: 1,
+                                                                       dashColor: Theme.of(context).dividerColor,
+                                                                                                                                         ),
+                                                                    ),
                                                                      SizedBox(
-                                      height: size.width * 0.01,
+                                      height: size.width * 0.03,
                                     ),
                                     ///////
                                     CustomCard(
-                                      blurRadius: 8,
-                                      padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                                       borderRadius: 8,
+                                     border: Border.all(color: Theme.of(context).dividerColor,width: 0.2),
+                                      padding: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
                                       child: Column(
                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                    children: [
@@ -412,6 +424,9 @@ class AccountPage extends StatelessWidget {
                                                                         },
                                                                       ),
                                                                       ////
+                                                                       SizedBox(
+                                      height: size.width * 0.03,
+                                    ),
                                                                       ]),
                                                                     ),
                                     

@@ -603,7 +603,7 @@ class MapWidget extends StatelessWidget {
                   child: Container(
                     height: size.width * 0.75,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).disabledColor,
                         image: const DecorationImage(
                             alignment: Alignment.topCenter,
                             image: AssetImage(AppImages.map))),
@@ -808,7 +808,7 @@ class MapWidget extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).cardColor,
                     height: size.width * 0.5,
                     padding: EdgeInsets.all(size.width * 0.05),
                     width: size.width,

@@ -85,9 +85,9 @@ class FleetDriversPage extends StatelessWidget {
                                               width: size.width * 0.9,
                                               decoration: BoxDecoration(
                                                   color: Theme.of(context)
-                                                      .primaryColorDark
-                                                      .withOpacity(0.1),
+                                                      .cardColor,
                                                   border: Border.all(
+                                                    width: 0.5,
                                                       color: Theme.of(context)
                                                           .primaryColorDark
                                                           .withOpacity(0.5)),

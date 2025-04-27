@@ -30,7 +30,6 @@ class EditDocumentWidget extends StatelessWidget {
               padding: EdgeInsets.all(size.width * 0.05),
               height: size.height,
               width: size.width,
-              
               child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top),
@@ -92,8 +91,7 @@ class EditDocumentWidget extends StatelessWidget {
                       child: SingleChildScrollView(
                     child: CustomCard(
                       padding: EdgeInsets.symmetric(
-                          vertical: 2,
-                          horizontal: size.width * 0.05),
+                          vertical: 2, horizontal: size.width * 0.05),
                       child: Column(
                         spacing: 4,
                         children: [
@@ -150,7 +148,7 @@ class EditDocumentWidget extends StatelessWidget {
                                         color: AppColors.blackText,
                                       ),
                                 ),
-                                  DottedLine(
+                                DottedLine(
                                   // ADDED: BY MG: Dotted line
                                   dashLength: 2,
                                   dashGapLength: 2,
@@ -160,8 +158,7 @@ class EditDocumentWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: size.width * 0.04),
                                 Container(
-                                  color: AppColors.darkGrey
-                                            .withOpacity(0.1),
+                                  color: AppColors.darkGrey.withOpacity(0.1),
                                   height: size.width * 0.5,
                                   width: size.width * 0.8,
                                   child: DottedBorder(
@@ -258,7 +255,8 @@ class EditDocumentWidget extends StatelessWidget {
                                                 .firstWhere((e) =>
                                                     e.id ==
                                                     context
-                                                        .read<DriverProfileBloc>()
+                                                        .read<
+                                                            DriverProfileBloc>()
                                                         .choosenDocument)
                                                 .isEditable ==
                                             true
@@ -284,7 +282,8 @@ class EditDocumentWidget extends StatelessWidget {
                                         : null;
                                   },
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       MyText(
                                         text:
@@ -297,20 +296,21 @@ class EditDocumentWidget extends StatelessWidget {
                                               color: AppColors.blackText,
                                             ),
                                       ),
-                                        DottedLine(
-                                  // ADDED: BY MG: Dotted line
-                                  dashLength: 2,
-                                  dashGapLength: 2,
-                                  dashRadius: 1,
-                                  lineThickness: 1,
-                                  dashColor: Theme.of(context).dividerColor,
-                                ),
-                                     SizedBox(height: size.width * 0.04),
+                                      DottedLine(
+                                        // ADDED: BY MG: Dotted line
+                                        dashLength: 2,
+                                        dashGapLength: 2,
+                                        dashRadius: 1,
+                                        lineThickness: 1,
+                                        dashColor:
+                                            Theme.of(context).dividerColor,
+                                      ),
+                                      SizedBox(height: size.width * 0.04),
                                       Container(
                                         height: size.width * 0.5,
                                         width: size.width * 0.8,
-                                        color: AppColors.darkGrey
-                                            .withOpacity(0.1),
+                                        color:
+                                            AppColors.darkGrey.withOpacity(0.1),
                                         child: DottedBorder(
                                           color: AppColors.darkGrey,
                                           strokeWidth: 2,
@@ -324,9 +324,11 @@ class EditDocumentWidget extends StatelessWidget {
                                               ? Center(
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Icon(
                                                         Icons.camera_alt,
@@ -335,11 +337,11 @@ class EditDocumentWidget extends StatelessWidget {
                                                         size: size.width * 0.07,
                                                       ),
                                                       SizedBox(
-                                                          height:
-                                                              size.width * 0.025),
+                                                          height: size.width *
+                                                              0.025),
                                                       MyText(
-                                                        text: AppLocalizations.of(
-                                                                context)!
+                                                        text: AppLocalizations
+                                                                .of(context)!
                                                             .tapToUploadImage,
                                                         textStyle:
                                                             Theme.of(context)
@@ -370,7 +372,8 @@ class EditDocumentWidget extends StatelessWidget {
                                                       fit: BoxFit.cover,
                                                     ),
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                 ),
                                         ),
@@ -441,7 +444,8 @@ class EditDocumentWidget extends StatelessWidget {
                                     ),
                                     disabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: AppColors.black.withOpacity(0.5),
+                                          color:
+                                              AppColors.black.withOpacity(0.5),
                                           width: 1),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -513,17 +517,20 @@ class EditDocumentWidget extends StatelessWidget {
                                       enabled: false,
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
-                                            color: AppColors.darkGrey, width: 1),
+                                            color: AppColors.darkGrey,
+                                            width: 1),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
-                                            color: AppColors.darkGrey, width: 1),
+                                            color: AppColors.darkGrey,
+                                            width: 1),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       disabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
-                                            color: AppColors.darkGrey, width: 1),
+                                            color: AppColors.darkGrey,
+                                            width: 1),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       controller: context
@@ -542,7 +549,7 @@ class EditDocumentWidget extends StatelessWidget {
                     ),
                   )),
                   CustomButton(
-                    borderRadius: 2,
+                      borderRadius: 2,
                       buttonName: AppLocalizations.of(context)!.submit,
                       onTap: () {
                         if (context.read<DriverProfileBloc>().docImage !=

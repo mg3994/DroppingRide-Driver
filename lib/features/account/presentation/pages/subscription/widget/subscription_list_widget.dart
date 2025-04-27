@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,11 +63,12 @@ class SubscriptionListWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(size.width * 0.05),
-                        child: MyText(
+                  Padding(
+                    padding: EdgeInsets.all(size.width * 0.05),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText(
                           text: AppLocalizations.of(context)!
                               .chooseYourSubscription,
                           textStyle: Theme.of(context)
@@ -74,9 +76,17 @@ class SubscriptionListWidget extends StatelessWidget {
                               .bodyLarge!
                               .copyWith(color: AppColors.blackText),
                         ),
-                      ),
-                    ],
+                         DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                      ],
+                    ),
                   ),
+                 
                   Expanded(
                     child: ListView.builder(
                       itemCount: subscriptionListDatas.length,
@@ -95,7 +105,7 @@ class SubscriptionListWidget extends StatelessWidget {
                               },
                               child: Container(
                                 width: size.width * 0.9,
-                                padding: EdgeInsets.all(size.width * 0.03),
+                                padding: EdgeInsets.all(size.width * 0.05),
                                 margin:
                                     EdgeInsets.only(bottom: size.width * 0.025),
                                 decoration: BoxDecoration(
@@ -122,7 +132,11 @@ class SubscriptionListWidget extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                            width: 1.5, color: AppColors.black),
+                                            width: 1.5, color:  (context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)
+                                                ?Theme.of(context).primaryColor:AppColors.black),
                                       ),
                                       alignment: Alignment.center,
                                       child: Container(
@@ -134,7 +148,7 @@ class SubscriptionListWidget extends StatelessWidget {
                                                         .read<AccBloc>()
                                                         .choosenPlanindex ==
                                                     index)
-                                                ? AppColors.black
+                                                ? Theme.of(context).primaryColor
                                                 : Colors.transparent),
                                       ),
                                     ),
@@ -170,6 +184,7 @@ class SubscriptionListWidget extends StatelessWidget {
                                                   SizedBox(
                                                     width: size.width * 0.02,
                                                   ),
+                                                  
                                                   MyText(
                                                     text: subscriptionListDatas[
                                                             index]
@@ -187,6 +202,20 @@ class SubscriptionListWidget extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
+                                          SizedBox(height: size.width * 0.005),
+
+                                                    SizedBox(
+                                                       width: size.width * 0.7,
+                                                       height: size.width * 0.01,
+                                                      child: DottedLine( // ADDED: BY MG: Dotted line
+                                                                       dashLength: 2,
+                                                                       dashGapLength: 2,
+                                                                       dashRadius: 1,
+                                                                       lineThickness: 1,
+                                                                       dashColor: Theme.of(context).dividerColor,
+                                                                     ),
+                                                    ),
+                     
                                               SizedBox(
                                                 width: size.width * 0.6,
                                                 child: MyText(
@@ -217,6 +246,7 @@ class SubscriptionListWidget extends StatelessWidget {
                       },
                     ),
                   ),
+                  
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -224,15 +254,28 @@ class SubscriptionListWidget extends StatelessWidget {
                         padding: EdgeInsets.all(
                           size.width * 0.05,
                         ),
-                        child: MyText(
-                          text:
-                              AppLocalizations.of(context)!.choosePaymentMethod,
-                          textStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: AppColors.blackText),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MyText(
+                              text:
+                                  AppLocalizations.of(context)!.choosePaymentMethod,
+                              textStyle: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.blackText),
+                            ),
+                             DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                          ],
                         ),
                       ),
+                                               
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -339,6 +382,7 @@ class SubscriptionListWidget extends StatelessWidget {
                     height: size.width * 0.06,
                   ),
                   CustomButton(
+                    borderRadius: 30,
                     buttonName: AppLocalizations.of(context)!.confirm,
                     onTap: () async {
                       if (context.read<AccBloc>().choosenSubscriptionPayIndex ==
@@ -380,6 +424,7 @@ class SubscriptionListWidget extends StatelessWidget {
                             isScrollControlled: false,
                             enableDrag: false,
                             isDismissible: true,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                             builder: (_) {
                               return BlocProvider.value(
                                 value: context.read<AccBloc>(),
@@ -393,6 +438,9 @@ class SubscriptionListWidget extends StatelessWidget {
                             });
                       }
                     },
+                  ),
+                    SizedBox(
+                    height: size.width * 0.06,
                   ),
                 ],
               )

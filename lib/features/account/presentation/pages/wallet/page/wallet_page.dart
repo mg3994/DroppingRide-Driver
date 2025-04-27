@@ -456,7 +456,7 @@ class WalletHistoryPage extends StatelessWidget {
                                   });
                             },
                             child: CustomCard(
-                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 8),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -469,7 +469,7 @@ class WalletHistoryPage extends StatelessWidget {
                                           .copyWith(
                                               color: Theme.of(context)
                                                   .primaryColorDark,
-                                              fontSize: 14)),
+                                              fontSize: 16)),
                                   // SizedBox(
                                   //   width: size.width * 0.02,
                                   // ),
@@ -497,7 +497,7 @@ class WalletHistoryPage extends StatelessWidget {
                                   context, WithdrawPage.routeName,arguments: WithdrawPageArguments(minWalletAmount :context.read<AccBloc>().walletResponse!.minimumAmountAddedToWallet));
                             },
                             child: CustomCard(
-                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 8),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -509,7 +509,7 @@ class WalletHistoryPage extends StatelessWidget {
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .primaryColorDark,
-                                            fontSize: 14),
+                                            fontSize: 16),
                                   ),
                                   // SizedBox(width: size.width * 0.02),
                                   // Container(
@@ -552,7 +552,7 @@ class WalletHistoryPage extends StatelessWidget {
                                     });
                               },
                               child: CustomCard(
-                              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 2),
+                               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 8),
                                 child: Row(
                                   children: [
                                     MyText(
@@ -564,7 +564,7 @@ class WalletHistoryPage extends StatelessWidget {
                                             .copyWith(
                                                 color: Theme.of(context)
                                                     .primaryColorDark,
-                                                fontSize: 14)),
+                                                fontSize: 16)),
                                     // SizedBox(width: size.width * 0.02),
                                     // Container(
                                     //   height: size.width * 0.04,

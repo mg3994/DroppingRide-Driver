@@ -107,7 +107,7 @@ class CustomSliderButton extends StatelessWidget {
                             state.isSliding ? '' : buttonName,
                             style: AppTextStyle.boldStyle().copyWith(
                               color: textColor ?? AppColors.white,
-                              fontSize: textSize ?? 18,
+                              fontSize: textSize ?? 14,
                             ),
                           ),
                         );

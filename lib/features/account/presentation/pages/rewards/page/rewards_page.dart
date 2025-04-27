@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -156,17 +157,26 @@ class RewardsPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                                DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                               SizedBox(height: size.width * 0.03),
                               Container(
                                 height: size.width * 0.2,
                                 // width: size.width,
                                 decoration: BoxDecoration(
+                                  color: Theme.of(context).cardColor,
                                   border: Border.all(
                                     color: Theme.of(context)
                                         .primaryColorDark
                                         .withOpacity(0.5),
+                                        width: 0.2
                                   ),
-                                  borderRadius: BorderRadius.circular(5),
+                                  borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,7 +237,14 @@ class RewardsPage extends StatelessWidget {
                                     AppLocalizations.of(context)!.pointsHistory,
                                 textStyle: const TextStyle(fontSize: 18),
                               ),
-                              SizedBox(height: size.width * 0.03),
+                               DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                              SizedBox(height: size.width * 0.01),
                               context
                                       .read<AccBloc>()
                                       .driverRewardsList

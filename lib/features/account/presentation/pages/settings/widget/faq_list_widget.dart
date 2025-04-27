@@ -36,9 +36,10 @@ class FaqDataListWidget extends StatelessWidget {
                       width: size.width,
                       margin: const EdgeInsets.only(right: 10, bottom: 10),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(4),
+                          color: Theme.of(context).cardColor,
                           border: Border.all(
-                              width: 1.2,
+                              width: 0.2,
                               color: Theme.of(context).disabledColor)),
                       child: Padding(
                         padding: EdgeInsets.all(size.width * 0.025),

@@ -28,7 +28,7 @@ class ShowSubscriptionWidget extends StatelessWidget {
             padding: EdgeInsets.all(size.width * 0.01),
             child: Column(
               children: [
-                SizedBox(height: size.width * 0.1),
+                SizedBox(height: size.width * 0.07),
                 SizedBox(
                   width: size.width * 0.9,
                   child: Column(
@@ -40,7 +40,7 @@ class ShowSubscriptionWidget extends StatelessWidget {
                         textAlign: TextAlign.center,
                         textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: AppColors.red,
-                              fontSize: 14,
+                              fontSize: 10,
                               fontWeight: FontWeight.w600,
                             ),
                       ),
@@ -54,7 +54,7 @@ class ShowSubscriptionWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: size.width * 0.05),
+                SizedBox(height: size.width * 0.04),
                 CustomSliderButton(
                   buttonName: AppLocalizations.of(context)!.choosePlan,
                   onSlideSuccess: () async {
@@ -84,7 +84,7 @@ class ShowSubscriptionWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       textStyle:
                           Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w400,
                               ),
                     ),
@@ -95,19 +95,30 @@ class ShowSubscriptionWidget extends StatelessWidget {
                       AppSharedPreference.setSubscriptionSkipStatus(true);
                       Navigator.pop(context);
                     },
-                    child: SizedBox(
-                      width: size.width * 0.9,
-                      child: MyText(
-                        text:
-                            AppLocalizations.of(context)!.continueWithoutPlans,
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        textStyle:
-                            Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Theme.of(context).primaryColorDark,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).disabledColor,
+                          width: 0.2
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                        color: Theme.of(context).cardColor,
+                      ),
+                      width: size.width * 0.75,
+                      height: size.width * 0.13,
+                      child: Center(
+                        child: MyText(
+                          text:
+                              AppLocalizations.of(context)!.continueWithoutPlans,
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          textStyle:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).primaryColorDark,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
                       ),
                     ),
                   ),
@@ -122,7 +133,7 @@ class ShowSubscriptionWidget extends StatelessWidget {
                       textStyle:
                           Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Theme.of(context).disabledColor,
-                                fontSize: 12,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w400,
                               ),
                     ),

@@ -38,8 +38,9 @@ class FleetVehicleDetailsWidget extends StatelessWidget {
                         // width: size.width * 0.9,
                         decoration: BoxDecoration(
                             color:
-                                Theme.of(context).dividerColor.withOpacity(0.3),
+                                Theme.of(context).cardColor,
                             border: Border.all(
+                              width: 0.5,
                                 color: Theme.of(context)
                                     .disabledColor
                                     .withOpacity(0.5)),

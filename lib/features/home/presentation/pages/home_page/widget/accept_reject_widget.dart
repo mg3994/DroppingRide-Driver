@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/common.dart';
@@ -71,6 +72,14 @@ class AcceptRejectWidget extends StatelessWidget {
                       SizedBox(height: size.width * 0.05),
                     ],
                   ),
+                 DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                             
                 Container(
                   width: size.width * 0.9,
                   padding: EdgeInsets.all(size.width * 0.05),
@@ -78,7 +87,7 @@ class AcceptRejectWidget extends StatelessWidget {
                       border: Border.all(
                           width: 0.5, color: Theme.of(context).disabledColor),
                       borderRadius: BorderRadius.circular(5),
-                      color: AppColors.darkGrey.withOpacity(0.5)),
+                      color: Theme.of(context).cardColor),
                   child: Row(
                     children: [
                       Container(

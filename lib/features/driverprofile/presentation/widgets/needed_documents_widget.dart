@@ -33,7 +33,7 @@ class NeededDocumentsWidget extends StatelessWidget {
                     textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.black.withOpacity(0.5),
+                          // color: AppColors.black.withOpacity(0.5),
                         ),
                     maxLines: 2,
                   ),
@@ -69,14 +69,14 @@ class NeededDocumentsWidget extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          color: AppColors.black, width: 2)),
+                                          color: Theme.of(context).primaryColorDark, width: 2)),
                                   alignment: Alignment.center,
                                   child: Container(
                                     height: size.width * 0.02,
                                     width: size.width * 0.02,
-                                    decoration: const BoxDecoration(
+                                    decoration:  BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: AppColors.black),
+                                         color: Theme.of(context).primaryColorDark,),
                                   ),
                                 ),
                                 SizedBox(width: size.width * 0.025),
@@ -91,7 +91,7 @@ class NeededDocumentsWidget extends StatelessWidget {
                                       .bodyMedium!
                                       .copyWith(
                                         fontSize: 18,
-                                        color: AppColors.blackText,
+                                        //  color: Theme.of(context).primaryColorDark,
                                       ),
                                 ))
                               ],
@@ -188,8 +188,8 @@ class NeededDocumentsWidget extends StatelessWidget {
                                                                 .bodyMedium!
                                                                 .copyWith(
                                                                   fontSize: 16,
-                                                                  color: AppColors
-                                                                      .blackText,
+                                                                  // color: AppColors
+                                                                  //     .blackText,
                                                                 ),
                                                       ),
                                                     )

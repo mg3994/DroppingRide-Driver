@@ -114,7 +114,7 @@ class QuickActionsWidget extends StatelessWidget {
                                 ), //BoxShadow
                               ],
                               borderRadius: BorderRadius.circular(5),
-                              color: Theme.of(context).scaffoldBackgroundColor),
+                              color: Theme.of(context).cardColor),
                           child: Row(
                             children: [
                               Container(
@@ -185,7 +185,7 @@ class QuickActionsWidget extends StatelessWidget {
                               ), //BoxShadow
                             ],
                             borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).scaffoldBackgroundColor),
+                            color: Theme.of(context).cardColor),
                         child: Row(
                           children: [
                             Container(
@@ -254,7 +254,7 @@ class QuickActionsWidget extends StatelessWidget {
                               ), //BoxShadow
                             ],
                             borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).scaffoldBackgroundColor),
+                            color: Theme.of(context).cardColor),
                         child: Row(
                           children: [
                             Container(
@@ -333,7 +333,7 @@ class QuickActionsWidget extends StatelessWidget {
                                 ), //BoxShadow
                               ],
                               borderRadius: BorderRadius.circular(5),
-                              color: Theme.of(context).scaffoldBackgroundColor),
+                              color: Theme.of(context).cardColor),
                           child: Row(
                             children: [
                               Container(
@@ -404,7 +404,7 @@ class QuickActionsWidget extends StatelessWidget {
                               ), //BoxShadow
                             ],
                             borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).scaffoldBackgroundColor),
+                            color: Theme.of(context).cardColor),
                         child: Row(
                           children: [
                             Container(

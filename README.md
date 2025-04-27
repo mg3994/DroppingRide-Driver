@@ -1,6 +1,12 @@
 # IOS Parts Remains Totally 
 <!-- > <string>Encoded app id from firebase</string>  -->
 
+<!-- cred
+user login with this credentials: 
+phone number: 0242284569
+password: 123456789
+ -->
+
 # restart_tagxi
 
 A new Flutter project.

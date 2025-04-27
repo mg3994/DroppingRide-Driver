@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,9 +71,9 @@ class RideOtpWidget extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: Theme.of(context)
-                                    .disabledColor
-                                    .withOpacity(0.3),
+                                    .cardColor,
                                 border: Border.all(
+                                  width: 0.2,
                                     color: Theme.of(context).disabledColor),
                               ),
                               child: (context.read<HomeBloc>().showImagePick)
@@ -98,6 +99,14 @@ class RideOtpWidget extends StatelessWidget {
                                                           FontWeight.w600),
                                               textAlign: TextAlign.center,
                                             )),
+        DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                             
                                         SizedBox(height: size.width * 0.05),
                                         SizedBox(
                                             width: size.width * 0.8,
@@ -343,7 +352,7 @@ Widget _pinCodeView(BuildContext context, Size size) {
       animationType: AnimationType.none,
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(4),
         fieldHeight: size.width * 0.13,
         fieldWidth: size.width * 0.12,
         activeFillColor: Theme.of(context).scaffoldBackgroundColor,

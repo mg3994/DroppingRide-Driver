@@ -1,7 +1,9 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/app_colors.dart';
 import 'package:restart_tagxi/core/utils/custom_button.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/core/utils/custom_loader.dart';
 import 'package:restart_tagxi/core/utils/custom_snack_bar.dart';
 import 'package:restart_tagxi/core/utils/custom_text.dart';
@@ -46,115 +48,138 @@ class ReportsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: size.width * 0.05,
                       children: [
-                        MyText(
-                          text: AppLocalizations.of(context)!.generateReport,
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
                           children: [
                             MyText(
-                              text: AppLocalizations.of(context)!.from,
+                              text: AppLocalizations.of(context)!.generateReport,
                               textStyle: Theme.of(context)
                                   .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context).disabledColor),
+                                  .bodyLarge!
+                                  .copyWith(color: Theme.of(context).primaryColor),
                             ),
-                            InkWell(
-                              onTap: () {
-                                context.read<AccBloc>().add(ChooseDateEvent(
-                                    context: context, isFromDate: true));
-                              },
-                              child: Container(
-                                width: size.width * 0.6,
-                                color: AppColors.darkGrey.withOpacity(0.1),
-                                child: CustomTextField(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        color: Theme.of(context).disabledColor,
-                                      ),
-                                  enabled: false,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  controller:
-                                      context.read<AccBloc>().fromDateText,
-                                  suffixIcon: Icon(Icons.calendar_month),
-                                ),
-                              ),
-                            ),
+                             DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
                           ],
                         ),
-                        Row(
+                        //////////////////////
+                      CustomCard(
+                        borderRadius: 4,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spacing: size.width * 0.05,
                           children: [
-                            MyText(
-                              text: AppLocalizations.of(context)!.to,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context).disabledColor),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                context.read<AccBloc>().add(ChooseDateEvent(
-                                    context: context, isFromDate: false));
-                              },
-                              child: Container(
-                                width: size.width * 0.6,
-                                color: AppColors.darkGrey.withOpacity(0.1),
-                                child: CustomTextField(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        color: Theme.of(context).disabledColor,
-                                      ),
-                                  enabled: false,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MyText(
+                                text: AppLocalizations.of(context)!.from,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context).disabledColor),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context.read<AccBloc>().add(ChooseDateEvent(
+                                      context: context, isFromDate: true));
+                                },
+                                child: Container(
+                                  width: size.width * 0.6,
+                                  color: AppColors.darkGrey.withOpacity(0.1),
+                                  child: CustomTextField(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                          fontSize: 16,
+                                          color: Theme.of(context).disabledColor,
+                                        ),
+                                    enabled: false,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    controller:
+                                        context.read<AccBloc>().fromDateText,
+                                    suffixIcon: Icon(Icons.calendar_month),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: AppColors.darkGrey, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  controller:
-                                      context.read<AccBloc>().toDateText,
-                                  suffixIcon: Icon(Icons.calendar_month),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MyText(
+                                text: AppLocalizations.of(context)!.to,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context).disabledColor),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context.read<AccBloc>().add(ChooseDateEvent(
+                                      context: context, isFromDate: false));
+                                },
+                                child: Container(
+                                  width: size.width * 0.6,
+                                  color: AppColors.darkGrey.withOpacity(0.1),
+                                  child: CustomTextField(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                          fontSize: 16,
+                                          color: Theme.of(context).disabledColor,
+                                        ),
+                                    enabled: false,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.darkGrey, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    controller:
+                                        context.read<AccBloc>().toDateText,
+                                    suffixIcon: Icon(Icons.calendar_month),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),]),
+                      ),
+
+                        //////
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           spacing: size.width * 0.03,
@@ -235,7 +260,7 @@ class ReportsPage extends StatelessWidget {
                                 height: size.width * 0.23,
                                 width: size.width * 0.9,
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).dividerColor,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Row(

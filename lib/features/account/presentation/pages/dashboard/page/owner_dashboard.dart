@@ -83,7 +83,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                                 height: size.width * 0.25,
                                 decoration: BoxDecoration(
                                     color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                                        .cardColor,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Theme.of(context).shadowColor,
@@ -157,7 +157,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                                 height: size.width * 0.25,
                                 decoration: BoxDecoration(
                                     color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                                        .cardColor,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Theme.of(context).shadowColor,
@@ -229,8 +229,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                                 width: size.width * 0.27,
                                 height: size.width * 0.25,
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                                     color: Theme.of(context)
+                                        .cardColor,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Theme.of(context).shadowColor,
@@ -302,7 +302,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                         padding: EdgeInsets.only(
                             top: size.width * 0.04, bottom: size.width * 0.05),
                         decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            color: Theme.of(context)
+                                        .cardColor,
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).shadowColor,
@@ -530,8 +531,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                                         margin:
                                             EdgeInsets.all(size.width * 0.025),
                                         decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .scaffoldBackgroundColor,
+                                             color: Theme.of(context)
+                                        .cardColor,
                                             boxShadow: [
                                               BoxShadow(
                                                   color: Theme.of(context)
@@ -721,8 +722,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                                           margin: EdgeInsets.all(
                                               size.width * 0.025),
                                           decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
+                                               color: Theme.of(context)
+                                        .cardColor,
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: Theme.of(context)

@@ -28,8 +28,8 @@ class VehicleInformationWidget extends StatelessWidget {
           return Column(
             children: [
               CustomCard(
-                padding: EdgeInsets.all(4),
-                blurRadius: 8,
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+               borderRadius: 4,
                 child: Column(
                   children: [
                     if (userData!.enableModulesForApplications == 'both' &&
@@ -43,7 +43,8 @@ class VehicleInformationWidget extends StatelessWidget {
                                 Icon(
                                   CupertinoIcons.check_mark,
                                   size: size.width * 0.07,
-                                  color: AppColors.black,
+                                  color:    Theme.of(context).primaryColorDark
+                         ,
                                 ),
                                 SizedBox(width: size.width * 0.025),
                                 Expanded(
@@ -170,8 +171,8 @@ class VehicleInformationWidget extends StatelessWidget {
                                               .read<DriverProfileBloc>()
                                               .registerFor !=
                                           null)
-                                      ? AppColors.black
-                                      : AppColors.black.withOpacity(0.5),
+                                      ?   Theme.of(context).primaryColorDark
+                          :  Theme.of(context).primaryColorDark.withOpacity(0.5),
                                 ),
                                 SizedBox(width: size.width * 0.025),
                                 Expanded(
