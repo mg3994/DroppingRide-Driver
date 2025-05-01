@@ -352,8 +352,8 @@ Widget _pinCodeView(BuildContext context, Size size) {
       animationType: AnimationType.none,
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(4),
-        fieldHeight: size.width * 0.13,
+        borderRadius: BorderRadius.circular(2),
+        fieldHeight: size.width * 0.12,
         fieldWidth: size.width * 0.12,
         activeFillColor: Theme.of(context).scaffoldBackgroundColor,
         inactiveFillColor: Theme.of(context).scaffoldBackgroundColor,
@@ -365,7 +365,7 @@ Widget _pinCodeView(BuildContext context, Size size) {
         activeBorderWidth: 1,
         activeColor: Theme.of(context).disabledColor,
       ),
-      cursorColor: Theme.of(context).dividerColor,
+      cursorColor: Theme.of(context).primaryColorDark,
       // animationDuration:
       //     const Duration(milliseconds: 300),
       enableActiveFill: true,

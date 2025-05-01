@@ -162,36 +162,51 @@ class OnRideWidget extends StatelessWidget {
                 SizedBox(height: size.width * 0.05),
                 ////
                 CustomCard(
-                  blurRadius: 8,
+           borderRadius: 6,
+           
                   margin: EdgeInsets.symmetric(
                       horizontal: size.width * 0.05),
-                  border:Border.all(width: 0.5, color: Theme.of(context).disabledColor) ,
-                  padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
+                  border:Border.all(width: 0.3, color: Theme.of(context).disabledColor.withAlpha(100)) ,
+                  padding: EdgeInsets.symmetric(horizontal: size.width *0.05,vertical: size.width * 0.04),
                   child: Column(
                     children: [
                       if (userData?.onTripRequest!.arrivedAt == null)
                         SizedBox(
                           width: size.width * 0.9,
-                          child: Row(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                          child: Column(
+                            spacing: 4,
                             children: [
-                              const PickupIcon(),
-                              SizedBox(width: size.width * 0.025),
-                              Expanded(
-                                child: MyText(
-                                  text: userData!
-                                      .onTripRequest!.pickAddress,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  maxLines: 5,
-                                ),
+                              Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  const PickupIcon(),
+                                  SizedBox(width: size.width * 0.025),
+                                  Expanded(
+                                    child: MyText(
+                                      text: userData!
+                                          .onTripRequest!.pickAddress,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      maxLines: 5,
+                                    ),
+                                  ),
+                                ],
                               ),
+                               DottedLine(
+                      // ADDED: BY MG: Dotted line
+                      dashLength: 2,
+                      dashGapLength: 2,
+                      dashRadius: 1,
+                      lineThickness: 1,
+                      dashColor: Theme.of(context).dividerColor,
+                    ),
+                    SizedBox(height: 2,)
                             ],
                           ),
                         ),
@@ -268,14 +283,14 @@ class OnRideWidget extends StatelessWidget {
                                             ),
                                         ],
                                       ),
-                                       DottedLine(
-                      // ADDED: BY MG: Dotted line
-                      dashLength: 2,
-                      dashGapLength: 2,
-                      dashRadius: 1,
-                      lineThickness: 1,
-                      dashColor: Theme.of(context).dividerColor,
-                    ),
+                    //                    DottedLine(
+                    //   // ADDED: BY MG: Dotted line
+                    //   dashLength: 2,
+                    //   dashGapLength: 2,
+                    //   dashRadius: 1,
+                    //   lineThickness: 1,
+                    //   dashColor: Theme.of(context).dividerColor,
+                    // ),
                                     ],
                                   ),
                                 ),
@@ -481,26 +496,40 @@ class OnRideWidget extends StatelessWidget {
                       if (userData?.onTripRequest!.arrivedAt != null)
                         SizedBox(
                           width: size.width * 0.9,
-                          child: Row(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                          child: Column(
+                            spacing: 4,
                             children: [
-                              const PickupIcon(),
-                              SizedBox(width: size.width * 0.025),
-                              Expanded(
-                                child: MyText(
-                                  text: userData!
-                                      .onTripRequest!.pickAddress,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  maxLines: 5,
-                                ),
+                               DottedLine(
+                      // ADDED: BY MG: Dotted line
+                      dashLength: 2,
+                      dashGapLength: 2,
+                      dashRadius: 1,
+                      lineThickness: 1,
+                      dashColor: Theme.of(context).dividerColor,
+                    ),
+                              Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  const PickupIcon(),
+                                  SizedBox(width: size.width * 0.025),
+                                  Expanded(
+                                    child: MyText(
+                                      text: userData!
+                                          .onTripRequest!.pickAddress,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      maxLines: 5,
+                                    ),
+                                  ),
+                                ],
                               ),
+                              
                             ],
                           ),
                         ),
@@ -513,9 +542,9 @@ class OnRideWidget extends StatelessWidget {
                   padding: EdgeInsets.all(size.width * 0.05),
                   decoration: BoxDecoration(
                       border: Border.all(
-                          width: 0.5,
-                          color: Theme.of(context).disabledColor),
-                      borderRadius: BorderRadius.circular(4),
+                          width: 0.2,
+                          color: Theme.of(context).disabledColor.withAlpha(150)),
+                      borderRadius: BorderRadius.circular(2),
                       color: Theme.of(context)
                           .cardColor),
                   child: Row(
@@ -647,25 +676,36 @@ class OnRideWidget extends StatelessWidget {
                                               fontWeight:
                                                   FontWeight.bold),
                                     )),
-                            MyText(
-                              text: (userData!
-                                          .onTripRequest!.isBidRide ==
-                                      "0")
-                                  ? '${userData!.onTripRequest!.currencySymbol}${userData!.onTripRequest!.requestEtaAmount}'
-                                  : '${userData!.onTripRequest!.currencySymbol}${userData!.onTripRequest!.acceptedRideFare}',
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge!
-                                  .copyWith(
-                                      color: AppColors.green,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                              textAlign: (context
-                                          .read<HomeBloc>()
-                                          .textDirection ==
-                                      'ltr')
-                                  ? TextAlign.right
-                                  : TextAlign.left,
+                            CustomCard(
+                              border: Border.all(
+                                  width: 0.2,
+                                  color: Theme.of(context)
+                                      .disabledColor),
+                              color: Theme.of(context).disabledColor.withAlpha(50),
+                              borderRadius: 1,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.05,
+                                  vertical: size.width * 0.004),
+                              child: MyText(
+                                text: (userData!
+                                            .onTripRequest!.isBidRide ==
+                                        "0")
+                                    ? '${userData!.onTripRequest!.currencySymbol}${userData!.onTripRequest!.requestEtaAmount}'
+                                    : '${userData!.onTripRequest!.currencySymbol}${userData!.onTripRequest!.acceptedRideFare}',
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(
+                                        color: AppColors.green,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                textAlign: (context
+                                            .read<HomeBloc>()
+                                            .textDirection ==
+                                        'ltr')
+                                    ? TextAlign.right
+                                    : TextAlign.left,
+                              ),
                             ),
                           ],
                         ),
@@ -817,7 +857,7 @@ class OnRideWidget extends StatelessWidget {
                     ],
                 SizedBox(height: size.width * 0.03),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: 8),
                   margin: EdgeInsets.only(
                       left: size.width * 0.05,
                       right: size.width * 0.05),

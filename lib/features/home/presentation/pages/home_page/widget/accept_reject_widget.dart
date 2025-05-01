@@ -22,7 +22,13 @@ class AcceptRejectWidget extends StatelessWidget {
       value: cont.read<HomeBloc>(),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          final dist = calculateDistance(lat1: userData!.metaRequest!.pickLat, lon1: userData!.metaRequest!.pickLng, lat2: cont.read<HomeBloc>().currentLatLng!.latitude, lon2: cont.read<HomeBloc>().currentLatLng!.longitude);
+          final dist = (userData != null && userData!.metaRequest != null && cont.read<HomeBloc>().currentLatLng != null)
+              ? calculateDistance(
+                  lat1: userData!.metaRequest!.pickLat,
+                  lon1: userData!.metaRequest!.pickLng,
+                  lat2: cont.read<HomeBloc>().currentLatLng!.latitude,
+                  lon2: cont.read<HomeBloc>().currentLatLng!.longitude)
+              : null;
           return Container(
             decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
@@ -123,7 +129,7 @@ class AcceptRejectWidget extends StatelessWidget {
                                       color: Theme.of(context).primaryColor,
                                     ),
                                     MyText(
-                                      text: '${(dist/1000).toStringAsFixed(2)} ${AppLocalizations.of(context)!.kmAway}',
+                                      text: '${(dist != null)?(dist/1000).toStringAsFixed(2): '__'} ${AppLocalizations.of(context)!.kmAway}',
                                       textStyle: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
