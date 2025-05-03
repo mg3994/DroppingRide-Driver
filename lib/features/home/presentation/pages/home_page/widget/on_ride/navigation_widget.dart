@@ -56,29 +56,29 @@ class NavigationWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: size.width * 0.02),
-                      InkWell(
-                        onTap: () async {
-                          var browseUrl = (userData!
-                                      .onTripRequest!.isTripStart ==
-                                  0)
-                              ? 'https://waze.com/ul?ll=${userData!.onTripRequest!.pickLat},${userData!.onTripRequest!.pickLng}&navigate=yes'
-                              : 'https://waze.com/ul?ll=${userData!.onTripRequest!.dropLat},${userData!.onTripRequest!.dropLng}&navigate=yes';
-                          if (browseUrl.isNotEmpty) {
-                            await launchUrl(Uri.parse(browseUrl));
-                          } else {
-                            throw 'Could not launch $browseUrl';
-                          }
-                        },
-                        child: SizedBox(
-                          width: size.width * 0.07,
-                          child: Image.asset(
-                            AppImages.wazeMap,
-                            height: size.width * 0.07,
-                            width: 200,
-                          ),
-                        ),
-                      ),
+                      // SizedBox(width: size.width * 0.02),
+                      // InkWell(
+                      //   onTap: () async {
+                      //     var browseUrl = (userData!
+                      //                 .onTripRequest!.isTripStart ==
+                      //             0)
+                      //         ? 'https://waze.com/ul?ll=${userData!.onTripRequest!.pickLat},${userData!.onTripRequest!.pickLng}&navigate=yes'
+                      //         : 'https://waze.com/ul?ll=${userData!.onTripRequest!.dropLat},${userData!.onTripRequest!.dropLng}&navigate=yes';
+                      //     if (browseUrl.isNotEmpty) {
+                      //       await launchUrl(Uri.parse(browseUrl));
+                      //     } else {
+                      //       throw 'Could not launch $browseUrl';
+                      //     }
+                      //   },
+                      //   child: SizedBox(
+                      //     width: size.width * 0.07,
+                      //     child: Image.asset(
+                      //       AppImages.wazeMap,
+                      //       height: size.width * 0.07,
+                      //       width: 200,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'app_constants.dart';
+import 'package:restart_tagxi/firebase_options.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -41,7 +42,9 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     try {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
       var val = await Geolocator.getCurrentPosition();
       dynamic id;
       if (inputData != null) {
@@ -87,11 +90,13 @@ Future<void> commonSetup() async {
   }
   ConnectivityService().initialize();
   await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: AppConstants.firbaseApiKey,
-          appId: AppConstants.firebaseAppId,
-          messagingSenderId: AppConstants.firebasemessagingSenderId,
-          projectId: AppConstants.firebaseProjectId));
+    options: DefaultFirebaseOptions.currentPlatform,
+      // options: FirebaseOptions(
+      //     apiKey: AppConstants.firbaseApiKey,
+      //     appId: AppConstants.firebaseAppId,
+      //     messagingSenderId: AppConstants.firebasemessagingSenderId,
+      //     projectId: AppConstants.firebaseProjectId)
+          );
   await locator.init();
 
   PushNotification().initMessaging();

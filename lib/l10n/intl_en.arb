@@ -252,7 +252,7 @@
             "enterRideOtpDesc": "Enter the OTP shown in the customer's app to begin the ride",
             "rideVerification": "Ride Verification",
             "shipmentVerification": "Shipment Verification",
-            "uploadShipmentProof": "Upload Shipment Proof",
+            "uploadShipmentProof": "Upload Delivery Proof",
             "dropImageHere": "Drop Image Here",
             "supportedImage": "(Supports: 1111)",
             "drawSignature": "Draw your signature below",
