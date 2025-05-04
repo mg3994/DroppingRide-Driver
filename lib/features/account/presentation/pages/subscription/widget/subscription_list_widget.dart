@@ -1,0 +1,456 @@
+import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../common/common.dart';
+import '../../../../../../core/model/user_detail_model.dart';
+import '../../../../../../core/utils/custom_button.dart';
+import '../../../../../../core/utils/custom_text.dart';
+import '../../../../../../l10n/app_localizations.dart';
+import '../../../../application/acc_bloc.dart';
+import '../../../../domain/models/subcription_list_model.dart';
+import 'payment_gateway_list.dart';
+import 'subscription_shimmer.dart';
+
+class SubscriptionListWidget extends StatelessWidget {
+  final BuildContext cont;
+  final bool isFromAccPage;
+  final List<SubscriptionData> subscriptionListDatas;
+  const SubscriptionListWidget(
+      {super.key,
+      required this.cont,
+      required this.subscriptionListDatas,
+      required this.isFromAccPage});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    return BlocProvider.value(
+      value: cont.read<AccBloc>(),
+      child: BlocBuilder<AccBloc, AccState>(builder: (context, state) {
+        return subscriptionListDatas.isNotEmpty
+            ? Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(
+                      size.width * 0.05,
+                    ),
+                    child: Row(
+                      children: [
+                        (isFromAccPage)
+                            ? InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  size: size.width * 0.07,
+                                  color: AppColors.black,
+                                ),
+                              )
+                            : const SizedBox(),
+                        SizedBox(
+                          width: size.width * 0.05,
+                        ),
+                        MyText(
+                          text: AppLocalizations.of(context)!.subscription,
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                  fontSize: 18, color: AppColors.blackText),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(size.width * 0.05),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText(
+                          text: AppLocalizations.of(context)!
+                              .chooseYourSubscription,
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: AppColors.blackText),
+                        ),
+                         DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                      ],
+                    ),
+                  ),
+                 
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: subscriptionListDatas.length,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        return Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                context.read<AccBloc>().add(
+                                      SubscriptionOnTapEvent(
+                                          selectedPlanIndex: index),
+                                    );
+                              },
+                              child: Container(
+                                width: size.width * 0.9,
+                                padding: EdgeInsets.all(size.width * 0.05),
+                                margin:
+                                    EdgeInsets.only(bottom: size.width * 0.025),
+                                decoration: BoxDecoration(
+                                  color:(context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)? Theme.of(context).primaryColor.withOpacity(0.1): Theme.of(context).cardColor,
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(
+                                      width: (context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index) ? 1 :0.5,
+                                      color:(context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)? Theme.of(context).primaryColor: Theme.of(context).dividerColor),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: size.width * 0.05,
+                                      height: size.width * 0.05,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: 1.5, color:  (context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)
+                                                ?Theme.of(context).primaryColor:AppColors.black),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        width: size.width * 0.03,
+                                        height: size.width * 0.03,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: (context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex ==
+                                                    index)
+                                                ? Theme.of(context).primaryColor
+                                                : Colors.transparent),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          SizedBox(width: size.width * 0.04),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  MyText(
+                                                      text:
+                                                          subscriptionListDatas[
+                                                                  index]
+                                                              .name
+                                                              .toString(),
+                                                      textStyle: Theme
+                                                              .of(context)
+                                                          .textTheme
+                                                          .bodyMedium!
+                                                          .copyWith(
+                                                              color: AppColors
+                                                                  .blackText,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                  SizedBox(
+                                                    width: size.width * 0.02,
+                                                  ),
+                                                  
+                                                  MyText(
+                                                    text: subscriptionListDatas[
+                                                            index]
+                                                        .amount
+                                                        .toString(),
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .copyWith(
+                                                            color: AppColors
+                                                                .blackText,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                  ),
+                                                ],
+                                              ),
+                                          SizedBox(height: size.width * 0.005),
+
+                                                    SizedBox(
+                                                       width: size.width * 0.7,
+                                                       height: size.width * 0.01,
+                                                      child: DottedLine( // ADDED: BY MG: Dotted line
+                                                                       dashLength: 2,
+                                                                       dashGapLength: 2,
+                                                                       dashRadius: 1,
+                                                                       lineThickness: 1,
+                                                                       dashColor: Theme.of(context).dividerColor,
+                                                                     ),
+                                                    ),
+                     
+                                              SizedBox(
+                                                width: size.width * 0.6,
+                                                child: MyText(
+                                                  text: subscriptionListDatas[
+                                                          index]
+                                                      .description
+                                                      .toString(),
+                                                  textStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                          color: AppColors
+                                                              .blackText),
+                                                  maxLines: 2,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(
+                          size.width * 0.05,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MyText(
+                              text:
+                                  AppLocalizations.of(context)!.choosePaymentMethod,
+                              textStyle: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.blackText),
+                            ),
+                             DottedLine( // ADDED: BY MG: Dotted line
+                                                                     dashLength: 2,
+                                                                     dashGapLength: 2,
+                                                                     dashRadius: 1,
+                                                                     lineThickness: 1,
+                                                                     dashColor: Theme.of(context).dividerColor,
+                                                                   ),
+                          ],
+                        ),
+                      ),
+                                               
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              context.read<AccBloc>().add(
+                                  SubscriptionPaymentOnTapEvent(
+                                      selectedPayIndex: 0));
+                            },
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * 0.05,
+                                  height: size.width * 0.05,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: AppColors.black),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    width: size.width * 0.03,
+                                    height: size.width * 0.03,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (context
+                                                    .read<AccBloc>()
+                                                    .choosenSubscriptionPayIndex ==
+                                                0)
+                                            ? AppColors.black
+                                            : Colors.transparent),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.025,
+                                ),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.card,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                          fontSize: 18,
+                                          color: AppColors.blackText),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.025,
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              context.read<AccBloc>().add(
+                                    SubscriptionPaymentOnTapEvent(
+                                        selectedPayIndex: 2),
+                                  );
+                            },
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * 0.05,
+                                  height: size.width * 0.05,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 1.5, color: AppColors.black),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    width: size.width * 0.03,
+                                    height: size.width * 0.03,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (context
+                                                    .read<AccBloc>()
+                                                    .choosenSubscriptionPayIndex ==
+                                                2)
+                                            ? AppColors.black
+                                            : Colors.transparent),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.025,
+                                ),
+                                MyText(
+                                  text: AppLocalizations.of(context)!.wallet,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                          fontSize: 18,
+                                          color: AppColors.blackText),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.width * 0.06,
+                  ),
+                  CustomButton(
+                    borderRadius: 30,
+                    buttonName: AppLocalizations.of(context)!.confirm,
+                    onTap: () async {
+                      if (context.read<AccBloc>().choosenSubscriptionPayIndex ==
+                          2) {
+                        if (subscriptionListDatas[
+                                    context.read<AccBloc>().choosenPlanindex]
+                                .amount! >=
+                            userData!.wallet!.data.amountBalance) {
+                          context.read<AccBloc>().add(WalletEmptyEvent());
+                        } else if (subscriptionListDatas[
+                                    context.read<AccBloc>().choosenPlanindex]
+                                .amount! <=
+                            userData!.wallet!.data.amountBalance) {
+                          context.read<AccBloc>().add(
+                                SubscribeToPlanEvent(
+                                    paymentOpt: context
+                                        .read<AccBloc>()
+                                        .choosenSubscriptionPayIndex!,
+                                    amount:
+                                        (userData!.wallet!.data.amountBalance -
+                                                subscriptionListDatas[context
+                                                        .read<AccBloc>()
+                                                        .choosenPlanindex]
+                                                    .amount!)
+                                            .toInt(),
+                                    planId: subscriptionListDatas[context
+                                            .read<AccBloc>()
+                                            .choosenPlanindex]
+                                        .id!),
+                              );
+                        }
+                      } else if (context
+                              .read<AccBloc>()
+                              .choosenSubscriptionPayIndex ==
+                          0) {
+                        context.read<AccBloc>().walletAmountController.clear();
+                        showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: false,
+                            enableDrag: false,
+                            isDismissible: true,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value: context.read<AccBloc>(),
+                                child: PaymentGatewayListWidget(
+                                  cont: context,
+                                  walletPaymentGatways: context
+                                      .read<AccBloc>()
+                                      .walletPaymentGatways,
+                                ),
+                              );
+                            });
+                      }
+                    },
+                  ),
+                    SizedBox(
+                    height: size.width * 0.06,
+                  ),
+                ],
+              )
+            : Padding(
+                padding: EdgeInsets.only(
+                  top: size.width * 0.05,
+                ),
+                child: SubscriptionShimmer(size: size),
+              );
+      }),
+    );
+  }
+}
